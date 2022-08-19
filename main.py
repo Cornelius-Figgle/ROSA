@@ -31,8 +31,6 @@ def main():
     except sr.RequestError as e:
         print('Could not request results from Google Speech Recognition service; {0}'.format(e))
 
-
-
 #________________________________________________________________________________________________________________________________
 
 if __name__ == '__main__': main()
