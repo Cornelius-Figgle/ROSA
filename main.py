@@ -1,7 +1,7 @@
+from time import sleep
+
 import speech_recognition as sr
 from playsound import playsound
-
-from time import sleep
 
 #________________________________________________________________________________________________________________________________
 
@@ -10,7 +10,6 @@ r = sr.Recognizer()
 m = sr.Microphone()
 
 #________________________________________________________________________________________________________________________________
-
 
 def startup():
     print('\n\t\tADJUSTING FOR AMIENBT')
@@ -35,7 +34,7 @@ def backgroundListening():
     # `stop_listening` is now a function that, when called, stops background listening
 
     # do some unrelated computations for 5 seconds
-    for i in range(0, 20): sleep(100)  # we're still listening even though the main thread is doing other things
+    for i in range(0, 20): sleep(0.1)  # we're still listening even though the main thread is doing other things
 
     # calling this function requests that the background listener stop listening
     #stop_listening(wait_for_stop=False)
