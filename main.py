@@ -17,7 +17,7 @@ keys = {
     'homeq': ['turn', 'on', 'off', 'light']
 }
 responses = {
-    'musicq': ['Why should I have do your every request?', 'What do you think I am, some kind of musician?', 'third music'], 
+    'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?', 'third music'], 
     'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
     'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good', 'third home']
 }
