@@ -1,6 +1,8 @@
 
 # ROSA
 
+ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
+
 An emotional smart assistant that doesn't listen to you
 
 ## Installation
