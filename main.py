@@ -19,13 +19,13 @@ def backgroundListening():
     # obtain audio from the microphone
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print('Say something!')
+        print(':')
         audio = r.listen(source)
 
     try:
         speech = str(r.recognize_google(audio)) #converting to str for syntax highlighting
         if 'rosa' in speech.lower():
-            print('rosa: ?')
+            print('rosa?')
             answer(speech[4:].strip())
     except sr.UnknownValueError:
         print('Google Speech Recognition could not understand audio')
@@ -34,6 +34,7 @@ def backgroundListening():
 
 def answer(query):
     print(query)
+    backgroundListening()
 
 def main():
     backgroundListening()
