@@ -5,8 +5,6 @@
 
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
-from time import sleep
-
 import speech_recognition as sr
 from playsound import playsound
 
