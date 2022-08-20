@@ -12,6 +12,7 @@ from playsound import playsound
 
 #________________________________________________________________________________________________________________________________
 
+activations = ['rosa', 'browser'] #user could append their own
 keys = {
     'musicq': ['play', 'music'], 
     'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
@@ -47,11 +48,12 @@ def backgroundListening():
 
     try:
         speech = str(r.recognize_google(audio)) #converting to str for syntax highlighting
-        if 'rosa' in speech.lower():
-            determineResponse(speech.replace('rosa', '').strip())
-            backgroundListening()
-        else:
-            backgroundListening()
+        for phrase in activations:
+            if phrase in speech.lower():
+                determineResponse(speech.replace(phrase, '').strip())
+                backgroundListening()
+            else:
+                backgroundListening()
     except sr.UnknownValueError:
         print('Google Speech Recognition could not understand audio')
         backgroundListening()
