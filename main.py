@@ -26,7 +26,7 @@ def backgroundListening():
         speech = str(r.recognize_google(audio)) #converting to str for syntax highlighting
         if 'rosa' in speech.lower():
             print('rosa? ')
-            answer(speech[4:].strip())
+            answer(speech.replace('rosa', '').strip())
             backgroundListening()
         else:
             print(speech)
