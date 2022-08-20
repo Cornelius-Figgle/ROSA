@@ -19,7 +19,7 @@ And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/)
 pip install SpeechRecognition PyAudio playsound
 ```
 
-It is reconmended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
+It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
 [Python 3](https://www.python.org/downloads/) will also need to be installed if it isn't already
 
