@@ -25,11 +25,7 @@ def backgroundListening():
     try:
         speech = str(r.recognize_google(audio)) #converting to str for syntax highlighting
         if 'rosa' in speech.lower():
-<<<<<<< HEAD
             print('rosa? ')
-=======
-            print('rosa?')
->>>>>>> 03fea28b17328b5d967eb9ccc39d7900e105f7d2
             answer(speech[4:].strip())
     except sr.UnknownValueError:
         print('Google Speech Recognition could not understand audio')
