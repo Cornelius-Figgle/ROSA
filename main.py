@@ -27,14 +27,18 @@ def backgroundListening():
         if 'rosa' in speech.lower():
             print('rosa? ')
             answer(speech[4:].strip())
+            backgroundListening()
+        else:
+            backgroundListening()
     except sr.UnknownValueError:
         print('Google Speech Recognition could not understand audio')
+        backgroundListening()
     except sr.RequestError as e:
         print('Could not request results from Google Speech Recognition service; {0}'.format(e))
+        backgroundListening()
 
 def answer(query):
     print(query)
-    backgroundListening()
 
 def main():
     backgroundListening()
