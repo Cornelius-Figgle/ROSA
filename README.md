@@ -16,10 +16,10 @@ git clone https://github.com/Cornelius-Figgle/ROSA.git
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/)
 
 ```shell
-pip install SpeechRecognition PyAudio playsound
+pip install playsound PyAudio SpeechRecognition 
 ```
 
-It is reconmended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
+It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
 [Python 3](https://www.python.org/downloads/) will also need to be installed if it isn't already
 
@@ -39,4 +39,4 @@ Then you should be able to run the `main.py` file from wherever you cloned the r
 
 ## License
 
-[MIT](https://github.com/Cornelius-Figgle/ROSA/blob/main/LICENSE )
+[MIT](https://github.com/Cornelius-Figgle/ROSA/blob/main/LICENSE)
