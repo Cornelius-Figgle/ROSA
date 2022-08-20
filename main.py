@@ -40,6 +40,23 @@ def backgroundListening():
 
 def answer(query):
     print(query)
+    def musicq(q):
+        keys = ['play', 'music']
+        for key in keys:
+            if key in q:
+                return 'musicq'
+    def wikiq(q):
+        keys = ['wikipedia', 'wiki', 'what does', 'lookup', 'def']
+        for key in keys:
+            if key in q:
+                return 'wikiq'
+    def homeq(q):
+        keys = ['turn', 'on', 'off']
+        for key in keys:
+            if key in q:
+                return 'homeq'
+    typeq = musicq, wikiq, homeq(query)
+    print(typeq)
 
 def main():
     backgroundListening()
