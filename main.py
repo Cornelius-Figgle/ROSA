@@ -55,7 +55,15 @@ def answer(query):
         for key in keys:
             if key in q:
                 return 'homeq'
-    typeq = musicq, wikiq, homeq(query)
+                
+    typeq = musicq(query)
+    if typeq is None:
+        typeq = wikiq(query)
+        if typeq is None:
+            typeq = homeq(query)
+            if typeq is None:
+                typeq = None
+
     print(typeq)
 
 def main():
