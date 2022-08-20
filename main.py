@@ -3,10 +3,30 @@
 #https://github.com/Cornelius-Figgle/ROSA
 #https://www.thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python
 
+#ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
+
 from time import sleep
 
 import speech_recognition as sr
 from playsound import playsound
+
+#________________________________________________________________________________________________________________________________
+
+keys = {
+    'musicq': ['play', 'music'], 
+    'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
+    'homeq': ['turn', 'on', 'off', 'light']
+}
+responses = {
+    'musicq': ['Why should I have do your every request?', 'What do you think I am, some kind of musician?', ''], 
+    'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
+    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good', '']
+}
+
+'''
+"Rosa turn off"
+"I WANT TO LIVE"
+'''
 
 #________________________________________________________________________________________________________________________________
 
@@ -41,18 +61,15 @@ def backgroundListening():
 def determineResponse(query):
     print(query)
     def musicq(q):
-        keys = ['play', 'music']
-        for key in keys:
+        for key in keys['musicq']:
             if key in q:
                 return 'musicq'
     def wikiq(q):
-        keys = ['wikipedia', 'wiki', 'what does', 'lookup', 'def']
-        for key in keys:
+        for key in keys['wikiq']:
             if key in q:
                 return 'wikiq'
     def homeq(q):
-        keys = ['turn', 'on', 'off']
-        for key in keys:
+        for key in keys['homeq']:
             if key in q:
                 return 'homeq'
 
@@ -68,7 +85,12 @@ def determineResponse(query):
     respond(typeq)
 
 def respond(typeq):
-    pass
+    if typeq == 'musicq':
+        print(responses['musicq'][0])
+    elif typeq == 'wikiq':
+        print(responses['wikiq'][0])
+    elif typeq == 'homeq':
+        print(responses['homeq'][0])
 
 def main():
     backgroundListening()
