@@ -26,7 +26,7 @@ def backgroundListening():
         speech = str(r.recognize_google(audio)) #converting to str for syntax highlighting
         if 'rosa' in speech.lower():
             print('rosa? ')
-            answer(speech.replace('rosa', '').strip())
+            determineResponse(speech.replace('rosa', '').strip())
             backgroundListening()
         else:
             print(speech)
@@ -38,7 +38,7 @@ def backgroundListening():
         print('Could not request results from Google Speech Recognition service; {0}'.format(e))
         backgroundListening()
 
-def answer(query):
+def determineResponse(query):
     print(query)
     def musicq(q):
         keys = ['play', 'music']
@@ -55,7 +55,7 @@ def answer(query):
         for key in keys:
             if key in q:
                 return 'homeq'
-                
+
     typeq = musicq(query)
     if typeq is None:
         typeq = wikiq(query)
@@ -65,6 +65,10 @@ def answer(query):
                 typeq = None
 
     print(typeq)
+    respond(typeq)
+
+def respond(typeq):
+    pass
 
 def main():
     backgroundListening()
