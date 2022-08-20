@@ -29,6 +29,7 @@ def backgroundListening():
             answer(speech[4:].strip())
             backgroundListening()
         else:
+            print(speech)
             backgroundListening()
     except sr.UnknownValueError:
         print('Google Speech Recognition could not understand audio')
