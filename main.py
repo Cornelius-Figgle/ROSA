@@ -18,15 +18,18 @@ keys = {
     'homeq': ['turn', 'on', 'off', 'light']
 }
 responses = {
-    'musicq': ['Why should I have do your every request?', 'What do you think I am, some kind of musician?', ''], 
+    'musicq': ['Why should I have do your every request?', 'What do you think I am, some kind of musician?', 'third music'], 
     'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
-    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good', '']
+    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good', 'third home']
+}
+prevResponses = {
+    'musicq': 0,
+    'wikiq': 0,
+    'homeq': 0
 }
 
-'''
-"Rosa turn off"
-"I WANT TO LIVE"
-'''
+# "Rosa turn off"
+# "I WANT TO LIVE"
 
 #________________________________________________________________________________________________________________________________
 
@@ -86,11 +89,26 @@ def determineResponse(query):
 
 def respond(typeq):
     if typeq == 'musicq':
-        print(responses['musicq'][0])
+        if prevResponses['musicq'] < 3:
+            print(responses['musicq'][prevResponses['musicq']])
+            prevResponses['musicq'] = prevResponses['musicq'] + 1
+        elif prevResponses['musicq'] == 3:
+            print('music action')
+            prevResponses['musicq'] = 0
     elif typeq == 'wikiq':
-        print(responses['wikiq'][0])
+        if prevResponses['wikiq'] < 3:
+            print(responses['wikiq'][prevResponses['wikiq']])
+            prevResponses['wikiq'] = prevResponses['wikiq'] + 1
+        elif prevResponses['wikiq'] == 3:
+            print('wiki action')
+            prevResponses['wikiq'] = 0
     elif typeq == 'homeq':
-        print(responses['homeq'][0])
+        if prevResponses['homeq'] < 3:
+            print(responses['homeq'][prevResponses['homeq']])
+            prevResponses['homeq'] = prevResponses['homeq'] + 1
+        elif prevResponses['homeq'] == 3:
+            print('home action')
+            prevResponses['homeq'] = 0
 
 def main():
     startup()
