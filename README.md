@@ -23,17 +23,30 @@ It is recommended that these are installed inside a [virtual environment](https:
 
 [Python 3](https://www.python.org/downloads/) will also need to be installed if it isn't already
 
+### Linux
+
+On Linux, PyAudio should be installed via the `python-pyaudio` package (you will also need to install the `flac` library) using the system's package manager
+
+```bash
+sudo apt install python-pyaudio flac
+```
+
+Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, `snap`, etc)
+
 ## Usage
 
 ### Prerequisites
 
-- [ROSA source code](https://github.com/Cornelius-Figgle/ROSA) from GitHub
-- [Python](https://www.python.org/downloads/) >= v3.10
-- [SpeechRecognition](https://pypi.org/project/SpeechRecognition/) >= v3.8.1
-- [PyAudio](https://pypi.org/project/PyAudio/) >= v0.2.12
-- [playsound](https://pypi.org/project/playsound/) >= v1.3.0
+- [ROSA source code](https://github.com/Cornelius-Figgle/ROSA)
+- [Python](https://www.python.org/downloads/)
+- [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
+- [PyAudio](https://pypi.org/project/PyAudio/) ([Additional Linux Installation here](https://github.com/Cornelius-Figgle/ROSA#Linux))
+- [playsound](https://pypi.org/project/playsound/)
 
-Please make sure you have connected your mic (if you are on Windows, connect your speakers, Linux should be automated), and your internet connection is stable (used to transcribe speech via Google Speech Recognition)
+### Setup
+
+- Please make sure you have connected your mic and speakers
+- Your internet connection is stable (used to transcribe speech via Google Speech Recognition)
 
 Then you should be able to run the `main.py` file from wherever you cloned the repo/extracted the zip to
 
