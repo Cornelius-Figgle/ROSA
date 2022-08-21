@@ -40,7 +40,7 @@ Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, 
 - [ROSA source code](https://github.com/Cornelius-Figgle/ROSA)
 - [Python](https://www.python.org/downloads/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
-- [PyAudio](https://pypi.org/project/PyAudio/) ([Additional Linux Installation here](https://github.com/Cornelius-Figgle/ROSA#Linux))
+- [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux](https://github.com/Cornelius-Figgle/ROSA#Linux))
 - [playsound](https://pypi.org/project/playsound/)
 
 ### Setup
