@@ -33,7 +33,7 @@ It is recommended that these are installed inside a [virtual environment](https:
 - [PyAudio](https://pypi.org/project/PyAudio/) >= v0.2.12
 - [playsound](https://pypi.org/project/playsound/) >= v1.3.0
 
-Please make sure you have connected your mic and your internet connection is stable (used to transcribe speech via Google Speech Recognition)
+Please make sure you have connected your mic (if you are on Windows, connect your speakers, Linux should be automated), and your internet connection is stable (used to transcribe speech via Google Speech Recognition)
 
 Then you should be able to run the `main.py` file from wherever you cloned the repo/extracted the zip to
 
