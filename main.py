@@ -5,6 +5,8 @@
 
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
+import os
+
 import speech_recognition as sr
 from playsound import playsound
 
@@ -33,6 +35,10 @@ prevResponses = {
 #________________________________________________________________________________________________________________________________
 
 def startup():
+    if os.name == 'posix':
+        blue = open('blue.txt', 'r')
+        mac = blue.read()
+        os.system(f'bluetoothctl connect {mac}')
     print('ADJUSTING FOR AMIENBT')
     with sr.Microphone() as source: 
         sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
