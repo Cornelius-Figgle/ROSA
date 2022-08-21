@@ -17,9 +17,9 @@ keys = {
     'homeq': ['turn', 'on', 'off', 'light']
 }
 responses = {
-    'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?', 'third music'], 
+    'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?'], 
     'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
-    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good', 'third home']
+    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good']
 }
 prevResponses = {
     'musicq': 0,
@@ -86,24 +86,24 @@ def determineResponse(query):
 
 def respond(typeq):
     if typeq == 'musicq':
-        if prevResponses['musicq'] < 3:
+        if prevResponses['musicq'] < len(responses['musicq']):
             print(responses['musicq'][prevResponses['musicq']])
             prevResponses['musicq'] = prevResponses['musicq'] + 1
-        elif prevResponses['musicq'] == 3:
+        else:
             print('music action')
             prevResponses['musicq'] = 0
     elif typeq == 'wikiq':
-        if prevResponses['wikiq'] < 3:
+        if prevResponses['wikiq'] < len(responses['wikiq']):
             print(responses['wikiq'][prevResponses['wikiq']])
             prevResponses['wikiq'] = prevResponses['wikiq'] + 1
-        elif prevResponses['wikiq'] == 3:
+        else:
             print('wiki action')
             prevResponses['wikiq'] = 0
     elif typeq == 'homeq':
-        if prevResponses['homeq'] < 3:
+        if prevResponses['homeq'] < len(responses['homeq']):
             print(responses['homeq'][prevResponses['homeq']])
             prevResponses['homeq'] = prevResponses['homeq'] + 1
-        elif prevResponses['homeq'] == 3:
+        else:
             print('home action')
             prevResponses['homeq'] = 0
 
