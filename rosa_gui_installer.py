@@ -8,13 +8,20 @@ app = qt.QApplication([])
 
 #________________________________________________________________________________________________________________________________
 
+def selectDir(window):    
+    global installDir
+    installDir = qt.QFileDialog.getExistingDirectory(window, 'Select Folder')
+    print(installDir)
+
 def main():
     print(os.name)
     window = qt.QWidget()
     layout = qt.QVBoxLayout()
-    layout.addWidget(qt.QPushButton('Top'))
-    layout.addWidget(qt.QPushButton('Bottom'))
+    button = qt.QPushButton('Top')
+    layout.addWidget(button)
+    button.clicked.connect(lambda: selectDir(window))
     window.setLayout(layout)
+    
     window.show()
     app.exec()
 
