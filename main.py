@@ -45,10 +45,10 @@ def backgroundListening():
         audio = r.listen(source)
 
     try:
-        speech = str(r.recognize_google(audio)) #converting to str for syntax highlighting
+        speech = str(r.recognize_google(audio)).lower() #converting to str for syntax highlighting
         print(f'\n\t{speech}\n')
         for phrase in activations:
-            if phrase in speech.lower():
+            if phrase in speech:
                 determineResponse(speech.replace(phrase, '').strip())
                 backgroundListening()
             else:
