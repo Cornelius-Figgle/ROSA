@@ -10,7 +10,7 @@ from playsound import playsound
 
 #________________________________________________________________________________________________________________________________
 
-activations = ['rosa', 'browser'] #user could append their own
+activations = ['rosa', 'browser', 'rosanna'] #user could append their own
 keys = {
     'musicq': ['play', 'music'], 
     'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
@@ -88,6 +88,7 @@ def respond(typeq):
     if typeq == 'musicq':
         if prevResponses['musicq'] < len(responses['musicq']):
             print(responses['musicq'][prevResponses['musicq']])
+            playsound('\\responses\\_\\monolith.mp3')#, block=True)
             prevResponses['musicq'] = prevResponses['musicq'] + 1
         else:
             print('music action')
