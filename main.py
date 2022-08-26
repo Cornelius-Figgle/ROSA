@@ -46,7 +46,7 @@ def backgroundListening():
 
     try:
         speech = str(r.recognize_google(audio)).lower() #converting to str for syntax highlighting
-        print(f'\n\t{speech}\n')
+        print(f'> {speech}')
         for phrase in activations:
             if phrase in speech:
                 determineResponse(speech.replace(phrase, '').strip())
@@ -61,7 +61,6 @@ def backgroundListening():
         backgroundListening()
 
 def determineResponse(query):
-    print(query)
     def musicq(q):
         for key in keys['musicq']:
             if key in q:
