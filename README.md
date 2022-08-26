@@ -7,21 +7,21 @@ An emotional smart assistant that doesn't listen to you
 
 ## Installation
 
-You can either clone the repo or download the zip from Github
+[Python 3](https://www.python.org/downloads/) will need to be installed if it isn't already
+
+You can then either clone the repo or download the zip from Github
 
 ```shell
 git clone https://github.com/Cornelius-Figgle/ROSA.git
 ```
 
-And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/)
+And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python)
 
 ```shell
-pip install playsound PyAudio SpeechRecognition 
+pip install playsound==1.2.2 PyAudio SpeechRecognition 
 ```
 
 It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
-
-[Python 3](https://www.python.org/downloads/) will also need to be installed if it isn't already
 
 ### Linux
 
@@ -41,7 +41,7 @@ Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, 
 - [Python](https://www.python.org/downloads/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux](https://github.com/Cornelius-Figgle/ROSA#Linux))
-- [playsound](https://pypi.org/project/playsound/)
+- [playsound](https://pypi.org/project/playsound/) v1.2.2
 
 ### Setup
 
