@@ -90,7 +90,7 @@ def respond(typeq):
     if typeq == 'musicq':
         if prevResponses['musicq'] < len(responses['musicq']):
             print(responses['musicq'][prevResponses['musicq']])
-            playsound(os.join(os.path.dirname(__file__), 'responses', '_', 'monolith.mp3'))#, block=True)
+            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
             prevResponses['musicq'] = prevResponses['musicq'] + 1
         else:
             print('music action')
