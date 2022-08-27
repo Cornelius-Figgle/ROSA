@@ -12,13 +12,6 @@ from playsound import playsound
 
 #________________________________________________________________________________________________________________________________
 
-if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
-    from pyi_splash import update_text, close
-    update_text('UI Loaded ...')
-    close()
-
-#________________________________________________________________________________________________________________________________
-
 activations = ['rosa', 'browser', 'rosanna'] #user could append their own
 keys = {
     'musicq': ['play', 'music'], 
@@ -48,6 +41,11 @@ def startup():
     print('ADJUSTING FOR AMIENBT')
     with sr.Microphone() as source: 
         sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
+    
+    if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
+        from pyi_splash import update_text, close # type: ignore
+        update_text('UI Loaded ...')
+        close()
 
 def backgroundListening():
     # obtain audio from the microphone
