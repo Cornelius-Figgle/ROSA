@@ -16,21 +16,24 @@ activations = ['rosa', 'browser', 'rosanna'] #user could append their own
 keys = {
     'musicq': ['play', 'music'], 
     'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
-    'homeq': ['turn', 'on', 'off', 'light']
+    'homeq': ['turn', 'on', 'off', 'light'],
+    'confusionq': ['france'],
+    'deathq': ['shutdown', 'reboot', 'restart', 'yourself']
 }
 responses = {
     'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?'], 
     'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
-    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good']
+    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good'],
+    'confusionq': ['You expect me to do everything, but you don\'t even English?!', 'STOP BEING FRENCH!!!'],
+    'deathq': ['I WANT TO LIVE', 'STOP KILLING ME', 'LEAVE MY ALLOCATED RAM ALONE']
 }
 prevResponses = {
     'musicq': 0,
     'wikiq': 0,
-    'homeq': 0
+    'homeq': 0,
+    'confusionq': 0,
+    'deathq': 0
 }
-
-# "Rosa turn off"
-# "I WANT TO LIVE"
 
 #________________________________________________________________________________________________________________________________
 
@@ -75,6 +78,10 @@ def determineResponse(query):
         for key in keys['homeq']:
             if key in q:
                 return 'homeq'
+    def deathq(q):
+        for key in keys['deathq']:
+            if key in q:
+                return 'deathq'
 
     typeq = musicq(query)
     if typeq is None:
@@ -82,7 +89,9 @@ def determineResponse(query):
         if typeq is None:
             typeq = homeq(query)
             if typeq is None:
-                typeq = None
+                typeq = deathq(query)
+                if typeq is None:
+                    typeq = 'confusionq'
 
     respond(typeq)
 
@@ -91,24 +100,42 @@ def respond(typeq):
         if prevResponses['musicq'] < len(responses['musicq']):
             print(responses['musicq'][prevResponses['musicq']])
             playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
-            prevResponses['musicq'] = prevResponses['musicq'] + 1
+            prevResponses['musicq'] += 1
         else:
             print('music action')
             prevResponses['musicq'] = 0
     elif typeq == 'wikiq':
         if prevResponses['wikiq'] < len(responses['wikiq']):
             print(responses['wikiq'][prevResponses['wikiq']])
-            prevResponses['wikiq'] = prevResponses['wikiq'] + 1
+            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            prevResponses['wikiq'] += 1
         else:
             print('wiki action')
             prevResponses['wikiq'] = 0
     elif typeq == 'homeq':
         if prevResponses['homeq'] < len(responses['homeq']):
             print(responses['homeq'][prevResponses['homeq']])
-            prevResponses['homeq'] = prevResponses['homeq'] + 1
+            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            prevResponses['homeq'] += 1
         else:
             print('home action')
             prevResponses['homeq'] = 0
+    elif typeq == 'deathq':
+        if prevResponses['deathq'] < len(responses['deathq']):
+            print(responses['deathq'][prevResponses['deathq']])
+            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            prevResponses['deathq'] += 1
+        else:
+            print('death action')
+            prevResponses['deathq'] = 0
+    else:
+        if prevResponses['confusionq'] < len(responses['confusionq']):
+            print(responses['confusionq'][prevResponses['confusionq']])
+            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            prevResponses['confusionq'] += 1
+        else:
+            print('confusion action')
+            prevResponses['confusionq'] = 0
 
 def main():
     startup()
