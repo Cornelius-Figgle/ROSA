@@ -1,1 +1,4 @@
 rosa-env/
+bin/build/
+rosa.spec
+pyinstaller_command.txt
