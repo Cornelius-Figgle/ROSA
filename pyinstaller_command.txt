@@ -1,2 +1,0 @@
-cd /d t:\projects\rosa
-pyinstaller --distpath "t:\projects\rosa\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA --add-binary "t:\projects\rosa\responses;responses" --splash "T:\projects\ROSA\ico\hotspot.ai.png" -i "T:\projects\ROSA\ico\hotspot.ai.ico" main.py
