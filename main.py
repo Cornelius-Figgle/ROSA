@@ -16,7 +16,6 @@ if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
     from pyi_splash import update_text, close
     update_text('UI Loaded ...')
     close()
-    #log.info('Splash screen closed.')
 
 #________________________________________________________________________________________________________________________________
 
