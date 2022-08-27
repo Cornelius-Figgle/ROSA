@@ -13,6 +13,7 @@ from playsound import playsound
 #________________________________________________________________________________________________________________________________
 
 activations = ['rosa', 'browser', 'rosanna', 'frozen'] #user could append their own
+
 keys = {
     'musicq': ['play', 'music'], 
     'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
