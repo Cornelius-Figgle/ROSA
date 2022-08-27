@@ -56,6 +56,10 @@ Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, 
 
 Then you should be able to run the `main.py` file from wherever you cloned the repo/extracted the zip to
 
+### Dev Notes
+
+- `playsound()` only works without tags/metadata
+
 ## License
 
 [MIT](https://github.com/Cornelius-Figgle/ROSA/blob/main/LICENSE)
