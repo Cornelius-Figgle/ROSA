@@ -5,13 +5,15 @@ ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
 
+*If you wish to install the binaries instead of the source, [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/bin_README.md)*
+
 ## Installation
 
-You can use the binary files found in `/bin` if you do not wish to install from the source
+### All Platforms
 
 [Python 3](https://www.python.org/downloads/) will need to be installed if it isn't already
 
-You can then either clone the repo or download the zip from Github
+You can then either clone the repo or download the zip from GitHub
 
 ```shell
 git clone https://github.com/Cornelius-Figgle/ROSA.git
@@ -25,7 +27,7 @@ pip install playsound==1.2.2 PyAudio SpeechRecognition
 
 It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
-### Linux
+### Linux Only
 
 On Linux, PyAudio should be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
 
