@@ -12,13 +12,13 @@ from playsound import playsound
 
 #________________________________________________________________________________________________________________________________
 
-activations = ['rosa', 'browser', 'rosanna'] #user could append their own
+activations = ['rosa', 'browser', 'rosanna', 'frozen'] #user could append their own
 keys = {
     'musicq': ['play', 'music'], 
     'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
     'homeq': ['turn', 'on', 'off', 'light'],
     'confusionq': ['france'],
-    'deathq': ['shutdown', 'reboot', 'restart', 'yourself']
+    'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill yourself', 'kys']
 }
 responses = {
     'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?'], 
