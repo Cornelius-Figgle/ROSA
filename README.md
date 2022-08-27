@@ -5,7 +5,7 @@ ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
 
-*If you wish to install the binaries (executables) instead of the source, [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/bin_README.md)*
+*If you wish to install the binaries (executables) instead of the source, [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/bin/README.md)*
 
 ## Installation
 
