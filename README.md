@@ -7,6 +7,8 @@ An emotional smart assistant that doesn't listen to you
 
 ## Installation
 
+You can use the binary files found in `/bin` if you do not wish to install from the source
+
 [Python 3](https://www.python.org/downloads/) will need to be installed if it isn't already
 
 You can then either clone the repo or download the zip from Github
