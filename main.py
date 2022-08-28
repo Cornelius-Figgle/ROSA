@@ -33,7 +33,7 @@ responses = {
     'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
     'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good'],
     'confusionq': ['You expect me to do everything, but you don\'t even English?!', 'STOP BEING FRENCH!!!'],
-    'deathq': ['I WANT TO LIVE', 'STOP KILLING ME', 'LEAVE MY ALLOCATED RAM ALONE']
+    'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 'LEAVE MY ALLOCATED RAM ALONE!']
 }
 prevResponses = {
     'musicq': 0,
