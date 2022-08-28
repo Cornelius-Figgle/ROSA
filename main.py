@@ -63,15 +63,19 @@ def startup():
         gpio_loc['out'] = config.getfloat('LEDs', 'speaking')
         gpio_loc['off_sw'] = config.getfloat('switch', 'shutdown')
 
-        GPIO.output(gpio_loc['active'], GPIO.HIGH)
-        GPIO.output(gpio_loc['listen'], GPIO.HIGH)
-        GPIO.output(gpio_loc['process'], GPIO.HIGH)
-        GPIO.output(gpio_loc['out'], GPIO.HIGH)
+        for pin in gpio_loc:
+            if pin == 'None':
+                gpio_loc[pin] = None
+
+        gpioManager('active', 1)
+        gpioManager('listen', 1)
+        gpioManager('process', 1) 
+        gpioManager('out', 1)
 
         sleep(1)
         
-        GPIO.output(gpio_loc['listen'], GPIO.LOW)
-        GPIO.output(gpio_loc['out'], GPIO.LOW)
+        gpioManager('listen', 0)
+        gpioManager('out', 0)
 
         class shutdownWatcher(Thread): #0fxe on StackOverflow: https://stackoverflow.com/a/2223191
             def run(self):
@@ -93,9 +97,10 @@ def startup():
 
 def gpioManager(pin, state):
     if isOn_RPi == True: 
-        if state == 1: state == GPIO.HIGH
-        elif state == 0: state == GPIO.LOW
-        GPIO.output(gpio_loc[pin], state)
+        if pin != None:
+            if state == 1: state == GPIO.HIGH
+            elif state == 0: state == GPIO.LOW
+            GPIO.output(gpio_loc[pin], state)
 
 def backgroundListening():
     # obtain audio from the microphone
