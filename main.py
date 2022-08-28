@@ -6,13 +6,14 @@
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 import os
+from configparser import ConfigParser
 from time import sleep
 
 import speech_recognition as sr
 from playsound import playsound
 
 try: 
-    import RPi.GPIO as GPIO # type: ignore
+    import RPi.GPIO as GPIO  # type: ignore
     isOn_RPi = True
 except:
     isOn_RPi = False
@@ -52,12 +53,33 @@ def startup():
     
     if isOn_RPi == True: 
         GPIO.setmode(GPIO.BCM)
-        GPIO.output(18,GPIO.HIGH)
+        config = ConfigParser()
+
+        config.read('gpio.ini')
+
+        gpio_loc = {}
+
+        gpio_loc['active'] = config.get('LEDs', 'active')
+        gpio_loc['listen'] = config.getboolean('LEDS', 'listening')
+        gpio_loc['process'] = config.getint('LEDs', 'processing')
+        gpio_loc['out'] = config.getfloat('LEDs', 'speaking')
+        gpio_loc['off_sw'] = config.getfloat('switch', 'shutdown')
+
+        GPIO.output(gpio_loc['active'], GPIO.HIGH)
+        GPIO.output(gpio_loc['listen'], GPIO.HIGH)
+        GPIO.output(gpio_loc['process'], GPIO.HIGH)
+        GPIO.output(gpio_loc['out'], GPIO.HIGH)
+
         sleep(1)
-        GPIO.output(18,GPIO.LOW)
+        
+        GPIO.output(gpio_loc['listen'], GPIO.LOW)
+        GPIO.output(gpio_loc['process'], GPIO.LOW)
+        GPIO.output(gpio_loc['out'], GPIO.LOW)
+
+        GPIO.input(gpio_loc['off_sw']) == False
 
     if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
-        from pyi_splash import update_text, close # type: ignore
+        from pyi_splash import close, update_text  # type: ignore
         update_text('UI Loaded ...')
         close()
 
