@@ -48,6 +48,8 @@ prevResponses = {
 
 def startup():
     global gpio_loc
+
+    print('\a')
     
     if isOn_RPi == True: 
         GPIO.setmode(GPIO.BCM)
@@ -94,6 +96,7 @@ def startup():
         close()
 
     gpioManager('process', 0)
+    print('\a'); sleep(1); print('\a')
 
 def gpioManager(pin, state):
     if isOn_RPi == True: 
@@ -110,8 +113,9 @@ def backgroundListening():
         gpioManager('listen', 1)
 
         audio = r.listen(source)
-
+        
         gpioManager('listen', 0)
+        print('\a')
 
     gpioManager('process', 1)
 
