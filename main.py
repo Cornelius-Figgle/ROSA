@@ -6,6 +6,7 @@
 
 import os
 from configparser import ConfigParser
+from threading import Thread
 from time import sleep
 
 import speech_recognition as sr
@@ -46,6 +47,8 @@ prevResponses = {
 #________________________________________________________________________________________________________________________________
 
 def startup():
+    global gpio_loc
+
     print('ADJUSTING FOR AMIENBT')
     with sr.Microphone() as source: 
         sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
@@ -75,7 +78,12 @@ def startup():
         GPIO.output(gpio_loc['process'], GPIO.LOW)
         GPIO.output(gpio_loc['out'], GPIO.LOW)
 
-        GPIO.input(gpio_loc['off_sw']) == False
+        class shutdownWatcher(Thread): #0fxe on StackOverflow: https://stackoverflow.com/a/2223191
+            def run(self):
+                while True:
+                    if GPIO.input(gpio_loc['off_sw']) == False:
+                        os.system('shutdown -h now')
+        shutdownWatcher().start()
 
     if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
         from pyi_splash import close, update_text  # type: ignore
