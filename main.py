@@ -1,7 +1,6 @@
 #!T:\projects\ROSA\rosa-env\Scripts\python.exe
 
 #https://github.com/Cornelius-Figgle/ROSA
-#https://www.thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python
 
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
