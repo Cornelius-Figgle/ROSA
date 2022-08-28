@@ -2,3 +2,4 @@ rosa-env/
 bin/build/
 rosa.spec
 pyinstaller_command.txt
+print_responses.txt
