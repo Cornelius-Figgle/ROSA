@@ -48,10 +48,6 @@ prevResponses = {
 
 def startup():
     global gpio_loc
-
-    print('ADJUSTING FOR AMIENBT')
-    with sr.Microphone() as source: 
-        sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
     
     if isOn_RPi == True: 
         GPIO.setmode(GPIO.BCM)
@@ -75,7 +71,6 @@ def startup():
         sleep(1)
         
         GPIO.output(gpio_loc['listen'], GPIO.LOW)
-        GPIO.output(gpio_loc['process'], GPIO.LOW)
         GPIO.output(gpio_loc['out'], GPIO.LOW)
 
         class shutdownWatcher(Thread): #0fxe on StackOverflow: https://stackoverflow.com/a/2223191
@@ -85,10 +80,16 @@ def startup():
                         os.system('shutdown -h now')
         shutdownWatcher().start()
 
+    print('ADJUSTING FOR AMIENBT')
+    with sr.Microphone() as source: 
+        sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
+
     if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
         from pyi_splash import close, update_text  # type: ignore
         update_text('UI Loaded ...')
         close()
+
+    if isOn_RPi == True: GPIO.output(gpio_loc['process'], GPIO.LOW)
 
 def backgroundListening():
     # obtain audio from the microphone
