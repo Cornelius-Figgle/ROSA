@@ -119,12 +119,11 @@ def respond(typeq):
             print('wiki action')
             prevResponses['wikiq'] = 0
     elif typeq == 'homeq':
+        print(responses['homeq'][prevResponses['homeq']])
+        playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
         if prevResponses['homeq'] < len(responses['homeq']):
-            print(responses['homeq'][prevResponses['homeq']])
-            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
             prevResponses['homeq'] += 1
         else:
-            print('home action')
             prevResponses['homeq'] = 0
     elif typeq == 'deathq':
         if prevResponses['deathq'] < len(responses['deathq']):
@@ -135,12 +134,11 @@ def respond(typeq):
             print('death action')
             prevResponses['deathq'] = 0
     else:
+        print(responses['confusionq'][prevResponses['confusionq']])
+        playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
         if prevResponses['confusionq'] < len(responses['confusionq']):
-            print(responses['confusionq'][prevResponses['confusionq']])
-            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
             prevResponses['confusionq'] += 1
         else:
-            print('confusion action')
             prevResponses['confusionq'] = 0
 
 def main():
