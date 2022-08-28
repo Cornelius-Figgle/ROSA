@@ -6,9 +6,16 @@
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 import os
+from time import sleep
 
 import speech_recognition as sr
 from playsound import playsound
+
+try: 
+    import RPi.GPIO as GPIO # type: ignore
+    isOn_RPi = True
+except:
+    isOn_RPi = False
 
 #________________________________________________________________________________________________________________________________
 
@@ -43,6 +50,12 @@ def startup():
     with sr.Microphone() as source: 
         sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
     
+    if isOn_RPi == True: 
+        GPIO.setmode(GPIO.BCM)
+        GPIO.output(18,GPIO.HIGH)
+        sleep(1)
+        GPIO.output(18,GPIO.LOW)
+
     if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
         from pyi_splash import update_text, close # type: ignore
         update_text('UI Loaded ...')
