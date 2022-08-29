@@ -60,10 +60,10 @@ def startup():
         gpio_loc = {}
 
         gpio_loc['active'] = config.get('LEDs', 'active')
-        gpio_loc['listen'] = config.getboolean('LEDS', 'listening')
-        gpio_loc['process'] = config.getint('LEDs', 'processing')
-        gpio_loc['out'] = config.getfloat('LEDs', 'speaking')
-        gpio_loc['off_sw'] = config.getfloat('switch', 'shutdown')
+        gpio_loc['listen'] = config.get('LEDS', 'listening')
+        gpio_loc['process'] = config.get('LEDs', 'processing')
+        gpio_loc['out'] = config.get('LEDs', 'speaking')
+        gpio_loc['off_sw'] = config.get('switch', 'shutdown')
 
         for pin in gpio_loc:
             if pin == 'None':
