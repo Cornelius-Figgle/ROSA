@@ -68,6 +68,14 @@ def startup():
         for pin in gpio_loc:
             if pin == 'None':
                 gpio_loc[pin] = None
+	
+        GPIO.setup(gpio_loc['active'], GPIO.OUT)
+        GPIO.setup(gpio_loc['listen'], GPIO.OUT)
+        GPIO.setup(gpio_loc['process'], GPIO.OUT)
+        GPIO.setup(gpio_loc['out'], GPIO.OUT)
+        GPIO.setup(gpio_loc['off_sw'], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.add_event_detect(gpio_loc['off_sw'], GPIO.RISING, callback = lambda: os.system('shutdown -h now'))
+	
 
         gpioManager('active', 1)
         gpioManager('listen', 1)
@@ -78,13 +86,6 @@ def startup():
         
         gpioManager('listen', 0)
         gpioManager('out', 0)
-
-        class shutdownWatcher(Thread): #0fxe on StackOverflow: https://stackoverflow.com/a/2223191
-            def run(self):
-                while True:
-                    if GPIO.input(gpio_loc['off_sw']) == False:
-                        os.system('shutdown -h now')
-        shutdownWatcher().start()
 
     print('ADJUSTING FOR AMIENBT')
     with sr.Microphone() as source: 
@@ -101,9 +102,8 @@ def startup():
 def gpioManager(pin, state):
     if isOn_RPi == True: 
         if pin != None:
-            if state == 1: state == GPIO.HIGH
-            elif state == 0: state == GPIO.LOW
-            GPIO.output(gpio_loc[pin], state)
+            if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
+            elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
 
 def backgroundListening():
     # obtain audio from the microphone
