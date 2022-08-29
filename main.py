@@ -54,7 +54,7 @@ def startup():
         GPIO.setmode(GPIO.BCM)
         config = ConfigParser()
 
-        config.read('gpio.ini')
+        config.read(f'{os.path.dirname(__file__)}/gpio.ini')
 
         gpio_loc = {}
 
