@@ -6,7 +6,6 @@
 
 import os
 from configparser import ConfigParser
-from threading import Thread
 from time import sleep
 
 import speech_recognition as sr
