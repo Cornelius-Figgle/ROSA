@@ -92,7 +92,7 @@ def startup():
 
     if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
         from pyi_splash import close, update_text  # type: ignore
-        update_text('UI Loaded ...')
+        update_text('UI Loaded...')
         close()
 
     gpioManager('process', 0)
