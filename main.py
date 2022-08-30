@@ -4,9 +4,8 @@
 
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
-from logging import shutdown
+import json
 import os
-from configparser import ConfigParser
 from time import sleep
 
 import speech_recognition as sr
@@ -52,18 +51,11 @@ def startup():
     print('\a')
     
     if isOn_RPi == True: 
+
         GPIO.setmode(GPIO.BCM)
-        config = ConfigParser()
-
-        config.read(f'{os.path.dirname(__file__)}/gpio.ini')
-
-        gpio_loc = {}
-
-        gpio_loc['active'] = config.get('LED', 'active')
-        gpio_loc['listen'] = config.get('LED', 'listening')
-        gpio_loc['process'] = config.get('LED', 'processing')
-        gpio_loc['out'] = config.get('LED', 'speaking')
-        gpio_loc['off_sw'] = config.get('switch', 'shutdown')
+        
+        with open(f'{os.path.dirname(__file__)}/gpio.json', 'r') as j:
+            gpio_loc = json.loads(j.read())
 
         for pin in gpio_loc:
             if pin == 'None':
