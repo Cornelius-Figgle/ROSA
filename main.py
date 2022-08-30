@@ -100,10 +100,8 @@ def startup():
 
 def gpioManager(pin, state):
     if isOn_RPi is not False: 
-        if not pin:
-            if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
-            elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
-        else: print(f'second error {str(pin)}')
+        if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
+        elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
     else: print(f'first error {str(pin)}')
 
 def backgroundListening():
