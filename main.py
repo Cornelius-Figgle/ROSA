@@ -55,6 +55,8 @@ def startup():
     if isOn_RPi == True: 
 
         GPIO.setmode(GPIO.BCM)
+        
+        GPIO.cleanup()
 
         with open(os.path.join(os.path.dirname(__file__), 'gpio.json'), 'r') as j:
             gpio_loc = json.loads(j.read())
@@ -71,6 +73,7 @@ def startup():
         def shutdown():
             global hasStarted; hadStarted = True
 
+            GPIO.cleanup()
             os.system('sudo shutdown -h now')
 
         gpioManager('active', 1)
