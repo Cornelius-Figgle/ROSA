@@ -73,15 +73,15 @@ def startup():
 
         gpioManager('active', 1)
         sleep(0.5)
-        gpioManager('listen', 1)
+        gpioManager('listening', 1)
         sleep(0.5)
-        gpioManager('process', 1) 
+        gpioManager('processing', 1) 
         sleep(0.5)
-        gpioManager('out', 1)
+        gpioManager('speaking', 1)
         sleep(1)        
-        gpioManager('out', 0)
+        gpioManager('speaking', 0)
         sleep(0.5)
-        gpioManager('listen', 0)
+        gpioManager('listening', 0)
     #ENDIF
 
     print('ADJUSTING FOR AMIENBT')
@@ -93,28 +93,27 @@ def startup():
         update_text('UI Loaded...')
         close()
 
-    gpioManager('process', 0)
+    gpioManager('processing', 0)
     print('\a'); sleep(1); print('\a')
 
 def gpioManager(pin, state):
     if isOn_RPi == True: 
         if not pin:
-            if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
-            elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
+            GPIO.output(gpio_loc[pin], state)
 
 def backgroundListening():
     # obtain audio from the microphone
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print(':')
-        gpioManager('listen', 1)
+        gpioManager('listening', 1)
 
         audio = r.listen(source)
         
-        gpioManager('listen', 0)
+        gpioManager('listening', 0)
         print('\a')
 
-    gpioManager('process', 1)
+    gpioManager('processing', 1)
 
     try:
         speech = str(r.recognize_google(audio)).lower() #converting to str for syntax highlighting
@@ -124,15 +123,15 @@ def backgroundListening():
                 determineResponse(speech.replace(phrase, '').strip())
                 backgroundListening()
             else:
-                gpioManager('process', 0)
+                gpioManager('processing', 0)
                 backgroundListening()
     except sr.UnknownValueError:
         print('Google Speech Recognition could not understand audio')
-        gpioManager('process', 0)
+        gpioManager('processing', 0)
         backgroundListening()
     except sr.RequestError as e:
         print('Could not request results from Google Speech Recognition service; {0}'.format(e))
-        gpioManager('process', 0)
+        gpioManager('processing', 0)
         backgroundListening()
 
 def determineResponse(query):
@@ -163,11 +162,11 @@ def determineResponse(query):
                 if typeq is None:
                     typeq = 'confusionq'
 
-    gpioManager('process', 0)
+    gpioManager('processing', 0)
     respond(typeq)
 
 def respond(typeq):
-    gpioManager('out', 1)
+    gpioManager('speaking', 1)
 
     if typeq == 'musicq':
         if prevResponses['musicq'] < len(responses['musicq']):
@@ -208,7 +207,7 @@ def respond(typeq):
         else:
             prevResponses['confusionq'] = 0
 
-    gpioManager('out', 0)
+    gpioManager('speaking', 0)
 
 def main():
     startup()
