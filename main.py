@@ -14,12 +14,12 @@ from playsound import playsound
 try: 
     import RPi.GPIO as GPIO  # type: ignore
     isOn_RPi = True
-except:
+except ImportError:
     isOn_RPi = False
 
 #________________________________________________________________________________________________________________________________
 
-activations = ['rosa', 'browser', 'rosanna', 'frozen'] # future: user could append their own
+activations = ['rosa', 'browser', 'rosanna', 'frozen', 'roserton'] # future: user could append their own
 
 keys = {
     'musicq': ['play', 'music'], 
@@ -99,9 +99,10 @@ def startup():
     print('\a'); sleep(1); print('\a')
 
 def gpioManager(pin, state):
-    if isOn_RPi == True: 
+    if isOn_RPi is not None: 
         if not pin:
-            GPIO.output(gpio_loc[pin], state)
+            if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
+            elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
 
 def backgroundListening():
     # obtain audio from the microphone
