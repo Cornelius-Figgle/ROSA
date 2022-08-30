@@ -53,18 +53,14 @@ def startup():
     if isOn_RPi == True: 
 
         GPIO.setmode(GPIO.BCM)
-        
+
         with open(f'{os.path.dirname(__file__)}/gpio.json', 'r') as j:
             gpio_loc = json.loads(j.read())
-
-        for pin in gpio_loc:
-            if pin == 'None':
-                gpio_loc[pin] = None
 	
         GPIO.setup(gpio_loc['active'], GPIO.OUT)
-        GPIO.setup(gpio_loc['listen'], GPIO.OUT)
-        GPIO.setup(gpio_loc['process'], GPIO.OUT)
-        GPIO.setup(gpio_loc['out'], GPIO.OUT)
+        GPIO.setup(gpio_loc['listening'], GPIO.OUT)
+        GPIO.setup(gpio_loc['processing'], GPIO.OUT)
+        GPIO.setup(gpio_loc['speaking'], GPIO.OUT)
 
         hasStarted = False
         GPIO.setup(gpio_loc['off_sw'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
@@ -102,7 +98,7 @@ def startup():
 
 def gpioManager(pin, state):
     if isOn_RPi == True: 
-        if pin != None:
+        if not pin:
             if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
             elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
 

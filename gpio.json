@@ -1,7 +1,21 @@
 {
+    "#": "Lines that have text are comments",
+    "#_": "If you wish to ignore an LED, simply put the value as 2 empty double quotes (see sample below)",
+    "empty_sample": "",
+
+
     "active": 4,
+    "LED_1": "Shows when the script/program is running",
+
     "listening": 27,
+    "LED_2": "Shows when ROSA is listening to speech",
+
     "processing": 5,
+    "LED_3": "Shows when ROSA is processing speech/a response/etc",
+
     "speaking": 16,
-    "shutdown": 25 
+    "LED_4": "Shows when ROSA is outputting audio/text",
+
+    "shutdown": 25,
+    "BUTTON_1": "A simple push-button that will run the shutdown command when pressed"
 }
