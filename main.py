@@ -75,22 +75,26 @@ def startup():
         GPIO.setup(gpio_loc['out'], GPIO.OUT)
 
         hasStarted = False
-        GPIO.setup(gpio_loc['off_sw'], GPIO.IN)
-        GPIO.add_event_detect(gpio_loc['off_sw'], GPIO.RISING, callback = lambda channel: shutdown() if hasStarted == False else sleep(1))
+        GPIO.setup(gpio_loc['off_sw'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
+        GPIO.add_event_detect(gpio_loc['off_sw'], GPIO.FALLING, callback = lambda channel: shutdown() if not hasStarted else sleep(1))
 
         def shutdown():
             global hasStarted; hadStarted = True
+
             os.system('sudo shutdown -h now')
 
         gpioManager('active', 1)
+        sleep(0.5)
         gpioManager('listen', 1)
+        sleep(0.5)
         gpioManager('process', 1) 
+        sleep(0.5)
         gpioManager('out', 1)
-
-        sleep(1)
-        
-        gpioManager('listen', 0)
+        sleep(1)        
         gpioManager('out', 0)
+        sleep(0.5)
+        gpioManager('listen', 0)
+    #ENDIF
 
     print('ADJUSTING FOR AMIENBT')
     with sr.Microphone() as source: 
