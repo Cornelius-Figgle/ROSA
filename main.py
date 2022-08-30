@@ -33,14 +33,16 @@ responses = {
     'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
     'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good'],
     'confusionq': ['You expect me to do everything, but you don\'t even English?!', 'STOP BEING FRENCH!!!'],
-    'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 'LEAVE MY ALLOCATED RAM ALONE!']
+    'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 'LEAVE MY ALLOCATED RAM ALONE!'],
+    'net_err': ['You berate me with your credulous requests, yet no one offers to help me at all']
 }
 prevResponses = {
     'musicq': 0,
     'wikiq': 0,
     'homeq': 0,
     'confusionq': 0,
-    'deathq': 0
+    'deathq': 0,
+    'net_err': 0
 }
 
 #________________________________________________________________________________________________________________________________
@@ -105,7 +107,7 @@ def backgroundListening():
     # obtain audio from the microphone
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print(':')
+        print(': ')
         gpioManager('listening', 1)
 
         audio = r.listen(source)
@@ -126,12 +128,21 @@ def backgroundListening():
                 gpioManager('processing', 0)
                 backgroundListening()
     except sr.UnknownValueError:
-        print('Google Speech Recognition could not understand audio')
+        print('\tGoogle Speech Recognition could not understand audio')
+        print('\tThis is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music in the background')
         gpioManager('processing', 0)
         backgroundListening()
     except sr.RequestError as e:
-        print('Could not request results from Google Speech Recognition service; {0}'.format(e))
         gpioManager('processing', 0)
+        print(f'\tCould not request results from Google Speech Recognition service; Error Context: \'{e}\'')
+        print('\tIf the Error Context on the above line is blank, that would be because the `speech_recognition` module\'s error handling classes just return `pass`, ie they ignore all the errors lol')
+        print('\tOh well you get what you put in I suppose')
+
+        gpioManager('speaking', 1)
+        print(responses['net_err'][prevResponses['net_err']])
+        playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+        gpioManager('speaking', 0)
+
         backgroundListening()
 
 def determineResponse(query):
