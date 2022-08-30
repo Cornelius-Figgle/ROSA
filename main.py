@@ -56,7 +56,7 @@ def startup():
 
         GPIO.setmode(GPIO.BCM)
 
-        with open(f'{os.path.dirname(__file__)}/gpio.json', 'r') as j:
+        with open(os.path.join(os.path.dirname(__file__), 'gpio.json'), 'r') as j:
             gpio_loc = json.loads(j.read())
 	
         GPIO.setup(gpio_loc['active'], GPIO.OUT)
@@ -140,7 +140,7 @@ def backgroundListening():
 
         gpioManager('speaking', 1)
         print(responses['net_err'][prevResponses['net_err']])
-        playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+        playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
         gpioManager('speaking', 0)
 
         backgroundListening()
@@ -182,7 +182,7 @@ def respond(typeq):
     if typeq == 'musicq':
         if prevResponses['musicq'] < len(responses['musicq']):
             print(responses['musicq'][prevResponses['musicq']])
-            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
             prevResponses['musicq'] += 1
         else:
             print('music action')
@@ -190,14 +190,14 @@ def respond(typeq):
     elif typeq == 'wikiq':
         if prevResponses['wikiq'] < len(responses['wikiq']):
             print(responses['wikiq'][prevResponses['wikiq']])
-            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
             prevResponses['wikiq'] += 1
         else:
             print('wiki action')
             prevResponses['wikiq'] = 0
     elif typeq == 'homeq':
         print(responses['homeq'][prevResponses['homeq']])
-        playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+        playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
         if prevResponses['homeq'] < len(responses['homeq']):
             prevResponses['homeq'] += 1
         else:
@@ -205,14 +205,14 @@ def respond(typeq):
     elif typeq == 'deathq':
         if prevResponses['deathq'] < len(responses['deathq']):
             print(responses['deathq'][prevResponses['deathq']])
-            playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+            playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
             prevResponses['deathq'] += 1
         else:
             print('death action')
             prevResponses['deathq'] = 0
     else:
         print(responses['confusionq'][prevResponses['confusionq']])
-        playsound(f'{os.path.dirname(__file__)}/responses/_/monolith.mp3')
+        playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
         if prevResponses['confusionq'] < len(responses['confusionq']):
             prevResponses['confusionq'] += 1
         else:
