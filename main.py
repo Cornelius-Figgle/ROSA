@@ -65,8 +65,8 @@ def startup():
         GPIO.setup(gpio_loc['speaking'], GPIO.OUT)
 
         hasStarted = False
-        GPIO.setup(gpio_loc['off_sw'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
-        GPIO.add_event_detect(gpio_loc['off_sw'], GPIO.FALLING, callback = lambda channel: shutdown() if not hasStarted else sleep(1))
+        GPIO.setup(gpio_loc['shutdown'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
+        GPIO.add_event_detect(gpio_loc['shutdown'], GPIO.FALLING, callback = lambda channel: shutdown() if not hasStarted else sleep(1))
 
         def shutdown():
             global hasStarted; hadStarted = True
