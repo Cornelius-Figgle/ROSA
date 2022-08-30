@@ -4,6 +4,7 @@
 
 #ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
+from logging import shutdown
 import os
 from configparser import ConfigParser
 from time import sleep
@@ -19,7 +20,7 @@ except:
 
 #________________________________________________________________________________________________________________________________
 
-activations = ['rosa', 'browser', 'rosanna', 'frozen'] #user could append their own
+activations = ['rosa', 'browser', 'rosanna', 'frozen'] # future: user could append their own
 
 keys = {
     'musicq': ['play', 'music'], 
@@ -72,9 +73,14 @@ def startup():
         GPIO.setup(gpio_loc['listen'], GPIO.OUT)
         GPIO.setup(gpio_loc['process'], GPIO.OUT)
         GPIO.setup(gpio_loc['out'], GPIO.OUT)
-        GPIO.setup(gpio_loc['off_sw'], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(gpio_loc['off_sw'], GPIO.RISING, callback = lambda: os.system('shutdown -h now'))
-	
+
+        hasStarted = False
+        GPIO.setup(gpio_loc['off_sw'], GPIO.IN)
+        GPIO.add_event_detect(gpio_loc['off_sw'], GPIO.RISING, callback = lambda channel: shutdown() if hasStarted == False else sleep(1))
+
+        def shutdown():
+            global hasStarted; hadStarted = True
+            os.system('sudo shutdown -h now')
 
         gpioManager('active', 1)
         gpioManager('listen', 1)
