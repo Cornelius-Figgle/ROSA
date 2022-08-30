@@ -99,10 +99,12 @@ def startup():
     print('\a'); sleep(1); print('\a')
 
 def gpioManager(pin, state):
-    if isOn_RPi is not None: 
+    if isOn_RPi is not False: 
         if not pin:
             if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
             elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
+        else: print(f'second error {str(pin)}')
+    else: print(f'first error {str(pin)}')
 
 def backgroundListening():
     # obtain audio from the microphone
