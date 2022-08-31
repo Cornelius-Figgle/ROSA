@@ -6,3 +6,4 @@ pyinstaller_command.txt
 print_responses.md
 gpio.png
 test_ini.py
+ROSA-installer.py
