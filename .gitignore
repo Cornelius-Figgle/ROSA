@@ -1,6 +1,7 @@
 rosa-env/
 bin/build/
 rosa.spec
+ROSA.spec
 pyinstaller_command.txt
 print_responses.md
 gpio.png
