@@ -6,6 +6,6 @@ pyinstaller_command.txt
 print_responses.md
 gpio.png
 test_ini.py
-bin/ROSA 
-bin/ROSA.exe 
+bin/ROSA
+bin/ROSA.exe
 bin/gpio.json
