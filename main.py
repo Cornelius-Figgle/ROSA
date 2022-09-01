@@ -1,4 +1,4 @@
-#!T:\projects\ROSA\rosa-env\Scripts\python.exe
+#!T:/projects/ROSA/rosa-env/Scripts/python.exe
 
 #https://github.com/Cornelius-Figgle/ROSA
 
