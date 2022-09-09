@@ -6,4 +6,4 @@ pyinstaller_command.txt
 gpio.png
 test_ini.py
 ROSA-installer.py
-test_dwld/
+temp_dwld/
