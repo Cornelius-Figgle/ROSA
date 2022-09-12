@@ -22,7 +22,7 @@ git clone https://github.com/Cornelius-Figgle/ROSA.git
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python)
 
 ```shell
-pip install playsound==1.2.2 PyAudio SpeechRecognition 
+pip install pygame PyAudio SpeechRecognition 
 ```
 
 It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
@@ -30,8 +30,6 @@ It is recommended that these are installed inside a [virtual environment](https:
 ### Linux Only
 
 On Linux, PyAudio should be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
-
-The `python3-gst-1.0` package is also needed for `playsound` to work on a RPi and it should also be installed the same way (see [this](https://github.com/TaylorSMarks/playsound/issues/16) for more details)
 
 ```bash
 sudo apt install python-pyaudio flac 

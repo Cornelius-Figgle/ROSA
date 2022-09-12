@@ -9,7 +9,7 @@ import os
 from time import sleep
 
 import speech_recognition as sr
-from playsound import playsound
+from pygame import mixer
 
 try: 
     import RPi.GPIO as GPIO  # type: ignore
@@ -93,6 +93,8 @@ def startup():
     with sr.Microphone() as source: 
         sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
 
+    mixer.init()
+
     if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec("pyi_splash"):
         from pyi_splash import close, update_text  # type: ignore
         update_text('UI Loaded...')
@@ -143,7 +145,8 @@ def backgroundListening():
 
         gpioManager('speaking', 1)
         print(responses['net_err'][prevResponses['net_err']])
-        playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
+        mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+        while mixer.music.get_busy(): continue
         gpioManager('speaking', 0)
 
         backgroundListening()
@@ -185,7 +188,8 @@ def respond(typeq):
     if typeq == 'musicq':
         if prevResponses['musicq'] < len(responses['musicq']):
             print(responses['musicq'][prevResponses['musicq']])
-            playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
+            mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+            while mixer.music.get_busy(): continue
             prevResponses['musicq'] += 1
         else:
             print('music action')
@@ -193,14 +197,16 @@ def respond(typeq):
     elif typeq == 'wikiq':
         if prevResponses['wikiq'] < len(responses['wikiq']):
             print(responses['wikiq'][prevResponses['wikiq']])
-            playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
+            mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+            while mixer.music.get_busy(): continue
             prevResponses['wikiq'] += 1
         else:
             print('wiki action')
             prevResponses['wikiq'] = 0
     elif typeq == 'homeq':
         print(responses['homeq'][prevResponses['homeq']])
-        playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
+        mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+        while mixer.music.get_busy(): continue
         if prevResponses['homeq'] < len(responses['homeq']):
             prevResponses['homeq'] += 1
         else:
@@ -208,14 +214,16 @@ def respond(typeq):
     elif typeq == 'deathq':
         if prevResponses['deathq'] < len(responses['deathq']):
             print(responses['deathq'][prevResponses['deathq']])
-            playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
+            mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+            while mixer.music.get_busy(): continue
             prevResponses['deathq'] += 1
         else:
             print('death action')
             prevResponses['deathq'] = 0
     else:
         print(responses['confusionq'][prevResponses['confusionq']])
-        playsound(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3'))
+        mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+        while mixer.music.get_busy(): continue
         if prevResponses['confusionq'] < len(responses['confusionq']):
             prevResponses['confusionq'] += 1
         else:
