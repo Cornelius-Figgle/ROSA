@@ -9,6 +9,7 @@ import os
 from time import sleep
 
 import speech_recognition as sr
+import wikipedia as wiki
 from pygame import mixer
 
 try: 
@@ -180,9 +181,9 @@ def determineResponse(query):
                     typeq = 'confusionq'
 
     gpioManager('processing', 0)
-    respond(typeq)
+    respond(typeq, query)
 
-def respond(typeq):
+def respond(typeq, query):
     gpioManager('speaking', 1)
 
     if typeq == 'musicq':
@@ -195,14 +196,18 @@ def respond(typeq):
             print('music action')
             prevResponses['musicq'] = 0
     elif typeq == 'wikiq':
+        print(responses['wikiq'][prevResponses['wikiq']])
+        mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+        while mixer.music.get_busy(): continue
         if prevResponses['wikiq'] < len(responses['wikiq']):
-            print(responses['wikiq'][prevResponses['wikiq']])
-            mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
-            while mixer.music.get_busy(): continue
             prevResponses['wikiq'] += 1
         else:
-            print('wiki action')
             prevResponses['wikiq'] = 0
+
+            try: print(f'\t{wiki.summary(query)}')
+            except wiki.DisambiguationError: 
+                try: print(f'\t{wiki.summary(wiki.suggest(query))}')
+                except wiki.DisambiguationError: pass #error logginf
     elif typeq == 'homeq':
         print(responses['homeq'][prevResponses['homeq']])
         mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
