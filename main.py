@@ -187,13 +187,12 @@ def respond(typeq, query):
     gpioManager('speaking', 1)
 
     if typeq == 'musicq':
+        print(responses['musicq'][prevResponses['musicq']])
+        mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+        while mixer.music.get_busy(): continue
         if prevResponses['musicq'] < len(responses['musicq']):
-            print(responses['musicq'][prevResponses['musicq']])
-            mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
-            while mixer.music.get_busy(): continue
             prevResponses['musicq'] += 1
         else:
-            print('music action')
             prevResponses['musicq'] = 0
     elif typeq == 'wikiq':
         print(responses['wikiq'][prevResponses['wikiq']])
@@ -223,7 +222,8 @@ def respond(typeq, query):
             while mixer.music.get_busy(): continue
             prevResponses['deathq'] += 1
         else:
-            print('death action')
+            if os.name == 'nt': os.system('shutdown /p')
+            elif os.name == 'posix': os.system('sudo shutdown -h now')
             prevResponses['deathq'] = 0
     else:
         print(responses['confusionq'][prevResponses['confusionq']])
