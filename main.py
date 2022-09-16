@@ -10,7 +10,7 @@ from time import sleep
 
 import speech_recognition as sr
 import wikipedia as wiki
-from pygame import mixer
+import pygame.mixer as mixer
 
 try: 
     import RPi.GPIO as GPIO  # type: ignore
