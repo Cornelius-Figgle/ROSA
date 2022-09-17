@@ -8,4 +8,5 @@ test_ini.py
 ROSA-installer.py
 temp_dwld/
 wizard.py
+classwizard.py
 soundcloud.tmp
