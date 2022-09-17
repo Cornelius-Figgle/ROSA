@@ -8,9 +8,9 @@ import json
 import os
 from time import sleep
 
+import pygame.mixer as mixer
 import speech_recognition as sr
 import wikipedia as wiki
-import pygame.mixer as mixer
 
 try: 
     import RPi.GPIO as GPIO  # type: ignore
