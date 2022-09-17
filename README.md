@@ -49,7 +49,7 @@ Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, 
 - [Python](https://www.python.org/downloads/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux](https://github.com/Cornelius-Figgle/ROSA#Linux))
-- [playsound](https://pypi.org/project/playsound/) v1.2.2 ([See above for Linux](https://github.com/Cornelius-Figgle/ROSA#Linux))
+- [pygame](https://pypi.org/project/pygame/)
 
 ### Setup
 
