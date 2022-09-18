@@ -61,4 +61,4 @@ Then you should be able to run the `main.py` file from wherever you cloned the r
 
 ## License
 
-[MIT](https://github.com/Cornelius-Figgle/ROSA/blob/main/LICENSE)
+[MIT](https://choosealicense.com/licenses/mit/)
