@@ -1,51 +1,40 @@
 import os
+import pickle
 import shutil
-from getopt import GetoptError, getopt
-from msvcrt import getwch
-from sys import argv
-
-#________________________________________________________________________________________________________________________________
-
-print(argv[1:])
 
 #________________________________________________________________________________________________________________________________
 
 def uac_procs(installConfigs, downloadedFiles) -> None:
-    os.mkdir(os.path.join(installConfigs['programPath'], 'ROSA')) #admin
-    os.mkdir(os.path.join(installConfigs['dataPath'], 'ROSA')) #admin
-    os.mkdir(os.path.join(installConfigs['readPath'], 'ROSA')) #admin
+	os.mkdir(os.path.join(installConfigs['programPath'], 'ROSA')) #admin
+	os.mkdir(os.path.join(installConfigs['dataPath'], 'ROSA')) #admin
+	os.mkdir(os.path.join(installConfigs['readPath'], 'ROSA')) #admin
 
-    shutil.move(downloadedFiles['bin'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['bin']))) #admin
-    shutil.move(downloadedFiles['config'], os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(downloadedFiles['config'])))
-    shutil.move(downloadedFiles['readme'], os.path.join(installConfigs['readPath'], 'ROSA', os.path.basename(downloadedFiles['readme']))) #admin
-    if os.name == 'posix':
-        shutil.move(downloadedFiles['png'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['png']))) #admin
+	shutil.move(downloadedFiles['bin'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['bin']))) #admin
+	shutil.move(downloadedFiles['config'], os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(downloadedFiles['config'])))
+	shutil.move(downloadedFiles['readme'], os.path.join(installConfigs['readPath'], 'ROSA', os.path.basename(downloadedFiles['readme']))) #admin
+	if os.name == 'posix':
+		shutil.move(downloadedFiles['png'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['png']))) #admin
 
-def main(argv) -> None:
-    try:
-        opts, arg = getopt(argv, 'hc:d:',['config=', 'dwld='])
-    except GetoptError:
-        print('test.py -c <installConfigs> -d <downloadedFiles>')
-        return None
+def main() -> None:
+	with open(os.path.join(os.path.dirname(__file__), 'installConfigs.pickle'), 'rb') as file:
+		installConfigs = pickle.load(file)
+	os.remove(os.path.join(os.path.dirname(__file__), 'installConfigs.pickle'))
+	with open(os.path.join(os.path.dirname(__file__), 'downloadedFiles.pickle'), 'rb') as file:
+		downloadedFiles = pickle.load(file)
+	os.remove(os.path.join(os.path.dirname(__file__), 'downloadedFiles.pickle'))
 
-    for opt, arg in opts:
-        if opt == '-h':
-            print('test.py -c <installConfigs> -d <downloadedFiles>')
-            return None
-        elif opt in ('-c', '--config'):
-            installConfigs = arg
-        elif opt in ('-d', '--dwld'):
-            downloadedFiles = arg
-    print('argv[1] is', installConfigs)
-    print('argv[2] is', downloadedFiles)
+	for i in installConfigs:
+		print(f'installConfigs[{i}] is {installConfigs[i]}')
+	for i in downloadedFiles:
+		print(f'downloadedFiles[{i}] is {downloadedFiles[i]}')
 
-    #uac_procs(installConfigs, downloadedFiles)
+	uac_procs(installConfigs, downloadedFiles)
 
 #________________________________________________________________________________________________________________________________
 
-if __name__ == "__main__":
-    if len(argv) != 1:
-        main(argv[1:])
-    else:
-        print('test.py -c <installConfigs> -d <downloadedFiles>')
-    getwch()
+if __name__ == '__main__':
+	if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec('pyi_splash'):
+			from pyi_splash import close, update_text  # type: ignore
+			update_text('UI Loaded...')
+			close()
+	main()
