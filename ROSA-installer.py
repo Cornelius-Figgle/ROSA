@@ -229,10 +229,6 @@ class installROSA(qt.QWizardPage):
 		fred = Thread(target=self.threadProcesses)
 		fred.start()
 
-		fred.join()
-		print('install complete!')
-		self.infoLabel.setText('install complete!')
-
 	def threadProcesses(self) -> None:
 		if os.name == 'nt':
 			self.downloadedFiles['bin'] = self.download_file(installConfigs['filesToDownload']['winexe'])
@@ -262,6 +258,9 @@ class installROSA(qt.QWizardPage):
 			self.make_shortcut(self.downloadedFiles['config'], installConfigs['startPath'])
 			self.make_shortcut(self.downloadedFiles['readme'], installConfigs['startPath'])
 			self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'])		
+
+		print('install complete!')
+		self.infoLabel.setText('install complete!')
 
 	def download_file(self, url) -> str:
 		local_dirname = os.path.join(os.path.dirname(__file__), 'temp_dwld')
