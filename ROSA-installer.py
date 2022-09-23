@@ -7,6 +7,7 @@ import sys
 from threading import Thread
 
 import PyQt5.QtWidgets as qt
+import pythoncom
 from PyQt5.QtCore import Qt as QtCore
 from PyQt5.QtGui import QPixmap
 from requests import get
@@ -206,7 +207,7 @@ class installROSA(qt.QWizardPage):
 		installLayout = qt.QGridLayout()
 
 		label = qt.QLabel() #https://stackoverflow.com/a/40294286/19860022
-		pixmap = QPixmap(os.path.join(os.path.dirname(__file__), '../ico/hotpot-ai.png'))
+		pixmap = QPixmap(os.path.join('..', os.path.dirname(__file__), '/ico/hotpot-ai.png'))
 		label.setPixmap(pixmap)
 
 		self.infoLabel = qt.QLabel(' ')
@@ -305,7 +306,7 @@ class installROSA(qt.QWizardPage):
 			if os.name == 'nt':
 				dest_path = dest_path + '.lnk'
 				# make shortcut
-				shell = Dispatch('WScript.Shell')
+				shell = Dispatch('WScript.Shell', pythoncom.CoInitialize())
 				shortcut = shell.CreateShortCut(dest_path)
 				shortcut.IconLocation = source
 				shortcut.Targetpath = source
