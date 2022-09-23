@@ -275,7 +275,7 @@ class installROSA(qt.QWizardPage):
 		self.infoLabel.setText(f'starting download for "{local_filename}"')
 
 		with get(url, stream=True) as r:
-			with open(local_filename, 'w') as f:
+			with open(local_filename, 'w', encoding="utf-8") as f:
 				f.write(r.text)
 
 		print(f'finished download for "{local_filename}"')
