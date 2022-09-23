@@ -2,7 +2,6 @@
 
 import os
 import pickle
-import shutil
 import sys
 from threading import Thread
 
@@ -279,8 +278,8 @@ class installROSA(qt.QWizardPage):
 		self.infoLabel.setText(f'starting download for "{local_filename}"')
 
 		with get(url, stream=True) as r:
-			with open(local_filename, 'wb') as f:
-				shutil.copyfileobj(r.content.decode('utf-8'), f)
+			with open(local_filename, 'w') as f:
+				f.write(r.text)
 
 		print(f'finished download for "{local_filename}"')
 		self.infoLabel.setText(f'finished download for "{local_filename}"')
