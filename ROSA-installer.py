@@ -77,7 +77,7 @@ class userConfig(qt.QWizardPage):
 		
 		installConfigs['filesToDownload'] = {
 			'winexe': 'https://github.com/Cornelius-Figgle/ROSA/blob/e2993a9b9145c542e7b4a39eab35f1af2c0c654b/bin/ROSA.exe', #win
-			'winUAC': 'https://github.com/Cornelius-Figgle/ROSA/blob/5636a91530bf172ce20b0162c51d73e6c954850a/bin/UAC-ROSA-installer%5Bwin%5D.py',
+			'winUAC': 'https://github.com/Cornelius-Figgle/ROSA/blob/0e0bdb7a038c491db87b31f6a5adce86583b6d5e/bin/ROSA-installer_uac.exe',
 			'linbin': 'https://github.com/Cornelius-Figgle/ROSA/blob/e2993a9b9145c542e7b4a39eab35f1af2c0c654b/bin/ROSA', #*nix
 			'linSU': '',
 			'config': 'https://github.com/Cornelius-Figgle/ROSA/blob/344aed4435f5df357b8ed30255e405293d317f58/gpio.json', #any
@@ -207,7 +207,7 @@ class installROSA(qt.QWizardPage):
 		installLayout = qt.QGridLayout()
 
 		label = qt.QLabel() #https://stackoverflow.com/a/40294286/19860022
-		pixmap = QPixmap(os.path.join('..', os.path.dirname(__file__), '/ico/hotpot-ai.png'))
+		pixmap = QPixmap(os.path.join(os.path.dirname(__file__), '/ico/hotpot-ai.png'))
 		label.setPixmap(pixmap)
 
 		self.infoLabel = qt.QLabel(' ')
@@ -227,7 +227,7 @@ class installROSA(qt.QWizardPage):
 	def initializePage(self) -> None:
 		print(installConfigs)
 
-		fred = Thread(target=self.threadProcesses)
+		fred = Thread(target=self.threadProcesses, daemon=True)
 		fred.start()
 
 	def threadProcesses(self) -> None:
@@ -236,6 +236,9 @@ class installROSA(qt.QWizardPage):
 			self.downloadedFiles['adm'] = self.download_file(installConfigs['filesToDownload']['winUAC'])
 			self.downloadedFiles['config'] = self.download_file(installConfigs['filesToDownload']['config'])
 			self.downloadedFiles['readme'] = self.download_file(installConfigs['filesToDownload']['readme'])
+
+			print(self.downloadedFiles)
+			sys.exit()
 
 			self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
 			self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
@@ -247,6 +250,7 @@ class installROSA(qt.QWizardPage):
 			with open(os.path.join(os.path.dirname(__file__), 'downloadedFiles.pickle'), 'wb') as file:
 				pk2 = pickle.dump(self.downloadedFiles, file)
 			os.system(f'{self.downloadedFiles["adm"]} {pk1} {pk2}')
+
 		elif os.name == 'posix':
 			self.downloadedFiles['bin'] = self.download_file(installConfigs['filesToDownload']['linbin'])
 			self.downloadedFiles['adm'] = self.download_file(installConfigs['filesToDownload']['linSU'])
@@ -276,7 +280,7 @@ class installROSA(qt.QWizardPage):
 
 		with get(url, stream=True) as r:
 			with open(local_filename, 'wb') as f:
-				shutil.copyfileobj(r.raw, f)
+				shutil.copyfileobj(r.content.decode('utf-8'), f)
 
 		print(f'finished download for "{local_filename}"')
 		self.infoLabel.setText(f'finished download for "{local_filename}"')

@@ -11,3 +11,4 @@ classwizard.py
 soundcloud.tmp
 /bin/testjson.py
 /bin/*.pickle
+/bin/test*
