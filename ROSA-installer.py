@@ -305,7 +305,8 @@ class installROSA(qt.QWizardPage):
 			if os.name == 'nt':
 				dest_path = dest_path + '.lnk'
 				# make shortcut
-				shortcut = Dispatch('WScript.Shell').CreateShortCut(dest_path)
+				shell = Dispatch('WScript.Shell')
+				shortcut = shell.CreateShortCut(dest_path)
 				shortcut.IconLocation = source
 				shortcut.Targetpath = source
 				shortcut.save()
