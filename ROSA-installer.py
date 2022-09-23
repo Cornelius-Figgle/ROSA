@@ -304,7 +304,7 @@ class installROSA(qt.QWizardPage):
 			self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
 			
 			if os.name == 'nt':
-				dest_path = dest_path + '.lnk'
+				dest_path = os.path.splitext(dest_path)[0] + '.lnk'
 				# make shortcut
 				shell = Dispatch('WScript.Shell', pythoncom.CoInitialize())
 				shortcut = shell.CreateShortCut(dest_path)
