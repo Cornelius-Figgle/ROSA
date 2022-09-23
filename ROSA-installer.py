@@ -4,6 +4,7 @@ import os
 import pickle
 import shutil
 import sys
+from threading import Thread
 
 import PyQt5.QtWidgets as qt
 from PyQt5.QtCore import Qt as QtCore
@@ -225,6 +226,10 @@ class installROSA(qt.QWizardPage):
 	def initializePage(self) -> None:
 		print(installConfigs)
 
+		fred = Thread(target=self.threadProcesses)
+		fred.start()
+
+	def threadProcesses(self) -> None:
 		if os.name == 'nt':
 			self.downloadedFiles['bin'] = self.download_file(installConfigs['filesToDownload']['winexe'])
 			self.downloadedFiles['adm'] = self.download_file(installConfigs['filesToDownload']['winUAC'])
@@ -298,6 +303,7 @@ class installROSA(qt.QWizardPage):
 			self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
 			
 			if os.name == 'nt':
+				dest_path = dest_path + '.lnk'
 				# make shortcut
 				shortcut = Dispatch('WScript.Shell').CreateShortCut(dest_path)
 				shortcut.IconLocation = source
