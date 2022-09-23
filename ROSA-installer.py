@@ -75,14 +75,14 @@ class userConfig(qt.QWizardPage):
 		global installConfigs; installConfigs = {}
 		
 		installConfigs['filesToDownload'] = {
-			'winexe': 'https://github.com/Cornelius-Figgle/ROSA/blob/e2993a9b9145c542e7b4a39eab35f1af2c0c654b/bin/ROSA.exe', #win
-			'winUAC': 'https://github.com/Cornelius-Figgle/ROSA/blob/0e0bdb7a038c491db87b31f6a5adce86583b6d5e/bin/ROSA-installer_uac.exe',
-			'linbin': 'https://github.com/Cornelius-Figgle/ROSA/blob/e2993a9b9145c542e7b4a39eab35f1af2c0c654b/bin/ROSA', #*nix
+			'winexe': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA.exe', #win
+			'winUAC': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA-installer_uac.exe',
+			'linbin': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA', #*nix
 			'linSU': '',
-			'config': 'https://github.com/Cornelius-Figgle/ROSA/blob/344aed4435f5df357b8ed30255e405293d317f58/gpio.json', #any
-			'readme': 'https://github.com/Cornelius-Figgle/ROSA/blob/344aed4435f5df357b8ed30255e405293d317f58/bin/README.md', #any
-			'ico': 'https://github.com/Cornelius-Figgle/ROSA/blob/1d02194767e2ed2dd486c146a1274336d3953c7a/ico/hotpot-ai.ico', #any
-			'png': 'https://github.com/Cornelius-Figgle/ROSA/blob/1d02194767e2ed2dd486c146a1274336d3953c7a/ico/hotpot-ai.png' #any
+			'config': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/gpio.json', #any
+			'readme': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/README.md', #any
+			'ico': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/ico/hotpot-ai.ico', #any
+			'png': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/ico/hotpot-ai.png' #any
 		}
 
 		if os.name == 'nt':
@@ -235,9 +235,6 @@ class installROSA(qt.QWizardPage):
 			self.downloadedFiles['adm'] = self.download_file(installConfigs['filesToDownload']['winUAC'])
 			self.downloadedFiles['config'] = self.download_file(installConfigs['filesToDownload']['config'])
 			self.downloadedFiles['readme'] = self.download_file(installConfigs['filesToDownload']['readme'])
-
-			print(self.downloadedFiles)
-			sys.exit()
 
 			self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
 			self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
