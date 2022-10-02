@@ -6,7 +6,6 @@ import sys
 from threading import Thread
 
 import PyQt5.QtWidgets as qt
-import pythoncom
 from PyQt5.QtCore import Qt as QtCore
 from PyQt5.QtGui import QPixmap
 from requests import get
@@ -14,6 +13,7 @@ from requests import get
 if os.name == 'nt':
 	from pathlib import Path
 
+	import pythoncom
 	from win32com.client import Dispatch
 
 #https://stackoverflow.com/a/11422350/19860022
