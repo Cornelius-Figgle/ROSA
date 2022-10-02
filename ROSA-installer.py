@@ -297,14 +297,14 @@ class installROSA(qt.QWizardPage):
 			dest_name = Path(source).name
 		dest_path = str(Path(dest_dir, dest_name)) + '.lnk' # `~/.local/share/applications/ROSA` reee I forgor wat dis did
 
-		if not os.path.exists(dest_path):
+		if not os.path.exists(dest_dir):
 			print(f'creating dirs "{dest_dir}"')
 			self.infoLabel.setText(f'creating dirs "{dest_dir}"')
 
 			os.makedirs(dest_dir, exist_ok=True)
 
-			print(f'creating shortcut at "{dest_path}"')
-			self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
+		print(f'creating shortcut at "{dest_path}"')
+		self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
 			
 		if os.name == 'nt':
 			os.system(f'{self.downloadedFiles["bat"]} {source} {dest_path} {source} "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesn\'t listen to you"')
