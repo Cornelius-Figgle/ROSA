@@ -263,28 +263,25 @@ class installROSA(qt.QWizardPage):
 		self.infoLabel.setText('install complete!')
 
 	def download_file(self, url) -> str:
-		try:
-			local_dirname = os.path.join(os.path.dirname(__file__), 'temp_dwld')
-			local_filename = os.path.join(local_dirname, url.split('/')[-1])
+		local_dirname = os.path.join(os.path.dirname(__file__), 'temp_dwld')
+		local_filename = os.path.join(local_dirname, url.split('/')[-1])
 
-			print(f'creating dirs "{local_dirname}"')
-			self.infoLabel.setText(f'creating dirs "{local_dirname}"')
+		print(f'creating dirs "{local_dirname}"')
+		self.infoLabel.setText(f'creating dirs "{local_dirname}"')
 
-			os.makedirs(local_dirname, exist_ok=True)
+		os.makedirs(local_dirname, exist_ok=True)
 
-			print(f'starting download for "{local_filename}"')
-			self.infoLabel.setText(f'starting download for "{local_filename}"')
+		print(f'starting download for "{local_filename}"')
+		self.infoLabel.setText(f'starting download for "{local_filename}"')
 
-			with get(url, stream=True) as r:
-				with open(local_filename, 'w', encoding="utf-8") as f:
-					f.write(r.text)
+		with get(url, stream=True) as r:
+			with open(local_filename, 'w', encoding="utf-8") as f:
+				f.write(r.text)
 
-			print(f'finished download for "{local_filename}"')
-			self.infoLabel.setText(f'finished download for "{local_filename}"')
+		print(f'finished download for "{local_filename}"')
+		self.infoLabel.setText(f'finished download for "{local_filename}"')
 
-			return local_filename    
-		except:
-			self.download_file(url)
+		return local_filename    
 
 	def make_shortcut(self, source, dest_dir, dest_name=None, linux_file=False) -> None:
 		'''
