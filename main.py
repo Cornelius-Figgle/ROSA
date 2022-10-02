@@ -48,7 +48,7 @@ prevResponses = {
 
 #________________________________________________________________________________________________________________________________
 
-def startup():
+def startup() -> None:
 	global gpio_loc
 
 	print('\a')
@@ -104,12 +104,12 @@ def startup():
 	gpioManager('processing', 0)
 	print('\a'); sleep(1); print('\a')
 
-def gpioManager(pin, state):
+def gpioManager(pin, state) -> None:
 	if isOn_RPi is not False: 
 		if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
 		elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
 
-def backgroundListening():
+def backgroundListening() -> None:
 	# obtain audio from the microphone
 	r = sr.Recognizer()
 	with sr.Microphone() as source:
@@ -152,7 +152,7 @@ def backgroundListening():
 
 		backgroundListening()
 
-def determineResponse(query):
+def determineResponse(query) -> None:
 	def musicq(q):
 		for key in keys['musicq']:
 			if key in q:
@@ -183,7 +183,7 @@ def determineResponse(query):
 	gpioManager('processing', 0)
 	respond(typeq, query)
 
-def respond(typeq, query):
+def respond(typeq, query) -> None:
 	gpioManager('speaking', 1)
 
 	if typeq == 'musicq':
@@ -236,7 +236,7 @@ def respond(typeq, query):
 
 	gpioManager('speaking', 0)
 
-def main():
+def main() -> None:
 	startup()
 	backgroundListening()
 

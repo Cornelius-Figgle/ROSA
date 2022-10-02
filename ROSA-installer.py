@@ -292,7 +292,7 @@ class installROSA(qt.QWizardPage):
 		# process user input
 		if dest_name is None:
 			dest_name = Path(source).name
-		dest_path = str(Path(dest_dir, dest_name)) # `~/.local/share/applications/ROSA` on linux
+		dest_path = str(Path(dest_dir, dest_name))# + '.lnk' # `~/.local/share/applications/ROSA` on linux
 
 		if not os.path.exists(dest_path):
 			print(f'creating dirs "{dest_dir}"')
@@ -306,7 +306,7 @@ class installROSA(qt.QWizardPage):
 			if os.name == 'nt':
 				dest_path = os.path.splitext(dest_path)[0] + '.lnk'
 				# make shortcut
-				shell = Dispatch('WScript.Shell', pythoncom.CoInitialize())
+				shell = Dispatch('WScript.Shell')
 				shortcut = shell.CreateShortCut(dest_path)
 				shortcut.IconLocation = source
 				shortcut.Targetpath = source
