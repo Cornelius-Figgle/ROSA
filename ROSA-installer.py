@@ -77,6 +77,7 @@ class userConfig(qt.QWizardPage):
 		installConfigs['filesToDownload'] = {
 			'winexe': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA.exe', #win
 			'winUAC': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA-installer_uac.exe',
+			'winBat': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/create_shortcut.bat',
 			'linbin': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA', #*nix
 			'linSU': '',
 			'config': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/gpio.json', #any
@@ -233,8 +234,10 @@ class installROSA(qt.QWizardPage):
 		if os.name == 'nt':
 			self.downloadedFiles['bin'] = self.download_file(installConfigs['filesToDownload']['winexe'])
 			self.downloadedFiles['adm'] = self.download_file(installConfigs['filesToDownload']['winUAC'])
+			self.downloadedFiles['bat'] = self.download_file(installConfigs['filesToDownload']['winBat'])
 			self.downloadedFiles['config'] = self.download_file(installConfigs['filesToDownload']['config'])
 			self.downloadedFiles['readme'] = self.download_file(installConfigs['filesToDownload']['readme'])
+			self.downloadedFiles['ico'] = self.download_file(installConfigs['filesToDownload']['ico'])
 
 			self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
 			self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
@@ -257,7 +260,7 @@ class installROSA(qt.QWizardPage):
 			self.make_shortcut(self.downloadedFiles['bin'], installConfigs['startPath'])
 			self.make_shortcut(self.downloadedFiles['config'], installConfigs['startPath'])
 			self.make_shortcut(self.downloadedFiles['readme'], installConfigs['startPath'])
-			self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'])		
+			self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'], linux_file=True)		
 
 		print('install complete!')
 		self.infoLabel.setText('install complete!')
@@ -292,7 +295,7 @@ class installROSA(qt.QWizardPage):
 		# process user input
 		if dest_name is None:
 			dest_name = Path(source).name
-		dest_path = str(Path(dest_dir, dest_name))# + '.lnk' # `~/.local/share/applications/ROSA` on linux
+		dest_path = str(Path(dest_dir, dest_name)) + '.lnk' # `~/.local/share/applications/ROSA` reee I forgor wat dis did
 
 		if not os.path.exists(dest_path):
 			print(f'creating dirs "{dest_dir}"')
@@ -303,37 +306,31 @@ class installROSA(qt.QWizardPage):
 			print(f'creating shortcut at "{dest_path}"')
 			self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
 			
-			if os.name == 'nt':
-				dest_path = os.path.splitext(dest_path)[0] + '.lnk'
-				# make shortcut
-				shell = Dispatch('WScript.Shell')
-				shortcut = shell.CreateShortCut(dest_path)
-				shortcut.IconLocation = source
-				shortcut.Targetpath = source
-				shortcut.WorkingDirectory = dest_dir
-				shortcut.save()
-			elif os.name == 'posix':
-				if linux_file:
-					dest_path = dest_path + '.desktop' # `~/.local/share/applications/ROSA.desktop`
+		if os.name == 'nt':
+			os.system(f'{self.downloadedFiles["bat"]} {source} {dest_path} {source} "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesn\'t listen to you"')
 
-					shortcutContent = f'''
-					[Desktop Entry]
-					Name=ROSA
-					Exec={os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin']))}
-					Terminal=true
-					Type=Application
-					Icon={os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['png']))}
-					'''
-					with open(dest_path, 'w') as f:
-						f.write(shortcutContent)
-				else: 
-					os.symlink(source, dest_path)
-			# print status
-			print(f'{source}\n-->\n{dest_path}')
-			self.infoLabel.setText(f'{source}\n-->\n{dest_path}')
+		elif os.name == 'posix':
+			if linux_file:
+				dest_path = dest_path + '.desktop' # `~/.local/share/applications/ROSA.desktop`
 
-			print(f'created shortcut at "{dest_path}"')
-			self.infoLabel.setText(f'created shortcut at "{dest_path}"')
+				shortcutContent = f'''
+				[Desktop Entry]
+				Name=ROSA
+				Exec={os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin']))}
+				Terminal=true
+				Type=Application
+				Icon={os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['png']))}
+				'''
+				with open(dest_path, 'w') as f:
+					f.write(shortcutContent)
+			else: 
+				os.symlink(source, dest_path)
+		# print status
+		print(f'{source}\n-->\n{dest_path}')
+		self.infoLabel.setText(f'{source}\n-->\n{dest_path}')
+
+		print(f'created shortcut at "{dest_path}"')
+		self.infoLabel.setText(f'created shortcut at "{dest_path}"')
 
 #________________________________________________________________________________________________________________________________
 
