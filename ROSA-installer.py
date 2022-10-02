@@ -310,6 +310,7 @@ class installROSA(qt.QWizardPage):
 				shortcut = shell.CreateShortCut(dest_path)
 				shortcut.IconLocation = source
 				shortcut.Targetpath = source
+				shortcut.WorkingDirectory = dest_dir
 				shortcut.save()
 			elif os.name == 'posix':
 				if linux_file:
