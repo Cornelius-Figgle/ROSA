@@ -1,3 +1,5 @@
+    PKG & Release cmds:
+
 pyinstaller --distpath "t:\projects\rosa\bin\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --hidden-import pyi_splash --add-binary "t:\projects\rosa\responses;responses" --splash "T:\projects\ROSA\ico\hotpot-ai.png" -i "T:\projects\ROSA\ico\hotpot-ai.ico" "T:\projects\ROSA\main.py"
 
 pyinstaller --distpath "t:\projects\rosa\bin\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_gui --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --add-data "T:\projects\ROSA\bin\bin;." --add-data "T:\projects\ROSA\ico;ico" --add-data "T:\projects\ROSA\gpio.json;." -w --hidden-import pyi_splash --splash "T:\projects\ROSA\ico\hotpot-ai.png" -i "T:\projects\ROSA\ico\hotpot-ai.ico" "T:\projects\ROSA\WIN_ROSA-installer.py"
@@ -6,7 +8,7 @@ pyinstaller --distpath "t:\projects\rosa\bin\bin" --workpath "t:\projects\rosa\b
 
 
 
-
+    DEBUG cmds:
 
 pyinstaller --distpath "t:\projects\rosa\bin\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --hidden-import pyi_splash --add-binary "t:\projects\rosa\responses;responses" --splash "T:\projects\ROSA\ico\hotpot-ai.png" -i "T:\projects\ROSA\ico\hotpot-ai.ico" "T:\projects\ROSA\main.py"
 
