@@ -1,5 +1,16 @@
 #!T:/projects/ROSA/rosa-env/Scripts/python.exe
 
+'''
+**purge time**
+
+Ok so, originally this was intended to be cross-platofrm. It was hard and messy.
+I also realised, *nix users generally install stuf themselves, and my installer is probably wildly wrong for there system. 
+So. `git clone https://github.com/cornelius-figgle/ROSA.git` works.
+I may also add ROSA to package managers en la futuro (especially the RPi one: `apt`, iirc)
+So have fun on Windows,
+	- Max, a dev (kinda~)
+'''
+
 import os
 import pickle
 import sys
