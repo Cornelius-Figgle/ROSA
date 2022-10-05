@@ -88,16 +88,6 @@ class userConfig(qt.QWizardPage):
 		shell = Dispatch('WScript.Shell')
 
 		global installConfigs; installConfigs = {}
-		
-		installConfigs['filesToDownload'] = {
-			'exe': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA.exe',
-			'UAC': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/ROSA-installer_uac.exe',
-			'bat': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/create_shortcut.bat',
-			'config': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/gpio.json', 
-			'readme': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/bin/README.md', 
-			'ico': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/ico/hotpot-ai.ico',
-			'png': 'https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/main/ico/hotpot-ai.png'
-		}
 
 		installConfigs['programPath'] = os.path.expandvars('%ProgramFiles%')
 		installConfigs['dataPath'] = os.path.expandvars('%AppData%')
@@ -228,12 +218,12 @@ class installROSA(qt.QWizardPage):
 		fred.start()
 
 	def threadProcesses(self) -> None:
-		self.downloadedFiles['bin'] = self.download_file(installConfigs['filesToDownload']['exe'])
-		self.downloadedFiles['adm'] = self.download_file(installConfigs['filesToDownload']['UAC'])
-		self.downloadedFiles['bat'] = self.download_file(installConfigs['filesToDownload']['bat'])
-		self.downloadedFiles['config'] = self.download_file(installConfigs['filesToDownload']['config'])
-		self.downloadedFiles['readme'] = self.download_file(installConfigs['filesToDownload']['readme'])
-		self.downloadedFiles['ico'] = self.download_file(installConfigs['filesToDownload']['ico'])
+		self.downloadedFiles['bin'] = os.path.join(file_base_path, 'ROSA.exe')
+		self.downloadedFiles['adm'] = os.path.join(file_base_path, 'ROSA-installer_uac.exe')
+		self.downloadedFiles['bat'] = os.path.join(file_base_path, 'create_shortcut.bat')
+		self.downloadedFiles['config'] = os.path.join(file_base_path, 'config.json')
+		self.downloadedFiles['readme'] = os.path.join(file_base_path, 'README.md')
+		self.downloadedFiles['ico'] = os.path.join(file_base_path, '/ico/hotpot-ai.ico')
 
 		self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
@@ -247,28 +237,7 @@ class installROSA(qt.QWizardPage):
 		os.system(f'{self.downloadedFiles["adm"]} {pk1} {pk2}')	
 
 		print('install complete!')
-		self.infoLabel.setText('install complete!')
-
-	def download_file(self, url) -> str:
-		local_dirname = os.path.join(file_base_path, 'temp_dwld')
-		local_filename = os.path.join(local_dirname, url.split('/')[-1])
-
-		print(f'creating dirs "{local_dirname}"')
-		self.infoLabel.setText(f'creating dirs "{local_dirname}"')
-
-		os.makedirs(local_dirname, exist_ok=True)
-
-		print(f'starting download for "{local_filename}"')
-		self.infoLabel.setText(f'starting download for "{local_filename}"')
-
-		with get(url, stream=True) as r:
-			with open(local_filename, 'w', encoding="utf-8") as f:
-				f.write(r.text)
-
-		print(f'finished download for "{local_filename}"')
-		self.infoLabel.setText(f'finished download for "{local_filename}"')
-
-		return local_filename    
+		self.infoLabel.setText('install complete!') 
 
 	def make_shortcut(self, source, dest_dir, dest_name=None) -> None:
 		'''
