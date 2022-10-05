@@ -3,10 +3,12 @@
 '''
 **purge time**
 
-Ok so, originally this was intended to be cross-platofrm. It was hard and messy.
-I also realised, *nix users generally install stuf themselves, and my installer is probably wildly wrong for there system. 
-So. `git clone https://github.com/cornelius-figgle/ROSA.git` works.
+Ok so, originally this was intended to be cross-platofrm. It was hard and confusing and messy
+I also realised, *nix users generally install stuf themselves, and my installer is probably incorrect for their specific system.
+
+So. `git clone https://github.com/cornelius-figgle/ROSA.git` works still
 I may also add ROSA to package managers en la futuro (especially the RPi one: `apt`, iirc)
+
 So have fun on Windows,
 	- Max, a dev (kinda~)
 '''
@@ -14,18 +16,14 @@ So have fun on Windows,
 import os
 import pickle
 import sys
+from pathlib import Path
 from threading import Thread
 
 import PyQt5.QtWidgets as qt
 from PyQt5.QtCore import Qt as QtCore
 from PyQt5.QtGui import QPixmap
 from requests import get
-
-if os.name == 'nt':
-	from pathlib import Path
-
-	import pythoncom
-	from win32com.client import Dispatch
+from win32com.client import Dispatch
 
 #https://stackoverflow.com/a/11422350/19860022
 
