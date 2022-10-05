@@ -1,6 +1,12 @@
 import os
 import pickle
 import shutil
+import sys
+
+if hasattr(sys, '_MEIPASS'): #https://stackoverflow.com/a/66581062/19860022
+	file_base_path = sys._MEIPASS #https://stackoverflow.com/a/36343459/19860022
+else:
+	file_base_path = os.path.dirname(__file__)
 
 #________________________________________________________________________________________________________________________________
 
@@ -13,12 +19,12 @@ def uac_procs(installConfigs, downloadedFiles) -> None:
 	shutil.move(downloadedFiles['readme'], os.path.join(installConfigs['progamPath'], 'ROSA', os.path.basename(downloadedFiles['readme']))) #admin
 
 def main() -> None:
-	with open(os.path.join(os.path.dirname(__file__), 'installConfigs.pickle'), 'rb') as file:
+	with open(os.path.join(file_base_path, 'installConfigs.pickle'), 'rb') as file:
 		installConfigs = pickle.load(file)
-	os.remove(os.path.join(os.path.dirname(__file__), 'installConfigs.pickle'))
-	with open(os.path.join(os.path.dirname(__file__), 'downloadedFiles.pickle'), 'rb') as file:
+	os.remove(os.path.join(file_base_path, 'installConfigs.pickle'))
+	with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'rb') as file:
 		downloadedFiles = pickle.load(file)
-	os.remove(os.path.join(os.path.dirname(__file__), 'downloadedFiles.pickle'))
+	os.remove(os.path.join(file_base_path, 'downloadedFiles.pickle'))
 
 	for i in installConfigs:
 		print(f'installConfigs[{i}] is {installConfigs[i]}')

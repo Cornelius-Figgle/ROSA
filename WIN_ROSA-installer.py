@@ -240,9 +240,9 @@ class installROSA(qt.QWizardPage):
 		self.make_shortcut(self.downloadedFiles['readme'], os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'])
 
-		with open(os.path.join(os.path.dirname(__file__), 'installConfigs.pickle'), 'wb') as file:
+		with open(os.path.join(file_base_path, 'installConfigs.pickle'), 'wb') as file:
 			pk1 = pickle.dump(installConfigs, file)
-		with open(os.path.join(os.path.dirname(__file__), 'downloadedFiles.pickle'), 'wb') as file:
+		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
 		os.system(f'{self.downloadedFiles["adm"]} {pk1} {pk2}')	
 
@@ -250,7 +250,7 @@ class installROSA(qt.QWizardPage):
 		self.infoLabel.setText('install complete!')
 
 	def download_file(self, url) -> str:
-		local_dirname = os.path.join(os.path.dirname(__file__), 'temp_dwld')
+		local_dirname = os.path.join(file_base_path, 'temp_dwld')
 		local_filename = os.path.join(local_dirname, url.split('/')[-1])
 
 		print(f'creating dirs "{local_dirname}"')
