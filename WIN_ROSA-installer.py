@@ -6,6 +6,9 @@
 Ok so, originally this was intended to be cross-platofrm. It was hard and confusing and messy
 I also realised, *nix users generally install stuf themselves, and my installer is probably incorrect for their specific system.
 
+I summed this up with:
+	'cod3 is way nicer to look at without 6 thousand `if` statemnts for cross-platform code that doesn't function properly'
+
 So. `git clone https://github.com/cornelius-figgle/ROSA.git` works still
 I may also add ROSA to package managers en la futuro (especially the RPi one: `apt`, iirc)
 
