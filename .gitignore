@@ -1,6 +1,6 @@
 rosa-env/
 bin/build/
-pyinstaller_command.txt
+#pyinstaller_command.txt
 gpio.png
 wizard.py
 classwizard.py
