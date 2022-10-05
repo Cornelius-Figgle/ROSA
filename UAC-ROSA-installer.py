@@ -4,7 +4,7 @@ import shutil
 import sys
 
 if hasattr(sys, '_MEIPASS'): #https://stackoverflow.com/a/66581062/19860022
-	file_base_path = sys._MEIPASS #https://stackoverflow.com/a/36343459/19860022
+	file_base_path = sys.argv[0] #https://stackoverflow.com/a/36343459/19860022
 else:
 	file_base_path = os.path.dirname(__file__)
 
@@ -37,7 +37,7 @@ def main() -> None:
 
 if __name__ == '__main__':
 	if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec('pyi_splash'):
-			from pyi_splash import close, update_text  # type: ignore
-			update_text('UI Loaded...')
-			close()
+		from pyi_splash import close, update_text  # type: ignore
+		update_text('UI Loaded...')
+		close()
 	main()

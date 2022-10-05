@@ -9,9 +9,13 @@ I also realised, *nix users generally install stuf themselves, and my installer 
 So. `git clone https://github.com/cornelius-figgle/ROSA.git` works still
 I may also add ROSA to package managers en la futuro (especially the RPi one: `apt`, iirc)
 
+Btw, I was previously using `requests` to download the files from github, then realised I can pkg them into the exe with pyinstaller
+
 So have fun on Windows,
 	- Max, learning to be a dev
 '''
+
+#https://python.plainenglish.io/packaging-data-files-to-pyinstaller-binaries-6ed63aa20538
 
 import os
 import pickle
@@ -22,7 +26,6 @@ from threading import Thread
 import PyQt5.QtWidgets as qt
 from PyQt5.QtCore import Qt as QtCore
 from PyQt5.QtGui import QPixmap
-from requests import get
 from win32com.client import Dispatch
 
 #https://stackoverflow.com/a/11422350/19860022
