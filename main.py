@@ -6,6 +6,7 @@
 
 import json
 import os
+import sys
 from time import sleep
 
 import pygame.mixer as mixer
@@ -18,9 +19,18 @@ try:
 except ImportError:
 	isOn_RPi = False
 
+if hasattr(sys, '_MEIPASS'): #https://stackoverflow.com/a/66581062/19860022
+	file_base_path = sys._MEIPASS #https://stackoverflow.com/a/36343459/19860022
+else:
+	file_base_path = os.path.dirname(__file__)
+
 #________________________________________________________________________________________________________________________________
 
-activations = ['rosa', 'browser', 'rosanna', 'frozen', 'roserton'] # future: user could append their own
+activations = [
+	'rosa', #actual
+	'browser', 'rosanna', 'frozen', 'roserton' #misheards
+	# future : user could append their own
+] 
 
 keys = {
 	'musicq': ['play', 'music'], 
@@ -59,7 +69,7 @@ def startup() -> None:
 		
 		GPIO.cleanup()
 
-		with open(os.path.join(os.path.dirname(__file__), 'gpio.json'), 'r') as j:
+		with open(os.path.join(sys.argv[0], 'gpio.json'), 'r') as j: #hm may work
 			gpio_loc = json.loads(j.read())
 	
 		GPIO.setup(gpio_loc['active'], GPIO.OUT)
@@ -71,7 +81,7 @@ def startup() -> None:
 		GPIO.setup(gpio_loc['shutdown'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
 		GPIO.add_event_detect(gpio_loc['shutdown'], GPIO.FALLING, callback = lambda channel: shutdown() if not hasStarted else sleep(1))
 
-		def shutdown():
+		def shutdown() -> None:
 			global hasStarted; hadStarted = True
 
 			GPIO.cleanup()
@@ -146,7 +156,7 @@ def backgroundListening() -> None:
 
 		gpioManager('speaking', 1)
 		print(responses['net_err'][prevResponses['net_err']])
-		mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		gpioManager('speaking', 0)
 
@@ -188,7 +198,7 @@ def respond(typeq, query) -> None:
 
 	if typeq == 'musicq':
 		print(responses['musicq'][prevResponses['musicq']])
-		mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['musicq'] < len(responses['musicq']):
 			prevResponses['musicq'] += 1
@@ -196,7 +206,7 @@ def respond(typeq, query) -> None:
 			prevResponses['musicq'] = 0
 	elif typeq == 'wikiq':
 		print(responses['wikiq'][prevResponses['wikiq']])
-		mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['wikiq'] < len(responses['wikiq']):
 			prevResponses['wikiq'] += 1
@@ -209,7 +219,7 @@ def respond(typeq, query) -> None:
 				except wiki.DisambiguationError: pass #error logginf
 	elif typeq == 'homeq':
 		print(responses['homeq'][prevResponses['homeq']])
-		mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['homeq'] < len(responses['homeq']):
 			prevResponses['homeq'] += 1
@@ -218,7 +228,7 @@ def respond(typeq, query) -> None:
 	elif typeq == 'deathq':
 		if prevResponses['deathq'] < len(responses['deathq']):
 			print(responses['deathq'][prevResponses['deathq']])
-			mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+			mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
 			while mixer.music.get_busy(): continue
 			prevResponses['deathq'] += 1
 		else:
@@ -227,7 +237,7 @@ def respond(typeq, query) -> None:
 			prevResponses['deathq'] = 0
 	else:
 		print(responses['confusionq'][prevResponses['confusionq']])
-		mixer.music.load(os.path.join(os.path.dirname(__file__), 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['confusionq'] < len(responses['confusionq']):
 			prevResponses['confusionq'] += 1
