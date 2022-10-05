@@ -262,9 +262,9 @@ class installROSA(qt.QWizardPage):
 		print(f'creating shortcut at "{dest_path}"')
 		self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
 
-		os.system(f'{self.downloadedFiles["bat"]} {source} {dest_path} {source} "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesn\'t listen to you"')
-		# print status
-		print(f'{source}\n-->\n{dest_path}')
+		os.system(f'{self.downloadedFiles["bat"]} {source} {dest_path} {self.downloadedFiles["ico"]} "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesn\'t listen to you"')
+		
+		print(f'{source}\n-->\n{dest_path}') # print status
 		self.infoLabel.setText(f'{source}\n-->\n{dest_path}')
 
 		print(f'created shortcut at "{dest_path}"')
