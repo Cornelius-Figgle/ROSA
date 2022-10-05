@@ -7,13 +7,10 @@ import shutil
 def uac_procs(installConfigs, downloadedFiles) -> None:
 	os.mkdir(os.path.join(installConfigs['programPath'], 'ROSA')) #admin
 	os.mkdir(os.path.join(installConfigs['dataPath'], 'ROSA')) #admin
-	os.mkdir(os.path.join(installConfigs['readPath'], 'ROSA')) #admin
 
 	shutil.move(downloadedFiles['bin'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['bin']))) #admin
-	shutil.move(downloadedFiles['config'], os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(downloadedFiles['config'])))
-	shutil.move(downloadedFiles['readme'], os.path.join(installConfigs['readPath'], 'ROSA', os.path.basename(downloadedFiles['readme']))) #admin
-	if os.name == 'posix':
-		shutil.move(downloadedFiles['png'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['png']))) #admin
+	shutil.move(downloadedFiles['config'], os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(downloadedFiles['config']))) #admin
+	shutil.move(downloadedFiles['readme'], os.path.join(installConfigs['progamPath'], 'ROSA', os.path.basename(downloadedFiles['readme']))) #admin
 
 def main() -> None:
 	with open(os.path.join(os.path.dirname(__file__), 'installConfigs.pickle'), 'rb') as file:
