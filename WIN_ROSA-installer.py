@@ -236,7 +236,7 @@ class installROSA(qt.QWizardPage):
 			pk1 = pickle.dump(installConfigs, file)
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
-		run([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'])
+		run([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True)
 
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin'])), os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
