@@ -237,10 +237,10 @@ class installROSA(qt.QWizardPage):
 			pk2 = pickle.dump(self.downloadedFiles, file)
 		os.system(f'{self.downloadedFiles["adm"]} {pk1} {pk2}')	
 
-		self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(self.downloadedFiles['readme'], os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'])
+		self.make_shortcut(installConfigs['programPath'], os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(installConfigs['dataPath'], os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(installConfigs['programPath'], os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(installConfigs['programPath'], installConfigs['deskPath'])
 
 		print('install complete!')
 		self.infoLabel.setText('install complete!') 
