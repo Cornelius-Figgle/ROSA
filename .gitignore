@@ -10,5 +10,6 @@ soundcloud.tmp
 *temp*
 *.spec
 /bin/ROSA
+*Whatsapp*
 
-/bin
+/bin/
