@@ -156,7 +156,7 @@ def backgroundListening() -> None:
 
 		gpioManager('speaking', 1)
 		print(responses['net_err'][prevResponses['net_err']])
-		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, 'responses/net_err/net_err_0.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		gpioManager('speaking', 0)
 
@@ -198,7 +198,7 @@ def respond(typeq, query) -> None:
 
 	if typeq == 'musicq':
 		print(responses['musicq'][prevResponses['musicq']])
-		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, f'responses/musicq/musicq_{prevResponses["musicq"]}.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['musicq'] < len(responses['musicq']):
 			prevResponses['musicq'] += 1
@@ -206,7 +206,7 @@ def respond(typeq, query) -> None:
 			prevResponses['musicq'] = 0
 	elif typeq == 'wikiq':
 		print(responses['wikiq'][prevResponses['wikiq']])
-		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, f'responses/wikiq/wikiq_{prevResponses["wikiq"]}.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['wikiq'] < len(responses['wikiq']):
 			prevResponses['wikiq'] += 1
@@ -219,7 +219,7 @@ def respond(typeq, query) -> None:
 				except wiki.DisambiguationError: pass #error logginf
 	elif typeq == 'homeq':
 		print(responses['homeq'][prevResponses['homeq']])
-		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, f'responses/homeq/homeq_{prevResponses["homeq"]}.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['homeq'] < len(responses['homeq']):
 			prevResponses['homeq'] += 1
@@ -228,16 +228,16 @@ def respond(typeq, query) -> None:
 	elif typeq == 'deathq':
 		if prevResponses['deathq'] < len(responses['deathq']):
 			print(responses['deathq'][prevResponses['deathq']])
-			mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
+			mixer.music.load(os.path.join(file_base_path, f'responses/deathq/deathq_{prevResponses["deathq"]}.mp3')); mixer.music.play()
 			while mixer.music.get_busy(): continue
 			prevResponses['deathq'] += 1
 		else:
-			if os.name == 'nt': os.system('shutdown /p')
+			if os.name == 'nt': exit(0) #os.system('shutdown /p')
 			elif os.name == 'posix': os.system('sudo shutdown -h now')
 			prevResponses['deathq'] = 0
 	else:
 		print(responses['confusionq'][prevResponses['confusionq']])
-		mixer.music.load(os.path.join(file_base_path, 'responses/_/monolith.mp3')); mixer.music.play()
+		mixer.music.load(os.path.join(file_base_path, f'responses/confusionq/confusionq_{prevResponses["confusionq"]}.mp3')); mixer.music.play()
 		while mixer.music.get_busy(): continue
 		if prevResponses['confusionq'] < len(responses['confusionq']):
 			prevResponses['confusionq'] += 1
