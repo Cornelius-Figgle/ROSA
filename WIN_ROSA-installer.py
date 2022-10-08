@@ -24,6 +24,7 @@ import os
 import pickle
 import sys
 from pathlib import Path
+from subprocess import run
 from threading import Thread
 
 import PyQt5.QtWidgets as qt
@@ -235,7 +236,7 @@ class installROSA(qt.QWizardPage):
 			pk1 = pickle.dump(installConfigs, file)
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
-		os.system(f'{self.downloadedFiles["adm"]} "{pk1}" "{pk2}"')	
+		run([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'])
 
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin'])), os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
