@@ -237,10 +237,10 @@ class installROSA(qt.QWizardPage):
 			pk2 = pickle.dump(self.downloadedFiles, file)
 		os.system(f'{self.downloadedFiles["adm"]} {pk1} {pk2}')	
 
-		self.make_shortcut(os.path.join(installConfigs['programPath'], Path(self.downloadedFiles['bin']).name), os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(os.path.join(installConfigs['dataPath'], Path(self.downloadedFiles['config']).name), os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(os.path.join(installConfigs['programPath'], Path(self.downloadedFiles['readme']).name), os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(os.path.join(installConfigs['programPath'], Path(self.downloadedFiles['bin']).name), installConfigs['deskPath'])
+		self.make_shortcut(os.path.join(installConfigs['programPath'], os.path.basename(self.downloadedFiles['bin'])), os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(os.path.join(installConfigs['dataPath'], os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(os.path.join(installConfigs['programPath'], os.path.basename(self.downloadedFiles['readme'])), os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(os.path.join(installConfigs['programPath'], os.path.basename(self.downloadedFiles['bin'])), installConfigs['deskPath'])
 
 		print('install complete!')
 		self.infoLabel.setText('install complete!') 
@@ -253,7 +253,7 @@ class installROSA(qt.QWizardPage):
 
 		# process user input
 		if dest_name is None:
-			dest_name = Path(source).name
+			dest_name = os.path.basename(source)
 		dest_path = os.path.join(dest_dir, Path(dest_name).stem) + '.lnk'
 
 		if not os.path.exists(dest_dir):
