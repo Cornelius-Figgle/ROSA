@@ -254,7 +254,7 @@ class installROSA(qt.QWizardPage):
 		# process user input
 		if dest_name is None:
 			dest_name = Path(source).name
-		dest_path = str(Path(dest_dir, dest_name)) + '.lnk'
+		dest_path = os.path.join(dest_dir, Path(dest_name).stem) + '.lnk'
 
 		if not os.path.exists(dest_dir):
 			print(f'creating dirs "{dest_dir}"')
