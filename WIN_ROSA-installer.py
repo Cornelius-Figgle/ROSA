@@ -231,16 +231,16 @@ class installROSA(qt.QWizardPage):
 		self.downloadedFiles['readme'] = os.path.join(file_base_path, 'README.md')
 		self.downloadedFiles['ico'] = os.path.join(file_base_path, '/ico/hotpot-ai.ico')
 
-		self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(self.downloadedFiles['readme'], os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'])
-
 		with open(os.path.join(file_base_path, 'installConfigs.pickle'), 'wb') as file:
 			pk1 = pickle.dump(installConfigs, file)
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
 		os.system(f'{self.downloadedFiles["adm"]} {pk1} {pk2}')	
+
+		self.make_shortcut(self.downloadedFiles['bin'], os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(self.downloadedFiles['config'], os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(self.downloadedFiles['readme'], os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(self.downloadedFiles['bin'], installConfigs['deskPath'])
 
 		print('install complete!')
 		self.infoLabel.setText('install complete!') 
