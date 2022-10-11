@@ -202,7 +202,7 @@ class installROSA(qt.QWizardPage):
 		installLayout = qt.QGridLayout()
 
 		label = qt.QLabel() #https://stackoverflow.com/a/40294286/19860022
-		pixmap = QPixmap(os.path.join(file_base_path, '/ico/hotpot-ai.png'))
+		pixmap = QPixmap(os.path.join(file_base_path, 'ico/hotpot-ai.png'))
 		label.setPixmap(pixmap)
 
 		self.infoLabel = qt.QLabel(' ')
