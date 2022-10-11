@@ -240,8 +240,9 @@ class installROSA(qt.QWizardPage):
 
 		try: 
 			subprocess.check_call([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, stdout=sys.stdout, stderr=subprocess.STDOUT)
-		except subprocess.CalledProcessError: 
-			print('Error In UAC Call, t window for requesting admin permissions was probably closed by user')
+		except subprocess.CalledProcessError as err: 
+			print('\tError In UAC Call, t window for requesting admin permissions was probably closed by user')
+			print(f'\tProcess Returned Code: {err.returncode}')
 			sleep(1)
 			sys.exit()
 
