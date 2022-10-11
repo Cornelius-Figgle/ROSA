@@ -22,9 +22,9 @@ So have fun on Windows,
 
 import os
 import pickle
+import subprocess
 import sys
 from pathlib import Path
-from subprocess import run
 from threading import Thread
 
 import PyQt5.QtWidgets as qt
@@ -236,7 +236,17 @@ class installROSA(qt.QWizardPage):
 			pk1 = pickle.dump(installConfigs, file)
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
-		run([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, capture_output=True)
+
+		subprocess.check_call([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, stdout=sys.stdout, stderr=subprocess.STDOUT)
+
+		'''with Popen([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], stdout=PIPE, bufsize=1, universal_newlines=True) as p:
+			for line in p.stdout:
+				print(line, end='') # process line here
+				self.infoLabel.setText(line) 
+
+		if p.returncode != 0:
+			raise CalledProcessError(p.returncode, p.args)'''
+		#run([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, capture_output=True)
 
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin'])), os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
