@@ -26,6 +26,7 @@ import subprocess
 import sys
 from pathlib import Path
 from threading import Thread
+from time import sleep
 
 import PyQt5.QtWidgets as qt
 from PyQt5.QtCore import Qt as QtCore
@@ -237,7 +238,12 @@ class installROSA(qt.QWizardPage):
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
 
-		subprocess.check_call([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, stdout=sys.stdout, stderr=subprocess.STDOUT)
+		try: 
+			subprocess.check_call([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, stdout=sys.stdout, stderr=subprocess.STDOUT)
+		except subprocess.CalledProcessError: 
+			print('Error In UAC Call, t window for requesting admin permissions was probably closed by user')
+			sleep(1)
+			sys.exit()
 
 		'''with Popen([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], stdout=PIPE, bufsize=1, universal_newlines=True) as p:
 			for line in p.stdout:
