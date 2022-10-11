@@ -231,7 +231,7 @@ class installROSA(qt.QWizardPage):
 		self.downloadedFiles['bat'] = os.path.join(file_base_path, 'create_shortcut.bat')
 		self.downloadedFiles['config'] = os.path.join(file_base_path, 'config.json')
 		self.downloadedFiles['readme'] = os.path.join(file_base_path, 'README.md')
-		self.downloadedFiles['ico'] = os.path.join(file_base_path, '/ico/hotpot-ai.ico')
+		self.downloadedFiles['ico'] = os.path.join(file_base_path, 'ico/hotpot-ai.ico')
 
 		with open(os.path.join(file_base_path, 'installConfigs.pickle'), 'wb') as file:
 			pk1 = pickle.dump(installConfigs, file)
