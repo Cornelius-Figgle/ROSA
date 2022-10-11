@@ -243,7 +243,11 @@ class installROSA(qt.QWizardPage):
 		except subprocess.CalledProcessError as err: 
 			print('\tError In UAC Call, t window for requesting admin permissions was probably closed by user')
 			print(f'\tProcess Returned Code: {err.returncode}')
+			print(end='App will exit is 2 seconds')
 			sleep(1)
+			print(end='\rApp will exit is 1 seconds')
+			sleep(1)
+			print(end='\rApp will exit is 0 seconds')
 			sys.exit()
 
 		'''with Popen([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], stdout=PIPE, bufsize=1, universal_newlines=True) as p:
