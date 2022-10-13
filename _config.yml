@@ -1,7 +1,8 @@
-remote_theme: volny/creative-theme-jekyll #pages-themes/midnight@v0.2.0
+remote_theme: "mmistakes/minimal-mistakes@4.24.0" #pages-themes/midnight@v0.2.0
 title: GitHub Pages
 description: ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you
 
+minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "default"
 show_downloads: [true]
 github:
   zip_url: https://github.com/cornelius-figgle/ROSA/releases
