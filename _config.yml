@@ -3,5 +3,8 @@ title: ROSA - GitHub Pages
 description: ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you
 
 show_downloads: [true]
+github:
+  zip_url: https://cornelius-figgle.github.io/ROSA/
+  tar_url: https://cornelius-figgle.github.io/ROSA/
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
