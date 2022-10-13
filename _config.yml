@@ -1,4 +1,4 @@
-remote_theme: pages-themes/midnight@v0.2.0
+remote_theme: remote_theme: daattali/beautiful-jekyll@5.0.0 #pages-themes/midnight@v0.2.0
 title: GitHub Pages
 description: ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you
 
@@ -6,5 +6,5 @@ show_downloads: [true]
 github:
   zip_url: https://github.com/cornelius-figgle/ROSA/releases
   tar_url: https://github.com/cornelius-figgle/ROSA/releases
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+#plugins:
+#- jekyll-remote-theme # add this line to the plugins list if you already have one
