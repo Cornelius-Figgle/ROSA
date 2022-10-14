@@ -2,11 +2,37 @@ remote_theme: "mmistakes/minimal-mistakes@4.24.0" #pages-themes/midnight@v0.2.0
 title: ROSA - Info Site
 description: ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you
 
+masthead_title: " "
+logo: "/ico/hotspot-ai.png"
+
+# Site Author
+author:
+	name: "Max"
+	bio: "https://bio.link/mth"
+	location: "UK"
+	email: "max@fullimage.net"
+	links:s
+		- label: "Email"
+			icon: "fas fa-fw fa-envelope-square"
+			url: "mailto:max@fullimage.net"
+		- label: "GitHub"
+			icon: "fab fa-fw fa-github"
+			url: "https://github.com/Cornelius-Figgle/"
+		- label: "Instagram"
+			icon: "fab fa-fw fa-instagram"
+			url: "https://www.instagram.com/cornelius_figgle/"
+
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "default"
+
 show_downloads: [true]
 github:
-  zip_url: https://github.com/cornelius-figgle/ROSA/releases
-  tar_url: https://github.com/cornelius-figgle/ROSA/releases
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
-- jekyll-include-cache
+	zip_url: https://github.com/cornelius-figgle/ROSA/releases
+	tar_url: https://github.com/cornelius-figgle/ROSA/releases
+
+plugins: # add this line to the plugins list if you already have one
+	- jekyll-remote-theme a
+	- jekyll-paginate
+	- jekyll-sitemap
+	- jekyll-gist
+	- jekyll-feed
+	- jekyll-include-cache
