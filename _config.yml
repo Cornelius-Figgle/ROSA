@@ -4,7 +4,6 @@ description: ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assist
 
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "default"
 show_downloads: [true]
-site_favicon: favicon.ico
 github:
   zip_url: https://github.com/cornelius-figgle/ROSA/releases
   tar_url: https://github.com/cornelius-figgle/ROSA/releases
