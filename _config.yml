@@ -2,7 +2,6 @@ remote_theme: "mmistakes/minimal-mistakes@4.24.0" #pages-themes/midnight@v0.2.0
 title: ROSA - Info Site
 description: ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you
 
-masthead_title: " "
 logo: "/ico/hotspot-ai.png"
 
 # Site Author
@@ -23,6 +22,11 @@ author:
       url: "https://www.instagram.com/cornelius_figgle/"
 
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "default"
+
+include:
+  - "/ico/*"
+  - README.md
+  - LICENSE
 
 show_downloads: [true]
 github:
