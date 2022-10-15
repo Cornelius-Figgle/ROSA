@@ -44,4 +44,5 @@ if __name__ == '__main__':
 		from pyi_splash import close, update_text  # type: ignore
 		update_text('UI Loaded...')
 		close()
+	print('starting UAC script')
 	main(sys.argv[1], sys.argv[2])
