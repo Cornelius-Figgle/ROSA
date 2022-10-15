@@ -1,8 +1,6 @@
 #!T:/projects/ROSA/rosa-env/Scripts/python.exe
 
 '''
-**purge time**
-
 Ok so, originally this was intended to be cross-platform. It was hard and confusing and messy
 I also realised, *nix users generally install stuff themselves, and my installer is probably incorrect for their specific system.
 
@@ -238,26 +236,7 @@ class installROSA(qt.QWizardPage):
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
 			pk2 = pickle.dump(self.downloadedFiles, file)
 
-		try: 
-			subprocess.check_call([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, stdout=sys.stdout, stderr=subprocess.STDOUT)
-		except subprocess.CalledProcessError as err: 
-			print('\tError In UAC Call, t window for requesting admin permissions was probably closed by user')
-			print(f'\tProcess Returned Code: {err.returncode}')
-			print(end='App will exit is 2 seconds')
-			sleep(1)
-			print(end='\rApp will exit is 1 seconds')
-			sleep(1)
-			print(end='\rApp will exit is 0 seconds')
-			sys.exit()
-
-		'''with Popen([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], stdout=PIPE, bufsize=1, universal_newlines=True) as p:
-			for line in p.stdout:
-				print(line, end='') # process line here
-				self.infoLabel.setText(line) 
-
-		if p.returncode != 0:
-			raise CalledProcessError(p.returncode, p.args)'''
-		#run([f'{self.downloadedFiles["adm"]}', f'"{pk1}"', f'"{pk2}"'], shell=True, capture_output=True)
+		subprocess.run([f'"{self.downloadedFiles["adm"]}"', f'"{pk1}"', f'"{pk2}"'], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin'])), os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
