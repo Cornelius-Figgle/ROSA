@@ -232,9 +232,9 @@ class installROSA(qt.QWizardPage):
 		self.downloadedFiles['ico'] = os.path.join(file_base_path, 'ico/hotpot-ai.ico')
 
 		with open(os.path.join(file_base_path, 'installConfigs.pickle'), 'wb') as file:
-			pk1 = pickle.dump(installConfigs, file)
+			pickle.dump(installConfigs, file)
 		with open(os.path.join(file_base_path, 'downloadedFiles.pickle'), 'wb') as file:
-			pk2 = pickle.dump(self.downloadedFiles, file)
+			pickle.dump(self.downloadedFiles, file)
 
 		subprocess.run(
 			[f'"{self.downloadedFiles["adm"]}"', f'"{os.path.join(file_base_path, "installConfigs.pickle")}"', f'"{os.path.join(file_base_path, "downloadedFiles.pickle")}"'], 
