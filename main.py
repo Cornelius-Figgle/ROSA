@@ -28,7 +28,7 @@ else:
 
 activations = [
 	'rosa', #actual
-	'browser', 'rosanna', 'frozen', 'roserton' #misheards
+	'browser', 'rosanna', 'frozen', 'roserton' #misheard words
 	# future : user could append their own
 ] 
 
@@ -100,7 +100,7 @@ def startup() -> None:
 		gpioManager('listening', 0)
 	#ENDIF
 
-	print('ADJUSTING FOR AMIENBT')
+	print('ADJUSTING FOR AMBIENT')
 	with sr.Microphone() as source: 
 		sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
 
@@ -112,9 +112,10 @@ def startup() -> None:
 		close()
 
 	gpioManager('processing', 0)
+	os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 	print('\a'); sleep(1); print('\a')
 
-def gpioManager(pin, state) -> None:
+def gpioManager(pin: str, state: int) -> None:
 	if isOn_RPi is not False: 
 		if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
 		elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
@@ -161,21 +162,23 @@ def backgroundListening() -> None:
 		gpioManager('speaking', 0)
 
 		backgroundListening()
+	except KeyboardInterrupt:
+		GPIO.cleanup()
 
-def determineResponse(query) -> None:
-	def musicq(q):
+def determineResponse(query: str) -> None:
+	def musicq(q) -> str | None:
 		for key in keys['musicq']:
 			if key in q:
 				return 'musicq'
-	def wikiq(q):
+	def wikiq(q) -> str | None:
 		for key in keys['wikiq']:
 			if key in q:
 				return 'wikiq'
-	def homeq(q):
+	def homeq(q) -> str | None:
 		for key in keys['homeq']:
 			if key in q:
 				return 'homeq'
-	def deathq(q):
+	def deathq(q) -> str | None:
 		for key in keys['deathq']:
 			if key in q:
 				return 'deathq'
@@ -193,7 +196,7 @@ def determineResponse(query) -> None:
 	gpioManager('processing', 0)
 	respond(typeq, query)
 
-def respond(typeq, query) -> None:
+def respond(typeq: str, query: str) -> None:
 	gpioManager('speaking', 1)
 
 	if typeq == 'musicq':
@@ -232,7 +235,7 @@ def respond(typeq, query) -> None:
 			while mixer.music.get_busy(): continue
 			prevResponses['deathq'] += 1
 		else:
-			if os.name == 'nt': exit(0) #os.system('shutdown /p')
+			if os.name == 'nt': sys.exit(0) #os.system('shutdown /p')
 			elif os.name == 'posix': os.system('sudo shutdown -h now')
 			prevResponses['deathq'] = 0
 	else:
