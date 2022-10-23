@@ -1,4 +1,20 @@
-#!T:/projects/ROSA/rosa-env/Scripts/python.exe
+#pyinstaller --distpath "t:\projects\rosa\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_gui --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --add-data "T:\projects\ROSA\bin\bin;." --add-data "T:\projects\ROSA\ico;ico" --add-data "T:\projects\ROSA\gpio.json;." --hidden-import pyi_splash --splash "T:\projects\ROSA\ico\hotpot-ai.png" -i "T:\projects\ROSA\ico\hotpot-ai.ico" "T:\projects\ROSA\WIN_ROSA-installer.py"
+
+#https://github.com/Cornelius-Figgle/ROSA/
+#ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
+
+'''
+THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX HARRISON, AS OF 2022
+It may work separately and independently, it may not. Who knows
+
+Code (c) Max Harrison 2022
+Ideas (c) Callum Blumfield 2022
+Ideas (c) Max Harrison 2022
+Vocals (c) Evie Peacock 2022
+
+Thanks also to Alex, Ashe & Jake for support throughout (sorry for the spam)
+Extra thanks to all the internet peoples that helped with this as well 
+'''
 
 '''
 Ok so, originally this was intended to be cross-platform. It was hard and confusing and messy

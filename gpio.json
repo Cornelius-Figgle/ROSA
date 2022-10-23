@@ -1,21 +1,39 @@
 {
-    "#": "Lines that have text are comments",
-    "#_": "If you wish to ignore an LED, simply put the value as 2 empty double quotes (see sample below)",
+    "#0": {
+        "#0.1": "https://github.com/Cornelius-Figgle/ROSA",
+        "#0.2": "#ROBOTICALLY OBNOXIOUS SERVING ASSISTANT",
+
+        "#0.3": "THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX HARRISON, AS OF 2022",
+        "#0.4": "It may work separately and independently, it may not. Who knows",
+
+        "#0.5": "Code (c) Max Harrison 2022",
+        "#0.6": "Ideas (c) Callum Blumfield 2022",
+        "#0.7": "Ideas (c) Max Harrison 2022",
+        "#0.8": "Vocals (c) Evie Peacock 2022",
+
+        "#0.9": "Thanks also to Alex, Ashe & Jake for support throughout (sorry for the spam)",
+        "#0.10": "Extra thanks to all the internet peoples that helped with this as well "
+    },
+
+    "#1": "This file is only relevant if you are on a Raspberry Pi",
+    "#2": "Lines that have text are comments",
+    "#3": "If you wish to ignore an LED, simply put the value as 2 empty double quotes (see sample below)",
     "empty_sample": "",
+    "#4": "Use BCM formatting for pin numbers",
 
 
     "active": 4,
-    "LED_1": "Shows when the script/program is running",
+    "#LED_1": "Shows when the script/program is running",
 
     "listening": 27,
-    "LED_2": "Shows when ROSA is listening to speech",
+    "#LED_2": "Shows when ROSA is listening to speech",
 
     "processing": 5,
-    "LED_3": "Shows when ROSA is processing speech/a response/etc",
+    "#LED_3": "Shows when ROSA is processing speech/a response/etc",
 
     "speaking": 16,
-    "LED_4": "Shows when ROSA is outputting audio/text",
+    "#LED_4": "Shows when ROSA is outputting audio/text",
 
     "shutdown": 25,
-    "BUTTON_1": "A simple push-button that will run the shutdown command when pressed"
+    "#BUTTON_1": "A simple push-button that will run the shutdown command when pressed"
 }
