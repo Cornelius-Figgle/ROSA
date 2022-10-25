@@ -81,7 +81,7 @@ def startup() -> None:
 		
 		GPIO.cleanup()
 
-		with open(os.path.join(file_base_path, 'gpio.json'), 'r') as j: #hm may work
+		with open(os.path.join(os.path.dirname(sys.executable), 'gpio.json'), 'r') as j: #hm may work
 			gpio_loc = json.loads(j.read())
 	
 		GPIO.setup(gpio_loc['active'], GPIO.OUT)
