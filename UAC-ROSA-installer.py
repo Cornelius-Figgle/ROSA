@@ -30,10 +30,10 @@ else:
 
 def uac_procs(installConfigs: dict, downloadedFiles: dict) -> None:
 	os.mkdir(os.path.join(installConfigs['programPath'], 'ROSA')) #admin
-	os.mkdir(os.path.join(installConfigs['dataPath'], 'ROSA')) #admin
+	#os.mkdir(os.path.join(installConfigs['dataPath'], 'ROSA')) #admin
 
 	shutil.move(downloadedFiles['bin'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['bin']))) #admin
-	shutil.move(downloadedFiles['config'], os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(downloadedFiles['config']))) #admin
+	shutil.move(downloadedFiles['config'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['config']))) #admin
 	shutil.move(downloadedFiles['readme'], os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(downloadedFiles['readme']))) #admin
 
 def main(config_pk: str, dwld_pk: str) -> None:

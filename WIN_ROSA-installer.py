@@ -40,7 +40,6 @@ import subprocess
 import sys
 from pathlib import Path
 from threading import Thread
-from time import sleep
 
 import PyQt5.QtWidgets as qt
 from PyQt5.QtCore import Qt as QtCore
@@ -112,7 +111,7 @@ class userConfig(qt.QWizardPage):
 		global installConfigs; installConfigs = {}
 
 		installConfigs['programPath'] = os.path.expandvars('%ProgramFiles%')
-		installConfigs['dataPath'] = os.path.expandvars('%AppData%')
+		#installConfigs['dataPath'] = os.path.expandvars('%AppData%')
 		installConfigs['startPath'] = shell.SpecialFolders('Programs') #os.path.expandvars('%AppData%\Microsoft\Windows\Start Menu'))
 		installConfigs['deskPath'] = shell.SpecialFolders('Desktop') #os.path.expanduser('~\Desktop'))
 
@@ -122,11 +121,11 @@ class userConfig(qt.QWizardPage):
 		self.validateType(dirLabel, dirButton, 'programPath', 'Program Files Path: ')
 		dirLabel.textChanged.connect(lambda: self.validateType(dirLabel, dirButton, 'programPath', 'Program Files Path: '))
 
-		dataButton = qt.QPushButton('AppData Path: ')
-		dataButton.clicked.connect(lambda: self.chooseDir(dataLabel, dataButton, 'dataPath', 'AppData Path: '))
-		dataLabel = qt.QLineEdit(installConfigs['dataPath'])
-		self.validateType(dataLabel, dataButton, 'dataPath', 'AppData Path: ')
-		dataLabel.textChanged.connect(lambda: self.validateType(dataLabel, dataButton, 'dataPath', 'AppData Path: '))
+		#dataButton = qt.QPushButton('AppData Path: ')
+		#dataButton.clicked.connect(lambda: self.chooseDir(dataLabel, dataButton, 'dataPath', 'AppData Path: '))
+		#dataLabel = qt.QLineEdit(installConfigs['dataPath'])
+		#self.validateType(dataLabel, dataButton, 'dataPath', 'AppData Path: ')
+		#dataLabel.textChanged.connect(lambda: self.validateType(dataLabel, dataButton, 'dataPath', 'AppData Path: '))
 
 		cb1 = qt.QCheckBox('Add shortcut to Start Menu')
 		cb1.setChecked(True)
@@ -149,21 +148,20 @@ class userConfig(qt.QWizardPage):
 		configLayout.addWidget(dirButton, 0, 0)
 		configLayout.addWidget(dirLabel, 0, 1)
 
-		configLayout.addWidget(dataButton, 1, 0)
-		configLayout.addWidget(dataLabel, 1, 1)
+		#configLayout.addWidget(dataButton, 1, 0)
+		#configLayout.addWidget(dataLabel, 1, 1)
 
+		configLayout.addWidget(qt.QLabel(''), 1, 0)
 
-		configLayout.addWidget(qt.QLabel(''), 2, 0)
-
-		configLayout.addWidget(cb1, 3, 0)
-		configLayout.addWidget(cb1Button, 4, 0)
+		configLayout.addWidget(cb1, 2, 0)
+		configLayout.addWidget(cb1Button, 3, 0)
 		configLayout.addWidget(cb1Label, 4, 1)
 
-		configLayout.addWidget(qt.QLabel(''), 5, 0)
+		configLayout.addWidget(qt.QLabel(''), 4, 0)
 
-		configLayout.addWidget(cb2, 6, 0)
-		configLayout.addWidget(cb2Button, 7, 0)
-		configLayout.addWidget(cb2Label, 7, 1)
+		configLayout.addWidget(cb2, 5, 0)
+		configLayout.addWidget(cb2Button, 6, 0)
+		configLayout.addWidget(cb2Label, 6, 1)
 
 		self.setLayout(configLayout)
 
@@ -259,7 +257,7 @@ class installROSA(qt.QWizardPage):
 		))
 
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin'])), os.path.join(installConfigs['startPath'], 'ROSA'))
-		self.make_shortcut(os.path.join(installConfigs['dataPath'], 'ROSA', os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
+		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['config'])), os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['readme'])), os.path.join(installConfigs['startPath'], 'ROSA'))
 		self.make_shortcut(os.path.join(installConfigs['programPath'], 'ROSA', os.path.basename(self.downloadedFiles['bin'])), installConfigs['deskPath'])
 
