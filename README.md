@@ -1,10 +1,15 @@
 
 # ROSA
 
-<table><tbody><tr>
-<td style="vertical-align:top">ROBOTICALLY OBNOXIOUS SERVING ASSISTANT<br><br>An emotional smart assistant that doesn't listen to you<br><br><i>If you wish to install the binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)<i></td>
-<td><img src="./ico/README-2.jpg"></td>
-</tr></tbody></table>
+[<img src="./ico/README-2.jpg" width="250" align="right"/>](./ico/README-2.jpg)
+
+ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
+
+An emotional smart assistant that doesn't listen to you
+
+*If you wish to install the binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)*
+
+<br>
 
 ## Installation
 
@@ -38,7 +43,7 @@ sudo apt install python-pyaudio flac
 sudo apt install python3-gst-1.0
 ```
 
-Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, `snap`, etc)
+Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)
 
 ## Usage
 
