@@ -1,7 +1,7 @@
 
 # ROSA
 
-[<img src="./ico/README-2.jpg" width="250" align="right"/>](./ico/README-2.jpg)
+[<img src="./ico/README-2.jpg" width="300" align="right"/>](./ico/README-2.jpg)
 
 ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
