@@ -5,7 +5,7 @@
 
 '''
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX HARRISON, AS OF 2022
-It may work separately and independently, it may not. Who knows
+It may work separately and independently of the main repo, it may not. Who knows
 
 Code (c) Max Harrison 2022
 Ideas (c) Callum Blumfield 2022

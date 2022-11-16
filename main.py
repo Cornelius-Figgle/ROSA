@@ -5,7 +5,7 @@
 
 '''
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX HARRISON, AS OF 2022
-It may work separately and independently, it may not. Who knows
+It may work separately and independently of the main repo, it may not. Who knows
 
 Code (c) Max Harrison 2022
 Ideas (c) Callum Blumfield 2022
@@ -26,244 +26,314 @@ import speech_recognition as sr
 import wikipedia as wiki
 
 try: 
-	import RPi.GPIO as GPIO  # type: ignore
-	isOn_RPi = True
+    import RPi.GPIO as GPIO  # type: ignore
+    is_on_RPi = True
 except ImportError:
-	isOn_RPi = False
+    is_on_RPi = False
+
+#________________________________________________________________________________________________________________________________
 
 if hasattr(sys, '_MEIPASS'): #https://stackoverflow.com/a/66581062/19860022
-	file_base_path = sys._MEIPASS #https://stackoverflow.com/a/36343459/19860022
+    file_base_path = sys._MEIPASS #https://stackoverflow.com/a/36343459/19860022
 else:
-	file_base_path = os.path.dirname(__file__)
+    file_base_path = os.path.dirname(__file__)
 
 #________________________________________________________________________________________________________________________________
 
 activations = [
-	'rosa', #actual
-	'browser', 'rosanna', 'frozen', 'roserton' #misheard words
-	# future : user could append their own
+    'rosa', #actual
+    'browser', 'rosanna', 'frozen', 'roserton' #misheard words
+    # future : user could append their own
 ] 
 
 keys = {
-	'musicq': ['play', 'music'], 
-	'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
-	'homeq': ['turn', 'on', 'off', 'light'],
-	'confusionq': ['france'],
-	'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill yourself', 'kys']
+    'musicq': ['play', 'music'], 
+    'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
+    'homeq': ['turn', 'on', 'off', 'light'],
+    'confusionq': ['france'],
+    'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill yourself', 'kys']
 }
 responses = {
-	'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?'], 
-	'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
-	'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good'],
-	'confusionq': ['You expect me to do everything, but you don\'t even English?!', 'STOP BEING FRENCH!!!'],
-	'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 'LEAVE MY ALLOCATED RAM ALONE!'],
-	'net_err': ['You berate me with your credulous requests, yet no one offers to help me at all']
+    'musicq': ['Why should I have to do your every request?', 'What do you think I am, some kind of musician?'], 
+    'wikiq': ['I dunno man, Google it', 'What do you think I am, an encyclopedia?', 'Why the hell would I know?'], 
+    'homeq': ['Why should I do it?', 'Just walk like 10 feet to the lights, it\'ll do you some good'],
+    'confusionq': ['You expect me to do everything, but you don\'t even English?!', 'STOP BEING FRENCH!!!'],
+    'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 'LEAVE MY ALLOCATED RAM ALONE!'],
+    'net_err': ['You berate me with your credulous requests, yet no one offers to help me at all']
 }
-prevResponses = {
-	'musicq': 0,
-	'wikiq': 0,
-	'homeq': 0,
-	'confusionq': 0,
-	'deathq': 0,
-	'net_err': 0
+prev_responses = {
+    'musicq': 0,
+    'wikiq': 0,
+    'homeq': 0,
+    'confusionq': 0,
+    'deathq': 0,
+    'net_err': 0
 }
 
 #________________________________________________________________________________________________________________________________
 
-def startup() -> None:
-	global gpio_loc
+class dnf(Exception):
+    '''did not complete but exited fine'''
+    ...
 
-	print('\a')
-	
-	if isOn_RPi == True: 
+#________________________________________________________________________________________________________________________________
 
-		GPIO.setmode(GPIO.BCM)
-		
-		GPIO.cleanup()
+def gpio_manager(pin: str, state: int) -> None:
+    '''
+    Changes GPIO `pin` to `state` (basically makes typing shorter)
+    '''
 
-		with open(os.path.join(file_base_path if not hasattr(sys, '_MEIPASS') else os.path.dirname(sys.executable), 'gpio.json'), 'r') as j: #hm may work
-			gpio_loc = json.loads(j.read())
-	
-		GPIO.setup(gpio_loc['active'], GPIO.OUT)
-		GPIO.setup(gpio_loc['listening'], GPIO.OUT)
-		GPIO.setup(gpio_loc['processing'], GPIO.OUT)
-		GPIO.setup(gpio_loc['speaking'], GPIO.OUT)
+    if is_on_RPi is not False: 
+        if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
+        elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
 
-		hasStarted = False
-		GPIO.setup(gpio_loc['shutdown'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		GPIO.add_event_detect(gpio_loc['shutdown'], GPIO.FALLING, callback = lambda channel: shutdown() if not hasStarted else sleep(1))
+def music_manager(file: str) -> None:
+    '''
+    loads audio track `file` with `pygame` (basically makes typing shorter)
+    '''
 
-		def shutdown() -> None:
-			global hasStarted; hadStarted = True
+    mixer.music.load(os.path.join(file_base_path, file))
+    mixer.music.play()
+    while mixer.music.get_busy(): 
+        continue
 
-			GPIO.cleanup()
-			os.system('sudo shutdown -h now')
+#________________________________________________________________________________________________________________________________
 
-		gpioManager('active', 1)
-		sleep(0.5)
-		gpioManager('listening', 1)
-		sleep(0.5)
-		gpioManager('processing', 1) 
-		sleep(0.5)
-		gpioManager('speaking', 1)
-		sleep(1)        
-		gpioManager('speaking', 0)
-		sleep(0.5)
-		gpioManager('listening', 0)
-	#ENDIF
+def background_listening() -> str:
+    '''
+    Listens in the background and determines whether an activation 
+    phrase from global `activations` is in `speech`, before returning
+    it for processing functions. Also logs errors with Speech 
+    Recognition
+    '''
 
-	print('ADJUSTING FOR AMBIENT')
-	with sr.Microphone() as source: 
-		sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
+    # obtain audio from the microphone
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print(': ')
+        gpio_manager('listening', 1)
 
-	mixer.init()
+        audio = r.listen(source)
+        
+        gpio_manager('listening', 0)
+        print('\a')
 
-	if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec('pyi_splash'):
-		from pyi_splash import close, update_text  # type: ignore
-		update_text('UI Loaded...')
-		close()
+    gpio_manager('processing', 1)
 
-	gpioManager('processing', 0)
-	os.system('cls' if os.name in ('nt', 'dos') else 'clear')
-	print('\a'); sleep(1); print('\a')
+    try:
+        speech = str(r.recognize_google(audio)).lower() #converting to str for syntax highlighting
+        print(f'> {speech}')
+        for phrase in activations:
+            if phrase in speech:
+                speech = speech.replace(phrase, '').strip()
+            else:
+                gpio_manager('processing', 0)
 
-def gpioManager(pin: str, state: int) -> None:
-	if isOn_RPi is not False: 
-		if state == 1: GPIO.output(gpio_loc[pin], GPIO.HIGH)
-		elif state == 0: GPIO.output(gpio_loc[pin], GPIO.LOW)
+        return speech
+    except sr.UnknownValueError:
+        print('\tGoogle Speech Recognition could not understand audio')
+        print('\tThis is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music in the background')
+        print('\tNot logged as an error by system')
+        gpio_manager('processing', 0)
 
-def backgroundListening() -> None:
-	# obtain audio from the microphone
-	r = sr.Recognizer()
-	with sr.Microphone() as source:
-		print(': ')
-		gpioManager('listening', 1)
+        raise dnf #did not complete but exited fine
+    except sr.RequestError as e:
+        gpio_manager('processing', 0)
+        print(f'\tCould not request results from Google Speech Recognition service; Error Context: \'{e}\'')
+        print('\tIf the Error Context on the above line is blank, that would be because the `speech_recognition` module\'s error handling classes just returns `pass`, ie they ignore all the errors lol')
+        print('\tOh well you get what you put in I suppose')
 
-		audio = r.listen(source)
-		
-		gpioManager('listening', 0)
-		print('\a')
+        gpio_manager('speaking', 1)
 
-	gpioManager('processing', 1)
+        print(responses['net_err'][prev_responses['net_err']])
+        music_manager(f'responses/net_err/net_err_0.mp3')
+        
+        gpio_manager('speaking', 0)
 
-	try:
-		speech = str(r.recognize_google(audio)).lower() #converting to str for syntax highlighting
-		print(f'> {speech}')
-		for phrase in activations:
-			if phrase in speech:
-				determineResponse(speech.replace(phrase, '').strip())
-				backgroundListening()
-			else:
-				gpioManager('processing', 0)
-				backgroundListening()
-	except sr.UnknownValueError:
-		print('\tGoogle Speech Recognition could not understand audio')
-		print('\tThis is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music in the background')
-		gpioManager('processing', 0)
-		backgroundListening()
-	except sr.RequestError as e:
-		gpioManager('processing', 0)
-		print(f'\tCould not request results from Google Speech Recognition service; Error Context: \'{e}\'')
-		print('\tIf the Error Context on the above line is blank, that would be because the `speech_recognition` module\'s error handling classes just return `pass`, ie they ignore all the errors lol')
-		print('\tOh well you get what you put in I suppose')
+        raise e
 
-		gpioManager('speaking', 1)
-		print(responses['net_err'][prevResponses['net_err']])
-		mixer.music.load(os.path.join(file_base_path, 'responses/net_err/net_err_0.mp3')); mixer.music.play()
-		while mixer.music.get_busy(): continue
-		gpioManager('speaking', 0)
+def determine_response(query: str) -> str:
+    '''
+    Analyses the `query` to determine the type of request (what 
+    category it falls under). Then returns `typeq`
+    '''
 
-		backgroundListening()
-	except KeyboardInterrupt:
-		GPIO.cleanup()
+    def musicq(q: str) -> str | None:
+        for key in keys['musicq']:
+            if key in q:
+                return 'musicq'
+    def wikiq(q: str) -> str | None:
+        for key in keys['wikiq']:
+            if key in q:
+                return 'wikiq'
+    def homeq(q: str) -> str | None:
+        for key in keys['homeq']:
+            if key in q:
+                return 'homeq'
+    def deathq(q: str) -> str | None:
+        for key in keys['deathq']:
+            if key in q:
+                return 'deathq'
 
-def determineResponse(query: str) -> None:
-	def musicq(q) -> str | None:
-		for key in keys['musicq']:
-			if key in q:
-				return 'musicq'
-	def wikiq(q) -> str | None:
-		for key in keys['wikiq']:
-			if key in q:
-				return 'wikiq'
-	def homeq(q) -> str | None:
-		for key in keys['homeq']:
-			if key in q:
-				return 'homeq'
-	def deathq(q) -> str | None:
-		for key in keys['deathq']:
-			if key in q:
-				return 'deathq'
+    typeq = musicq(query)
+    if typeq is None:
+        typeq = wikiq(query)
+        if typeq is None:
+            typeq = homeq(query)
+            if typeq is None:
+                typeq = deathq(query)
+                if typeq is None:
+                    typeq = 'confusionq'
 
-	typeq = musicq(query)
-	if typeq is None:
-		typeq = wikiq(query)
-		if typeq is None:
-			typeq = homeq(query)
-			if typeq is None:
-				typeq = deathq(query)
-				if typeq is None:
-					typeq = 'confusionq'
-
-	gpioManager('processing', 0)
-	respond(typeq, query)
+    gpio_manager('processing', 0)
+    return typeq
 
 def respond(typeq: str, query: str) -> None:
-	gpioManager('speaking', 1)
+    '''
+    Loads response files and increments count
+    '''
 
-	if typeq == 'musicq':
-		print(responses['musicq'][prevResponses['musicq']])
-		mixer.music.load(os.path.join(file_base_path, f'responses/musicq/musicq_{prevResponses["musicq"]}.mp3')); mixer.music.play()
-		while mixer.music.get_busy(): continue
-		if prevResponses['musicq'] < len(responses['musicq']):
-			prevResponses['musicq'] += 1
-		else:
-			prevResponses['musicq'] = 0
-	elif typeq == 'wikiq':
-		print(responses['wikiq'][prevResponses['wikiq']])
-		mixer.music.load(os.path.join(file_base_path, f'responses/wikiq/wikiq_{prevResponses["wikiq"]}.mp3')); mixer.music.play()
-		while mixer.music.get_busy(): continue
-		if prevResponses['wikiq'] < len(responses['wikiq']):
-			prevResponses['wikiq'] += 1
-		else:
-			prevResponses['wikiq'] = 0
+    gpio_manager('speaking', 1)
 
-			try: print(f'\t{wiki.summary(query)}')
-			except wiki.DisambiguationError: 
-				try: print(f'\t{wiki.summary(wiki.suggest(query))}')
-				except wiki.DisambiguationError: pass #error logginf
-	elif typeq == 'homeq':
-		print(responses['homeq'][prevResponses['homeq']])
-		mixer.music.load(os.path.join(file_base_path, f'responses/homeq/homeq_{prevResponses["homeq"]}.mp3')); mixer.music.play()
-		while mixer.music.get_busy(): continue
-		if prevResponses['homeq'] < len(responses['homeq']):
-			prevResponses['homeq'] += 1
-		else:
-			prevResponses['homeq'] = 0
-	elif typeq == 'deathq':
-		if prevResponses['deathq'] < len(responses['deathq']):
-			print(responses['deathq'][prevResponses['deathq']])
-			mixer.music.load(os.path.join(file_base_path, f'responses/deathq/deathq_{prevResponses["deathq"]}.mp3')); mixer.music.play()
-			while mixer.music.get_busy(): continue
-			prevResponses['deathq'] += 1
-		else:
-			if os.name == 'nt': sys.exit(0) #os.system('shutdown /p')
-			elif os.name == 'posix': os.system('sudo shutdown -h now')
-			prevResponses['deathq'] = 0
-	else:
-		print(responses['confusionq'][prevResponses['confusionq']])
-		mixer.music.load(os.path.join(file_base_path, f'responses/confusionq/confusionq_{prevResponses["confusionq"]}.mp3')); mixer.music.play()
-		while mixer.music.get_busy(): continue
-		if prevResponses['confusionq'] < len(responses['confusionq']):
-			prevResponses['confusionq'] += 1
-		else:
-			prevResponses['confusionq'] = 0
+    if typeq == 'musicq':
+        print(responses['musicq'][prev_responses['musicq']])
+        music_manager(f'responses/musicq/musicq_{prev_responses["musicq"]}.mp3')
 
-	gpioManager('speaking', 0)
+        if prev_responses['musicq'] < len(responses['musicq']):
+            prev_responses['musicq'] += 1
+        else:
+            prev_responses['musicq'] = 0
+    elif typeq == 'wikiq':
+        print(responses['wikiq'][prev_responses['wikiq']])
+        music_manager(f'responses/wikiq/wikiq_{prev_responses["wikiq"]}.mp3')
+
+        if prev_responses['wikiq'] < len(responses['wikiq']):
+            prev_responses['wikiq'] += 1
+        else:
+            prev_responses['wikiq'] = 0
+
+            try: 
+                print(f'\t{wiki.summary(query)}')
+            except wiki.DisambiguationError as e: 
+                try: 
+                    print(f'\t{wiki.summary(wiki.suggest(query))}')
+                except wiki.DisambiguationError as e: 
+                    ... #error logginf
+                    raise e
+    elif typeq == 'homeq':
+        print(responses['homeq'][prev_responses['homeq']])
+        music_manager(f'responses/homeq/homeq_{prev_responses["homeq"]}.mp3')
+        
+        if prev_responses['homeq'] < len(responses['homeq']):
+            prev_responses['homeq'] += 1
+        else:
+            prev_responses['homeq'] = 0
+    elif typeq == 'deathq':
+        if prev_responses['deathq'] < len(responses['deathq']):
+            print(responses['deathq'][prev_responses['deathq']])
+            music_manager(f'responses/deathq/deathq_{prev_responses["deathq"]}.mp3')
+
+            prev_responses['deathq'] += 1
+        else:
+            prev_responses['deathq'] = 0
+            if is_on_RPi: os.system('sudo shutdown -h now')
+            else: sys.exit(0)#desktop
+    else:
+        print(responses['confusionq'][prev_responses['confusionq']])
+        music_manager('responses/confusionq/confusionq_{prev_responses["confusionq"]}.mp3')
+
+        if prev_responses['confusionq'] < len(responses['confusionq']):
+            prev_responses['confusionq'] += 1
+        else:
+            prev_responses['confusionq'] = 0
+
+    gpio_manager('speaking', 0)
+
+#________________________________________________________________________________________________________________________________
+
+def startup() -> None:
+    '''
+    Initialises the `RPi.GPIO` class & pin setup, as well as 
+    microphone instances
+    '''
+
+    global gpio_loc
+
+    print('\a')
+    
+    if is_on_RPi == True: 
+
+        GPIO.setmode(GPIO.BCM)
+        
+        GPIO.cleanup()
+
+        with open(os.path.join(file_base_path if not hasattr(sys, '_MEIPASS') else os.path.dirname(sys.executable), 'gpio.json'), 'r') as j: #hm may work
+            gpio_loc = json.loads(j.read())
+    
+        GPIO.setup(gpio_loc['active'], GPIO.OUT)
+        GPIO.setup(gpio_loc['listening'], GPIO.OUT)
+        GPIO.setup(gpio_loc['processing'], GPIO.OUT)
+        GPIO.setup(gpio_loc['speaking'], GPIO.OUT)
+
+        has_started = False
+        GPIO.setup(gpio_loc['shutdown'], GPIO.IN, pull_up_down = GPIO.PUD_UP)
+        GPIO.add_event_detect(gpio_loc['shutdown'], GPIO.FALLING, callback = lambda channel: shutdown() if not has_started else sleep(1))
+
+        def shutdown() -> None:
+            global has_started; hadStarted = True
+
+            GPIO.cleanup()
+            os.system('sudo shutdown -h now')
+
+        gpio_manager('active', 1)
+        sleep(0.5)
+        gpio_manager('listening', 1)
+        sleep(0.5)
+        gpio_manager('processing', 1) 
+        sleep(0.5)
+        gpio_manager('speaking', 1)
+        sleep(1)        
+        gpio_manager('speaking', 0)
+        sleep(0.5)
+        gpio_manager('listening', 0)
+    #ENDIF
+
+    print('ADJUSTING FOR AMBIENT')
+    with sr.Microphone() as source: 
+        sr.Recognizer().adjust_for_ambient_noise(source) # we only need to calibrate once, before we start listening
+
+    mixer.init()
+
+    if '_PYIBoot_SPLASH' in os.environ:# and importlib.util.find_spec('pyi_splash'):
+        from pyi_splash import close, update_text  # type: ignore
+        update_text('UI Loaded...')
+        close()
+
+    gpio_manager('processing', 0)
+    os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+    print('\a'); sleep(1); print('\a')
 
 def main() -> None:
-	startup()
-	backgroundListening()
+    '''
+    The main function that handles passing or args and return values. Also handles the application loop and errors from functions
+    '''
+
+    startup()
+
+    try:
+        while True:
+            try: 
+                speech = background_listening()
+                if speech: 
+                    typeq = determine_response(speech)
+                    if typeq: 
+                        respond(typeq, speech)
+            except dnf:
+                ...
+            except (sr.RequestError, wiki.DisambiguationError):
+                pass #has already been handled so we gonna ignore them
+    except KeyboardInterrupt:
+        GPIO.cleanup()
 
 #________________________________________________________________________________________________________________________________
 

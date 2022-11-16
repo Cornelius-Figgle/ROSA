@@ -1,6 +1,8 @@
 
 # ROSA
 
+[<img src="./ico/README-2.jpg" width="250" align="right"/>](./ico/README-2.jpg)
+
 ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
