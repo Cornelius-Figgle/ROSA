@@ -9,6 +9,8 @@ An emotional smart assistant that doesn't listen to you
 
 *If you wish to install the binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)*
 
+---
+
 ## Installation
 
 ### All Platforms
