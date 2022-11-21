@@ -29,6 +29,12 @@ And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) 
 pip install pygame PyAudio SpeechRecognition 
 ```
 
+I think you may have to download PyAudio externally and then pip-install the `whl` file. First, download the relevant file from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio) and copy the name of the saved file. Then run the following command, replacing the file path and name with your copy: (see [here](https://stackoverflow.com/a/61050118/19860022) for more details)
+
+```shell
+pip install "D:\full\path\to\file\PyAudio-0.2.11-cp311-cp311-win_amd64.whl"
+```
+
 It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
 ### Linux Only
