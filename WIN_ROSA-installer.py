@@ -185,8 +185,7 @@ class user_config(qt.QWizardPage):
         cb1_label.textChanged.connect(lambda: self.validate_type(
             cb1_label, cb1_button, 
             'start_path', 'Start Menu Path: '))
-        cb1.stateChanged.connect(lambda: self.save_check_status(
-            cb1, 'start_shortcut'))
+        cb1.stateChanged.connect(lambda: self.save_check_status())
 
         cb2 = qt.QCheckBox('Add shortcut to Desktop')
         cb2.setChecked(False)
@@ -201,8 +200,7 @@ class user_config(qt.QWizardPage):
         cb2_label.textChanged.connect(lambda: self.validate_type(
             cb2_label, cb2_button, 
             'desk_path', 'Desktop Path: '))
-        cb2.stateChanged.connect(lambda: self.save_check_status(
-            cb2, 'desk_shortcut'))
+        cb2.stateChanged.connect(lambda: self.save_check_status())
 
         config_layout.addWidget(dir_button, 0, 0)
         config_layout.addWidget(dir_label, 0, 1)
@@ -284,6 +282,23 @@ class user_config(qt.QWizardPage):
             f = label.font() ; f.setStrikeOut(False) ; label.setFont(f)
 
             return True        
+
+    def save_check_status(self) -> None:
+        '''
+        callback function for `cb1` and `cb2` b/c I am lazy
+        '''
+
+        try:
+            # note: program runs this sometimes when loading so we 
+            # note: ignore the errors
+            install_configs['start_shortcut'] = self.cb1.isChecked()
+            print('CheckBox `cb1` Toggled True')
+            install_configs['desk_shortcut'] = self.cb2.isChecked()
+            print('CheckBox `cb2` Toggled True')
+        except NameError: 
+            pass  # note: intelligent cod3
+        except AttributeError: 
+            pass  # note: big bran m0ve
 
     def choose_dir(
         self, label: qt.QLineEdit, display: qt.QPushButton, 
