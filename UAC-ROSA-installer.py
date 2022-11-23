@@ -87,7 +87,7 @@ def uac_procs(install_configs: dict, downloaded_files: dict) -> None:
     # shell: mkdir "C:\Program Files\ROSA"
     os.mkdir(
         os.path.join(
-            install_configs['programPath'],
+            install_configs['program_path'],
             'ROSA'
         )
     )
@@ -96,7 +96,7 @@ def uac_procs(install_configs: dict, downloaded_files: dict) -> None:
     shutil.move(
         downloaded_files['bin'], 
         os.path.join(
-            install_configs['programPath'], 
+            install_configs['program_path'], 
             'ROSA', 
             os.path.basename(downloaded_files['bin'])
         )
@@ -106,7 +106,7 @@ def uac_procs(install_configs: dict, downloaded_files: dict) -> None:
     shutil.move(
         downloaded_files['readme'], 
         os.path.join(
-            install_configs['programPath'], 
+            install_configs['program_path'], 
             'ROSA', 
             os.path.basename(downloaded_files['readme'])
         )

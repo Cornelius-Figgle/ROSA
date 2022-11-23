@@ -28,7 +28,7 @@ __maintainer__ = 'Cornelius-Figgle'
 __copyright__ = 'Copyright (c) 2022 Max Harrison'
 __license__ = 'MIT'
 __status__ = 'Development'
-__credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
+__credits__ = ['Max Harrison', 'Callum Blumfield', 'Evelyn May Peacocke']
 
 
 import os
@@ -69,7 +69,7 @@ if os.name != 'nt':
     (especially the RPi one: (`apt` iirc)
 
     Btw, I was previously using `requests` to download the files from 
-    GitHub, then realised I can pkg them into the exe with pyinstaller
+    GitHub, then realised I can pkg them into the exe with `pyinstaller`
     
     # source: https://python.plainenglish.io/packaging-data-files-to-pyinstaller-binaries-6ed63aa20538
 
@@ -85,15 +85,15 @@ class license_agree(qt.QWizardPage):
     '''
     A `PyQt5.QtWidgets.QWizardPage` instance
 
-    Presents the license to the user for them to agree to
+    Presents an MIT license to the user for them to read through
     '''
 
     def __init__(self, parent=None) -> None:
         super(license_agree, self).__init__(parent)
 
-        licenseLayout = qt.QGridLayout()
-        titleLabel = qt.QLabel('End User License Agreement')
-        licenseText = qt.QLabel(
+        license_layout = qt.QGridLayout()
+        title_label = qt.QLabel('End User License Agreement')
+        license_text = qt.QLabel(
             '''
             MIT License
             
@@ -121,155 +121,238 @@ class license_agree(qt.QWizardPage):
             DEALINGS IN THE SOFTWARE.
             '''
         )
-        agreeCb = qt.QLabel('By proceeding, you are agreeing to this' \
+        agree_cb = qt.QLabel('By proceeding, you are agreeing to this' \
             ' license and its terms')
 
-        licenseBox = qt.QScrollArea()
-        licenseBox.setVerticalScrollBarPolicy(QtCore.ScrollBarAsNeeded)
-        licenseBox.setHorizontalScrollBarPolicy(QtCore.ScrollBarAsNeeded)
-        licenseBox.setWidgetResizable(True)
-        licenseBox.setWidget(licenseText)
+        license_box = qt.QScrollArea()
+        license_box.setVerticalScrollBarPolicy(QtCore.ScrollBarAsNeeded)
+        license_box.setHorizontalScrollBarPolicy(QtCore.ScrollBarAsNeeded)
+        license_box.setWidgetResizable(True)
+        license_box.setWidget(license_text)
 
-        licenseLayout.addWidget(titleLabel, 0, 0, 1, 2)
-        licenseLayout.addWidget(licenseBox, 1, 0, 2, 2)
-        licenseLayout.addWidget(qt.QLabel(''), 3, 0)
-        licenseLayout.addWidget(agreeCb, 4, 0, 1, 2)
+        license_layout.addWidget(title_label, 0, 0, 1, 2)
+        license_layout.addWidget(license_box, 1, 0, 2, 2)
+        license_layout.addWidget(qt.QLabel(''), 3, 0)
+        license_layout.addWidget(agree_cb, 4, 0, 1, 2)
 
-        self.setLayout(licenseLayout)
+        self.setLayout(license_layout)
 
 class user_config(qt.QWizardPage):
     '''
     A `PyQt5.QtWidgets.QWizardPage` instance
 
-    Holds checkboxes/input boxes to save config values
+    Holds checkboxes/input boxes to save config values into 
+    dict `install_configs`
     '''
 
     def __init__(self, parent=None) -> None:
         super(user_config, self).__init__(parent)
 
-        configLayout = qt.QGridLayout()
+        config_layout = qt.QGridLayout()
         shell = Dispatch('WScript.Shell')
 
         global install_configs; install_configs = {}
 
-        install_configs['programPath'] = os.path.expandvars('%ProgramFiles%')
-        install_configs['startPath'] = shell.SpecialFolders('Programs') #os.path.expandvars('%AppData%\Microsoft\Windows\Start Menu'))
-        install_configs['deskPath'] = shell.SpecialFolders('Desktop') #os.path.expanduser('~\Desktop'))
+        install_configs['program_path'] = os.path.expandvars('%ProgramFiles%')
+        install_configs['start_path'] = shell.SpecialFolders('Programs') 
+        # old: os.path.expandvars('%AppData%\Microsoft\Windows\Start Menu'))
+        install_configs['desk_path'] = shell.SpecialFolders('Desktop') 
+        # old: os.path.expanduser('~\Desktop'))
 
-        dirButton = qt.QPushButton('Install Path: ')
-        dirButton.clicked.connect(lambda: self.chooseDir(dirLabel, dirButton, 'programPath', 'Install Path: '))
-        dirLabel = qt.QLineEdit(install_configs['programPath']) #https://docs.python.org/3/library/os.path.html#os.path.expandvars
-        self.validateType(dirLabel, dirButton, 'programPath', 'Program Files Path: ')
-        dirLabel.textChanged.connect(lambda: self.validateType(dirLabel, dirButton, 'programPath', 'Install Path: '))
+        dir_button = qt.QPushButton('Install Path: ')
+        dir_button.clicked.connect(lambda: self.choose_dir(
+            dir_label, dir_button, 
+            'program_path', 'Install Path: '))
+        dir_label = qt.QLineEdit(install_configs['program_path']) 
+        # source: https://docs.python.org/3/library/os.path.html#os.path.expandvars
+        self.validate_type(
+            dir_label, dir_button, 
+            'program_path', 'Install Path: ')
+        dir_label.textChanged.connect(lambda: self.validate_type(
+            dir_label, dir_button,
+            'program_path', 'Install Path: '))
 
         cb1 = qt.QCheckBox('Add shortcut to Start Menu')
         cb1.setChecked(True)
-        cb1Button = qt.QPushButton('Start Menu Path: ')
-        cb1Button.clicked.connect(lambda: self.chooseDir(cb1Label, cb1Button, 'startPath', 'Start Menu Path: '))
-        cb1Label = qt.QLineEdit(install_configs['startPath'])
-        self.validateType(cb1Label, cb1Button, 'startPath', 'Start Menu Path: ')
-        cb1Label.textChanged.connect(lambda: self.validateType( cb1Label, cb1Button, 'startPath', 'Start Menu Path: '))
-        cb1.stateChanged.connect(lambda: self.saveCheckStatus(cb1, 'startShortcut'))
+        cb1_button = qt.QPushButton('Start Menu Path: ')
+        cb1_button.clicked.connect(lambda: self.choose_dir(
+            cb1_label, cb1_button, 
+            'start_path', 'Start Menu Path: '))
+        cb1_label = qt.QLineEdit(install_configs['start_path'])
+        self.validate_type(
+            cb1_label, cb1_button, 
+            'start_path', 'Start Menu Path: ')
+        cb1_label.textChanged.connect(lambda: self.validate_type(
+            cb1_label, cb1_button, 
+            'start_path', 'Start Menu Path: '))
+        cb1.stateChanged.connect(lambda: self.save_check_status(
+            cb1, 'start_shortcut'))
 
         cb2 = qt.QCheckBox('Add shortcut to Desktop')
         cb2.setChecked(False)
-        cb2Button = qt.QPushButton('Desktop Path: ')
-        cb2Button.clicked.connect(lambda: self.chooseDir(cb2Label, cb2Button, 'deskPath', 'Desktop Path: '))
-        cb2Label = qt.QLineEdit(install_configs['deskPath'])
-        self.validateType(cb2Label, cb2Button, 'deskPath', 'Desktop Path: ')
-        cb2Label.textChanged.connect(lambda: self.validateType(cb2Label, cb2Button, 'deskPath', 'Desktop Path: '))
-        cb2.stateChanged.connect(lambda: self.saveCheckStatus(cb1, 'startShortcut'))
+        cb2_button = qt.QPushButton('Desktop Path: ')
+        cb2_button.clicked.connect(lambda: self.choose_dir(
+            cb2_label, cb2_button, 
+            'desk_path', 'Desktop Path: '))
+        cb2_label = qt.QLineEdit(install_configs['desk_path'])
+        self.validate_type(
+            cb2_label, cb2_button, 
+            'desk_path', 'Desktop Path: ')
+        cb2_label.textChanged.connect(lambda: self.validate_type(
+            cb2_label, cb2_button, 
+            'desk_path', 'Desktop Path: '))
+        cb2.stateChanged.connect(lambda: self.save_check_status(
+            cb2, 'desk_shortcut'))
 
-        configLayout.addWidget(dirButton, 0, 0)
-        configLayout.addWidget(dirLabel, 0, 1)
+        config_layout.addWidget(dir_button, 0, 0)
+        config_layout.addWidget(dir_label, 0, 1)
 
-        configLayout.addWidget(qt.QLabel(''), 1, 0)
+        config_layout.addWidget(qt.QLabel(''), 1, 0)
 
-        configLayout.addWidget(cb1, 2, 0)
-        configLayout.addWidget(cb1Button, 3, 0)
-        configLayout.addWidget(cb1Label, 3, 1)
+        config_layout.addWidget(cb1, 2, 0)
+        config_layout.addWidget(cb1_button, 3, 0)
+        config_layout.addWidget(cb1_label, 3, 1)
 
-        configLayout.addWidget(qt.QLabel(''), 4, 0)
+        config_layout.addWidget(qt.QLabel(''), 4, 0)
 
-        configLayout.addWidget(cb2, 5, 0)
-        configLayout.addWidget(cb2Button, 6, 0)
-        configLayout.addWidget(cb2Label, 6, 1)
+        config_layout.addWidget(cb2, 5, 0)
+        config_layout.addWidget(cb2_button, 6, 0)
+        config_layout.addWidget(cb2_label, 6, 1)
 
-        self.setLayout(configLayout)
+        self.setLayout(config_layout)
 
-    def pathIsGood(self, path: str) -> str | None: return path if path and os.path.exists(path) and os.access(path, os.X_OK | os.W_OK) else None
+    def path_is_good(self, path: str) -> str | None: 
+        '''
+        Evaluates whether the given `path` is a useable path. Checks 
+        whether the variable is `True`, then if it `exists`, then if 
+        the script has Execute/Write access
 
-    def validateType(self, label, display, config, revert) -> bool: 
+        Returns `path` if it is valid, else will return `None`
+        '''
+
+        if (path and os.path.exists(path) 
+        and os.access(path, os.X_OK | os.W_OK)):
+            return path
+        else:
+            return None
+
+    def validate_type(
+        self, label: qt.QLineEdit, display: qt.QPushButton, 
+        config: str, revert: str) -> bool: 
+
+        '''
+        Checks the values from `cbx` and that the given paths in 
+        `label` are valid. Sets styles for `display` and `label` if 
+        invalid paths (`revert` is passed so that the function can 
+        reset the text in `display` if a new path is set later). Also 
+        sets the values for `config` in `install_configs` if valid
+        paths
+
+        Returns `True` if the past from `label` was set to `config`, 
+        returns `False` if it was invalid
+        '''
+
         global install_configs
 
         try:
-            install_configs['startShortcut'] = True if self.cb1.isChecked() else False
-            install_configs['deskShortcut'] = True if self.cb2.isChecked() else False
-        except NameError: pass #intelligent cod3
-        except AttributeError: pass #big bran m0ve
+            # note: program runs this sometimes when loading so we 
+            # note: ignore the errors
+            install_configs['start_shortcut'] = self.cb1.isChecked()
+            print('CheckBox `cb1` Toggled True')
+            install_configs['desk_shortcut'] = self.cb2.isChecked()
+            print('CheckBox `cb2` Toggled True')
+        except NameError: 
+            pass  # note: intelligent cod3
+        except AttributeError: 
+            pass  # note: big bran m0ve
 
         path = label.text()
-        path = self.pathIsGood(path)
-        if not path:
+        returned_path = self.path_is_good(path)
+
+        if not returned_path:  # note: invalid path
             display.setText(f'Invalid \'{config}\'')
 
             display.setStyleSheet('background-color : red')
-            #f = wizard.button(qt.QWizard.WizardButton.NextButton).font() ; f.setStrikeOut(True) ; wizard.button(qt.QWizard.WizardButton.NextButton).setFont(f)
             f = label.font() ; f.setStrikeOut(True) ; label.setFont(f)
 
             return False
-        else:
-            install_configs[config] = path
+        else:  # note: if path is fine
+            install_configs[config] =  returned_path
             display.setText(revert)
 
             display.setStyleSheet('background-color : lightgrey')
-            #f = wizard.button(qt.QWizard.WizardButton.NextButton).font() ; f.setStrikeOut(False) ; wizard.button(qt.QWizard.WizardButton.NextButton).setFont(f)
             f = label.font() ; f.setStrikeOut(False) ; label.setFont(f)
 
             return True        
 
-    def chooseDir(self, label, display, config, revert) -> None: 
-        path = qt.QFileDialog.getExistingDirectory('Select Dir')
-        if self.pathIsGood(path): 
-            label.setText(path) 
-            self.validateType(label, display, config, revert)
+    def choose_dir(
+        self, label: qt.QLineEdit, display: qt.QPushButton, 
+        config: str, revert: str) -> None:
 
-    def saveCheckStatus(self, cb: qt.QCheckBox, config) -> None:
-        global install_configs
-        install_configs[config] = True if cb.isChecked() else False
-        print(f'CheckBox \'{cb}\' Toggled')
+        '''
+        Starts a `qt.QFileDialog.getExistingDirectory` instance to 
+        choose a dir, then calls `validate_type()` with the passed
+        values. Basically just a wrapper for `validate_type()` with
+        the dir choosing
+        '''
+
+        path = qt.QFileDialog.getExistingDirectory('Select Dir')
+        if self.path_is_good(path): 
+            label.setText(path) 
+            self.validate_type(label, display, config, revert)
+        
 
 class install_ROSA(qt.QWizardPage): 
+    '''
+    A `PyQt5.QtWidgets.QWizardPage` instance
+
+    Elaborate loading screen and runs copy scripts to install program
+    '''
+
     def __init__(self, parent=None) -> None:
         super(install_ROSA, self).__init__(parent)
 
-        installLayout = qt.QGridLayout()
+        install_layout = qt.QGridLayout()
 
-        label = qt.QLabel() #https://stackoverflow.com/a/40294286/19860022
+        label = qt.QLabel()  # source: https://stackoverflow.com/a/40294286/19860022
         pixmap = QPixmap(os.path.join(file_base_path, './ico/hotpot-ai.png'))
         label.setPixmap(pixmap)
 
-        self.infoLabel = qt.QLabel(' ')
-        self.infoLabel.setWordWrap(True)
+        self.info_label = qt.QLabel(' ')
+        self.info_label.setWordWrap(True)
 
         #display text to right of imag
         self.bar = qt.QProgressBar()
 
-        installLayout.addWidget(label, 0, 0)
-        installLayout.addWidget(self.infoLabel, 0, 1)
-        installLayout.addWidget(self.bar, 1, 0, 1, 2)
+        install_layout.addWidget(label, 0, 0)
+        install_layout.addWidget(self.info_label, 0, 1)
+        install_layout.addWidget(self.bar, 1, 0, 1, 2)
 
-        self.setLayout(installLayout)
+        self.setLayout(install_layout)
 
         self.downloaded_files = {}
 
     def initializePage(self) -> None:
+        # note: this is camelCase b/c it is the name defined in 
+        # note: the `PyQt5` module so it needs to be the same
         print(install_configs)
 
-        fred = Thread(target=self.threadProcesses) #so can dwld whilst display imag
+        # note: so can dwld whilst display imag
+        fred = Thread(target=self.thread_processes) 
         fred.start()
 
-    def threadProcesses(self) -> None:
+    def thread_processes(self) -> None:
+        '''
+        Constructs file paths, copies files and creates shortcuts for 
+        said files
+
+        Copying is done by `ROSA-installer_uac.exe`, which should be 
+        embedded within this file
+
+        Shortcuts are handled by `create_shortcut.bat`, which should 
+        be embedded within this file
+        '''
+
         self.downloaded_files['bin'] = os.path.join(file_base_path, 'ROSA.exe')
         self.downloaded_files['adm'] = os.path.join(file_base_path, 'ROSA-installer_uac.exe')
         self.downloaded_files['bat'] = os.path.join(file_base_path, 'create_shortcut.bat')
@@ -282,48 +365,91 @@ class install_ROSA(qt.QWizardPage):
             pickle.dump(self.downloaded_files, file)
 
         print(subprocess.run(
-            [f'"{self.downloaded_files["adm"]}"', f'"{os.path.join(file_base_path, "install_configs.pickle")}"', f'"{os.path.join(file_base_path, "downloaded_files.pickle")}"'], 
+            [
+                f'"{self.downloaded_files["adm"]}"', 
+                f'"{os.path.join(file_base_path, "install_configs.pickle")}"', 
+                f'"{os.path.join(file_base_path, "downloaded_files.pickle")}"'
+            ], 
             shell=True, check=True, 
             capture_output=True, text=True
         ))
 
-        self.make_shortcut(os.path.join(install_configs['programPath'], 'ROSA', os.path.basename(self.downloaded_files['bin'])), os.path.join(install_configs['startPath'], 'ROSA'))
-        self.make_shortcut(os.path.join(install_configs['programPath'], 'ROSA', os.path.basename(self.downloaded_files['readme'])), os.path.join(install_configs['startPath'], 'ROSA'))
-        self.make_shortcut(os.path.join(install_configs['programPath'], 'ROSA', os.path.basename(self.downloaded_files['bin'])), install_configs['deskPath'])
+        self.make_shortcut(
+            os.path.join(
+                install_configs['program_path'], 
+                'ROSA', 
+                os.path.basename(self.downloaded_files['bin'])
+            ), 
+            os.path.join(
+                install_configs['start_path'], 
+                'ROSA'  # note: start menu folder
+            )
+        )
+        self.make_shortcut(
+            os.path.join(
+                install_configs['program_path'], 
+                'ROSA', 
+                os.path.basename(self.downloaded_files['readme'])
+            ), 
+            os.path.join(
+                install_configs['start_path'], 
+                'ROSA'  # note: start menu folder
+            )
+        )
+        self.make_shortcut(
+            os.path.join(
+                install_configs['program_path'], 
+                'ROSA', 
+                os.path.basename(self.downloaded_files['bin'])
+            ), 
+            install_configs['desk_path']  # note: no folder in desktop
+        )
 
         print('install complete!')
-        self.infoLabel.setText('install complete!') 
+        self.info_label.setText('install complete!') 
 
     def make_shortcut(self, source, dest_dir, dest_name=None) -> None:
         '''
         Make shortcut of `source` path to file in `dest_dir` target folder
         If `dest_name` is None, will use `source`'s filename
+
+        Basically just a wrapper for `create_shortcut.bat`
         '''
 
-        # process user input
+        # note: process user input
         if dest_name is None:
             dest_name = os.path.basename(source)
         dest_path = os.path.join(dest_dir, Path(dest_name).stem) + '.lnk'
 
         if not os.path.exists(dest_dir):
             print(f'creating dirs "{dest_dir}"')
-            self.infoLabel.setText(f'creating dirs "{dest_dir}"')
+            self.info_label.setText(f'creating dirs "{dest_dir}"')
 
             os.makedirs(dest_dir, exist_ok=True)
 
         print(f'creating shortcut at "{dest_path}"')
-        self.infoLabel.setText(f'creating shortcut at "{dest_path}"')
+        self.info_label.setText(f'creating shortcut at "{dest_path}"')
 
-        os.system(f'{self.downloaded_files["bat"]} "{source}" "{dest_path}" "{self.downloaded_files["ico"]}" "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you"')
-        
-        print(f'{source}\n-->\n{dest_path}') # print status
-        self.infoLabel.setText(f'{source}\n-->\n{dest_path}')
+        print(subprocess.run([
+            self.downloaded_files["bat"], 
+            source, 
+            dest_path, 
+            self.downloaded_files["ico"], 
+            '"ROBOTICALLY OBNOXIOUS SERVING ASSISTANT -' \
+                'An emotional smart assistant that doesn\'t listen to you"'
+        ]))
 
         print(f'created shortcut at "{dest_path}"')
-        self.infoLabel.setText(f'created shortcut at "{dest_path}"')
+        self.info_label.setText(f'created shortcut at "{dest_path}"')
 
 
 class main(qt.QWizard):
+    '''
+    A `PyQt5.QtWidgets.QWizard` instance
+
+    Inits the other pages and the Qt application as a whole
+    '''
+
     def __init__(self, parent=None) -> None:
         super(main, self).__init__(parent)
 
