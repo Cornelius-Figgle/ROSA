@@ -144,7 +144,16 @@ if __name__ == '__main__':
         close()
 
     print('starting UAC script')
-    try: 
+    try:  # note: load from cli params
         main(sys.argv[1], sys.argv[2])
-    except IndexError:
-        main(os.path.join(os.path.dirname(sys.executable), 'install_configs.pickle'), os.path.join(os.path.dirname(sys.executable), 'download_files.pickle'))
+    except IndexError:  # note: fallback for files in cur dir
+        main(
+            os.path.join(
+                os.path.dirname(sys.executable), 
+                'install_configs.pickle'
+            ), 
+            os.path.join(
+                os.path.dirname(sys.executable), 
+                'downloaded_files.pickle'
+            )
+        )
