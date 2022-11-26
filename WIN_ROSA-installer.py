@@ -450,14 +450,22 @@ class install_ROSA(qt.QWizardPage):
         print(f'creating shortcut at "{dest_path}"')
         self.info_label.setText(f'creating shortcut at "{dest_path}"')
 
-        print(subprocess.run([
-            self.downloaded_files["bat"], 
-            source, 
-            dest_path, 
-            self.downloaded_files["ico"], 
-            '"ROBOTICALLY OBNOXIOUS SERVING ASSISTANT -' \
-                'An emotional smart assistant that doesn\'t listen to you"'
-        ]))
+        try:
+            process = subprocess.run(
+                [
+                    self.downloaded_files["bat"], 
+                    source, 
+                    dest_path, 
+                    self.downloaded_files["ico"], 
+                    '"ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you"'
+                ], 
+                shell=True, check=True, text=True,
+                stderr=subprocess.PIPE, stdout=subprocess.PIPE
+            )
+
+            print(process)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode, e.stderr, e.output)
 
         print(f'created shortcut at "{dest_path}"')
         self.info_label.setText(f'created shortcut at "{dest_path}"')
