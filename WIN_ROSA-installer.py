@@ -379,15 +379,21 @@ class install_ROSA(qt.QWizardPage):
         with open(os.path.join(file_base_path, 'downloaded_files.pickle'), 'wb') as file:
             pickle.dump(self.downloaded_files, file)
 
-        print(subprocess.run(
-            [
-                f'"{self.downloaded_files["adm"]}"', 
-                f'"{os.path.join(file_base_path, "install_configs.pickle")}"', 
-                f'"{os.path.join(file_base_path, "downloaded_files.pickle")}"'
-            ], 
-            shell=True, check=True, 
-            capture_output=True, text=True
-        ))
+        try:
+            process = subprocess.run(
+                [
+                    f'{self.downloaded_files["adm"]}', 
+                    f'{os.path.join(file_base_path, "install_configs.pickle")}', 
+                    f'{os.path.join(file_base_path, "downloaded_files.pickle")}'
+                ], 
+                shell=True, check=True, 
+                capture_output=True, text=True,
+                stderr=subprocess.PIPE, stdout=subprocess.PIPE
+            )
+
+            print(process)
+        except subprocess.CalledProcessError as e:
+            print(e.returncode, e.stderr, e.output)
 
         self.make_shortcut(
             os.path.join(
