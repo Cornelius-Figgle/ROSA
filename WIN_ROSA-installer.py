@@ -386,8 +386,7 @@ class install_ROSA(qt.QWizardPage):
                     f'{os.path.join(file_base_path, "install_configs.pickle")}', 
                     f'{os.path.join(file_base_path, "downloaded_files.pickle")}'
                 ], 
-                shell=True, check=True, 
-                capture_output=True, text=True,
+                shell=True, check=True, text=True,
                 stderr=subprocess.PIPE, stdout=subprocess.PIPE
             )
 
