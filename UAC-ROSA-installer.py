@@ -145,4 +145,7 @@ if __name__ == '__main__':
         close()
 
     print('starting UAC script')
-    main(sys.argv[1], sys.argv[2])
+    try: 
+        main(sys.argv[1], sys.argv[2])
+    except IndexError:
+        main(os.path.join(file_base_path, 'install_configs.pickle'), os.path.join(file_base_path, 'download_files.pickle'))
