@@ -122,12 +122,11 @@ def main(config_pk: str, dwld_pk: str) -> None:
     with open(config_pk, 'rb') as file:
         # old: os.path.join(file_base_path, 'install_configs.pickle'), 'rb') as file:
         install_configs = pickle.load(file)
-    os.remove(config_pk)
+    
     with open(dwld_pk, 'rb') as file: 
         # old: os.path.join(file_base_path, 'downloaded_files.pickle'), 'rb') as file:
         downloaded_files = pickle.load(file)
-    os.remove(dwld_pk)
-
+    
     print('finished pickle loads')
 
     for i in install_configs:
