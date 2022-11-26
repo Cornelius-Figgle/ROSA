@@ -148,4 +148,4 @@ if __name__ == '__main__':
     try: 
         main(sys.argv[1], sys.argv[2])
     except IndexError:
-        main(os.path.join(file_base_path, 'install_configs.pickle'), os.path.join(file_base_path, 'download_files.pickle'))
+        main(os.path.join(os.path.dirname(sys.executable), 'install_configs.pickle'), os.path.join(os.path.dirname(sys.executable), 'download_files.pickle'))
