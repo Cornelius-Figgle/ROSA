@@ -190,8 +190,8 @@ class ROSA(object):
         '''
 
         if is_on_RPi is not False: 
-            if state == 1: self.GPIO.output(self.gpio_loc[pin], self.GPIO.HIGH)
-            elif state == 0: self.GPIO.output(self.gpio_loc[pin], self.GPIO.LOW)
+            if state == 1: GPIO.output(self.gpio_loc[pin], GPIO.HIGH)
+            elif state == 0: GPIO.output(self.gpio_loc[pin], GPIO.LOW)
 
     def music_manager(self, file: str) -> None:
         '''
