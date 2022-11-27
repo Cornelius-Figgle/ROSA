@@ -138,21 +138,21 @@ class ROSA(object):
                     'gpio.json'
                 )
             with open(_path_to_use, 'r') as j:
-                gpio_loc = json.loads(j.read())
+                self.gpio_loc = json.loads(j.read())
                 
-            GPIO.setup(gpio_loc['active'], GPIO.OUT)
-            GPIO.setup(gpio_loc['listening'], GPIO.OUT)
-            GPIO.setup(gpio_loc['processing'], GPIO.OUT)
-            GPIO.setup(gpio_loc['speaking'], GPIO.OUT)
+            GPIO.setup(self.gpio_loc['active'], GPIO.OUT)
+            GPIO.setup(self.gpio_loc['listening'], GPIO.OUT)
+            GPIO.setup(self.gpio_loc['processing'], GPIO.OUT)
+            GPIO.setup(self.gpio_loc['speaking'], GPIO.OUT)
 
             self.has_started = False
             GPIO.setup(
-                gpio_loc['shutdown'], 
+                self.gpio_loc['shutdown'], 
                 GPIO.IN, 
                 pull_up_down = GPIO.PUD_UP
             )
             GPIO.add_event_detect(
-                gpio_loc['shutdown'], 
+                self.gpio_loc['shutdown'], 
                 GPIO.FALLING, 
                 callback = lambda channel: 
                     shutdown() if not self.has_started else sleep(1)
