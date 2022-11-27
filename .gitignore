@@ -13,5 +13,6 @@ soundcloud.tmp
 *Whatsapp*
 *__pycache__*
 demo/
+*.ogg
 
 /bin/
