@@ -10,13 +10,13 @@ HARRISON, AS OF 2022
 
 It may work separately and independently of the main repo, it may not
 
-- Code (c) Max Harrison 2022
-- Ideas (c) Callum Blumfield 2022
-- Ideas (c) Max Harrison 2022
-- Vocals (c) Evie Peacock 2022
+ - Code (c) Max Harrison 2022
+ - Ideas (c) Callum Blumfield 2022
+ - Ideas (c) Max Harrison 2022
+ - Vocals (c) Evie Peacock 2022
 
 Thanks also to Alex, Ashe & Jake for support throughout (sorry for the
-spam). Extra thanks to all the internet peoples that helped with this
+spam). also thanks to all the internet peoples that helped with this
 as well 
 '''
 

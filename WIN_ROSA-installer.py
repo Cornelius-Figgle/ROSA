@@ -10,13 +10,13 @@ HARRISON, AS OF 2022
 
 It may work separately and independently of the main repo, it may not
 
-- Code (c) Max Harrison 2022
-- Ideas (c) Callum Blumfield 2022
-- Ideas (c) Max Harrison 2022
-- Vocals (c) Evie Peacock 2022
+ - Code (c) Max Harrison 2022
+ - Ideas (c) Callum Blumfield 2022
+ - Ideas (c) Max Harrison 2022
+ - Vocals (c) Evie Peacock 2022
 
 Thanks also to Alex, Ashe & Jake for support throughout (sorry for the
-spam). Extra thanks to all the internet peoples that helped with this
+spam). also thanks to all the internet peoples that helped with this
 as well 
 '''
 
@@ -364,15 +364,15 @@ class install_ROSA(qt.QWizardPage):
         Copying is done by `ROSA-installer_uac.exe`, which should be 
         embedded within this file
 
-        Shortcuts are handled by `create_shortcut.bat`, which should 
+        Shortcuts are handled by `create_shortcut.vbs`, which should 
         be embedded within this file
         '''
 
         self.downloaded_files['bin'] = os.path.join(file_base_path, 'ROSA.exe')
         self.downloaded_files['adm'] = os.path.join(file_base_path, 'ROSA-installer_uac.exe')
-        self.downloaded_files['bat'] = os.path.join(file_base_path, 'create_shortcut.bat')
+        self.downloaded_files['vbs'] = os.path.join(file_base_path, 'create_shortcut.vbs')
         self.downloaded_files['readme'] = os.path.join(file_base_path, 'README.md')
-        self.downloaded_files['ico'] = os.path.join(file_base_path, 'ico/hotpot-ai.ico')
+        self.downloaded_files['ico'] = os.path.join(file_base_path, 'ico', 'hotpot-ai.ico')
 
         with open(os.path.join(file_base_path, 'install_configs.pickle'), 'wb') as file:
             pickle.dump(install_configs, file)
@@ -395,50 +395,49 @@ class install_ROSA(qt.QWizardPage):
             print(e.returncode, e.stderr, e.output)
 
         self.make_shortcut(
-            os.path.join(
+            source = os.path.join(
                 install_configs['program_path'], 
                 'ROSA', 
                 os.path.basename(self.downloaded_files['bin'])
             ), 
-            os.path.join(
+            dest_dir = os.path.join(
                 install_configs['start_path'], 
                 'ROSA'  # note: start menu folder
             )
         )
         self.make_shortcut(
-            os.path.join(
+            source = os.path.join(
                 install_configs['program_path'], 
                 'ROSA', 
                 os.path.basename(self.downloaded_files['readme'])
             ), 
-            os.path.join(
+            dest_dir = os.path.join(
                 install_configs['start_path'], 
                 'ROSA'  # note: start menu folder
             )
         )
         self.make_shortcut(
-            os.path.join(
+            source = os.path.join(
                 install_configs['program_path'], 
                 'ROSA', 
                 os.path.basename(self.downloaded_files['bin'])
             ), 
-            install_configs['desk_path']  # note: no folder in desktop
+            dest_dir = install_configs['desk_path']  # note: no folder in desktop
         )
 
         print('install complete!')
         self.info_label.setText('install complete!') 
 
-    def make_shortcut(self, source, dest_dir, dest_name=None) -> None:
+    def make_shortcut(self, source, dest_dir) -> None:
         '''
         Make shortcut of `source` path to file in `dest_dir` target folder
         If `dest_name` is None, will use `source`'s filename
 
-        Basically just a wrapper for `create_shortcut.bat`
+        Basically just a wrapper for `create_shortcut.vbs`
         '''
 
         # note: process user input
-        if dest_name is None:
-            dest_name = os.path.basename(source)
+        dest_name = os.path.basename(source)
         dest_path = os.path.join(dest_dir, Path(dest_name).stem) + '.lnk'
 
         if not os.path.exists(dest_dir):
@@ -453,11 +452,11 @@ class install_ROSA(qt.QWizardPage):
         try:
             process = subprocess.run(
                 [
-                    self.downloaded_files["bat"], 
-                    source, 
-                    dest_path, 
-                    self.downloaded_files["ico"], 
-                    '"ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you"'
+                    self.downloaded_files["vbs"],
+                    source,
+                    dest_path,
+                    self.downloaded_files["ico"],
+                    'ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you'
                 ], 
                 shell=True, check=True, text=True,
                 stderr=subprocess.PIPE, stdout=subprocess.PIPE
