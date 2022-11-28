@@ -316,7 +316,6 @@ class user_config(qt.QWizardPage):
             label.setText(path) 
             self.validate_type(label, display, config, revert)
         
-
 class install_ROSA(qt.QWizardPage): 
     '''
     A `PyQt5.QtWidgets.QWizardPage` instance
@@ -338,12 +337,16 @@ class install_ROSA(qt.QWizardPage):
 
         #display text to right of imag
         self.bar = qt.QProgressBar()
+        self.step = 5
+        self.bar.setValue(0)
 
         install_layout.addWidget(label, 0, 0)
         install_layout.addWidget(self.info_label, 0, 1)
         install_layout.addWidget(self.bar, 1, 0, 1, 2)
 
         self.setLayout(install_layout)
+
+        self.handle_progress('qt layout set')
 
         self.downloaded_files = {}
 
@@ -355,6 +358,8 @@ class install_ROSA(qt.QWizardPage):
         # note: so can dwld whilst display imag
         fred = Thread(target=self.thread_processes) 
         fred.start()
+        
+        self.handle_progress('fred started')
 
     def thread_processes(self) -> None:
         '''
@@ -373,11 +378,17 @@ class install_ROSA(qt.QWizardPage):
         self.downloaded_files['vbs'] = os.path.join(file_base_path, 'create_shortcut.vbs')
         self.downloaded_files['readme'] = os.path.join(file_base_path, 'README.md')
         self.downloaded_files['ico'] = os.path.join(file_base_path, 'ico', 'hotpot-ai.ico')
+        
+        self.handle_progress('paths loaded')
 
         with open(os.path.join(file_base_path, 'install_configs.pickle'), 'wb') as file:
             pickle.dump(install_configs, file)
+            self.handle_progress('install_configs.pickle created')
         with open(os.path.join(file_base_path, 'downloaded_files.pickle'), 'wb') as file:
             pickle.dump(self.downloaded_files, file)
+            self.handle_progress('downloaded_files.pickle created')
+
+        self.handle_progress('started UAC script')
 
         try:
             process = subprocess.run(
@@ -393,6 +404,9 @@ class install_ROSA(qt.QWizardPage):
             print(process)
         except subprocess.CalledProcessError as e:
             print(e.returncode, e.stderr, e.output)
+
+        self.handle_progress('UAC script finished', increase=self.step*3)
+            # note: to fill out gaps and show this is bigger process
 
         self.make_shortcut(
             source = os.path.join(
@@ -427,6 +441,24 @@ class install_ROSA(qt.QWizardPage):
 
         print('install complete!')
         self.info_label.setText('install complete!') 
+        self.bar.setValue(self.bar.value() + self.step)
+
+    def handle_progress(self, text: str, increase: int = None) -> None:
+        '''
+        Handles the progress bar and info labels, in the main thread. 
+        Sets `self.bar` to be `self.bar.value() + self.step` (or 
+        this plus `increase` if provided). Sets `info_label` to `text`
+        and prints this to the console for debugging 
+        '''
+
+        if increase is None:
+            increase = self.bar.value() + self.step
+        else:
+            increase += self.bar.value() + self.step
+
+        print(text)
+        self.info_label.setText(text)
+        self.bar.setValue(increase)
 
     def make_shortcut(self, source, dest_dir) -> None:
         '''
@@ -440,14 +472,12 @@ class install_ROSA(qt.QWizardPage):
         dest_name = os.path.basename(source)
         dest_path = os.path.join(dest_dir, Path(dest_name).stem) + '.lnk'
 
-        if not os.path.exists(dest_dir):
-            print(f'creating dirs "{dest_dir}"')
-            self.info_label.setText(f'creating dirs "{dest_dir}"')
+        self.handle_progress(f'checking dirs at \"{dest_path}\"')
 
+        if not os.path.exists(dest_dir):
             os.makedirs(dest_dir, exist_ok=True)
 
-        print(f'creating shortcut at "{dest_path}"')
-        self.info_label.setText(f'creating shortcut at "{dest_path}"')
+        self.handle_progress(f'started shortcut script for \"{dest_path}\"')
 
         try:
             process = subprocess.run(
@@ -466,8 +496,7 @@ class install_ROSA(qt.QWizardPage):
         except subprocess.CalledProcessError as e:
             print(e.returncode, e.stderr, e.output)
 
-        print(f'created shortcut at "{dest_path}"')
-        self.info_label.setText(f'created shortcut at "{dest_path}"')
+        self.handle_progress(f'shortcut script finished for "{dest_path}"')
 
 
 class main(qt.QWizard):

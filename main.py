@@ -366,9 +366,9 @@ def main() -> None:
         while True:
             try: 
                 speech = obj.background_listening()
-                if speech: 
+                if speech:  # note: if not error
                     typeq = obj.determine_response(speech)
-                    if typeq: 
+                    if typeq:  # note: if not error
                         obj.respond(typeq, speech)
             except dnf:
                 ...
