@@ -39,8 +39,8 @@ from pathlib import Path
 from threading import Thread
 
 import PyQt5.QtWidgets as qt
-from PyQt5.QtCore import Qt as QtCore
-from PyQt5.QtGui import QPixmap
+from PyQt5 import QtCore
+from PyQt5.QtGui import QPixmap, QFont
 from win32com.client import Dispatch
 
 # source: https://stackoverflow.com/a/11422350/19860022
@@ -125,8 +125,8 @@ class license_agree(qt.QWizardPage):
             ' license and its terms')
 
         license_box = qt.QScrollArea()
-        license_box.setVerticalScrollBarPolicy(QtCore.ScrollBarAsNeeded)
-        license_box.setHorizontalScrollBarPolicy(QtCore.ScrollBarAsNeeded)
+        license_box.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        license_box.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         license_box.setWidgetResizable(True)
         license_box.setWidget(license_text)
 
@@ -336,17 +336,16 @@ class install_ROSA(qt.QWizardPage):
         self.info_label.setWordWrap(True)
 
         #display text to right of imag
-        self.bar = qt.QProgressBar()
-        self.step = 5
-        self.bar.setValue(0)
+        self.bar = qt.QLabel('|                 | 0/17')
+        self.bar_prog = 0
 
-        install_layout.addWidget(label, 0, 0)
+        install_layout.addWidget(label, 0, 0, 2, 1)
         install_layout.addWidget(self.info_label, 0, 1)
-        install_layout.addWidget(self.bar, 1, 0, 1, 2)
+        install_layout.addWidget(self.bar, 1, 1)
 
         self.setLayout(install_layout)
 
-        self.handle_progress('qt layout set')
+        self.display_msg('qt layout set')
 
         self.downloaded_files = {}
 
@@ -356,10 +355,13 @@ class install_ROSA(qt.QWizardPage):
         print(install_configs)
 
         # note: so can dwld whilst display imag
-        fred = Thread(target=self.thread_processes) 
+        fred = Thread(
+            target=self.thread_processes,
+            name='fred (ROSA-installer)'
+        )
         fred.start()
         
-        self.handle_progress('fred started')
+        self.display_msg('fred started')
 
     def thread_processes(self) -> None:
         '''
@@ -379,16 +381,16 @@ class install_ROSA(qt.QWizardPage):
         self.downloaded_files['readme'] = os.path.join(file_base_path, 'README.md')
         self.downloaded_files['ico'] = os.path.join(file_base_path, 'ico', 'hotpot-ai.ico')
         
-        self.handle_progress('paths loaded')
+        self.display_msg('paths loaded')
 
         with open(os.path.join(file_base_path, 'install_configs.pickle'), 'wb') as file:
             pickle.dump(install_configs, file)
-            self.handle_progress('install_configs.pickle created')
+            self.display_msg('install_configs.pickle created')
         with open(os.path.join(file_base_path, 'downloaded_files.pickle'), 'wb') as file:
             pickle.dump(self.downloaded_files, file)
-            self.handle_progress('downloaded_files.pickle created')
+            self.display_msg('downloaded_files.pickle created')
 
-        self.handle_progress('started UAC script')
+        self.display_msg('started UAC script')
 
         try:
             process = subprocess.run(
@@ -405,8 +407,7 @@ class install_ROSA(qt.QWizardPage):
         except subprocess.CalledProcessError as e:
             print(e.returncode, e.stderr, e.output)
 
-        self.handle_progress('UAC script finished', increase=self.step*3)
-            # note: to fill out gaps and show this is bigger process
+        self.display_msg('UAC script finished')
 
         self.make_shortcut(
             source = os.path.join(
@@ -439,26 +440,29 @@ class install_ROSA(qt.QWizardPage):
             dest_dir = install_configs['desk_path']  # note: no folder in desktop
         )
 
-        print('install complete!')
-        self.info_label.setText('install complete!') 
-        self.bar.setValue(self.bar.value() + self.step)
-
-    def handle_progress(self, text: str, increase: int = None) -> None:
+        self.display_msg('install complete!')
+    
+    def display_msg(self, text: str) -> None:
         '''
-        Handles the progress bar and info labels, in the main thread. 
-        Sets `self.bar` to be `self.bar.value() + self.step` (or 
-        this plus `increase` if provided). Sets `info_label` to `text`
-        and prints this to the console for debugging 
+        Handles the info labels - Sets `info_label` to `text` and 
+        prints this to the console for debugging 
         '''
-
-        if increase is None:
-            increase = self.bar.value() + self.step
-        else:
-            increase += self.bar.value() + self.step
 
         print(text)
         self.info_label.setText(text)
-        self.bar.setValue(increase)
+
+        self.bar_prog += 1
+        self.bar.setText(
+            f'[ '
+            + "#"*self.bar_prog
+            + "--"*(17-self.bar_prog) 
+            + ' ] '
+            + str(self.bar_prog)
+            + ' / 17'
+        )
+        # tests: "[ ######----------- ] 6 / 17"
+        # tests: "[ ################# ] 17 / 17"
+        # note: prints 2 hyphens per hash because sizing
 
     def make_shortcut(self, source, dest_dir) -> None:
         '''
@@ -472,12 +476,12 @@ class install_ROSA(qt.QWizardPage):
         dest_name = os.path.basename(source)
         dest_path = os.path.join(dest_dir, Path(dest_name).stem) + '.lnk'
 
-        self.handle_progress(f'checking dirs at \"{dest_path}\"')
+        self.display_msg(f'checking dirs at \"{dest_path}\"')
 
         if not os.path.exists(dest_dir):
             os.makedirs(dest_dir, exist_ok=True)
 
-        self.handle_progress(f'started shortcut script for \"{dest_path}\"')
+        self.display_msg(f'started shortcut script for \"{dest_path}\"')
 
         try:
             process = subprocess.run(
@@ -496,7 +500,7 @@ class install_ROSA(qt.QWizardPage):
         except subprocess.CalledProcessError as e:
             print(e.returncode, e.stderr, e.output)
 
-        self.handle_progress(f'shortcut script finished for "{dest_path}"')
+        self.display_msg(f'shortcut script finished for "{dest_path}"')
 
 
 class main(qt.QWizard):
