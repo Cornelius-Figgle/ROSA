@@ -14,5 +14,6 @@ soundcloud.tmp
 *__pycache__*
 demo/
 *.ogg
-
 /bin/
+
+!.github/*
