@@ -14,4 +14,4 @@ Use this section to tell people about which versions of your project are current
 
 ## Reporting a Vulnerability
 
-Flag an issue on GitHub or [email me](max@fullimage.net) to report vunerabilities
+Flag an issue on GitHub or [email me](max@fullimage.net) to report vulnerabilities
