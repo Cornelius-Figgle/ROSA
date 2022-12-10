@@ -33,12 +33,13 @@ __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 import json
 import os
 import sys
+from contextlib import contextmanager
+from tempfile import gettempdir
 from time import sleep
 from typing import NoReturn
 
 import pygame.mixer as mixer
 import speech_recognition as sr
-import wikipedia as wiki
 
 try: 
     import RPi.GPIO as GPIO  # type: ignore
@@ -55,6 +56,24 @@ if hasattr(sys, '_MEIPASS'):
 else:
     file_base_path = os.path.dirname(__file__)
 
+@contextmanager
+def no_stdout() -> None:
+    '''
+    Silences the `sys.stdout` of a function call 
+    
+    [Credit here](https://stackoverflow.com/a/2829036/19860022)
+
+    Example:
+    ```
+    with no_stdout():
+        do_something_noisily()
+    ```
+    '''
+
+    save_stdout = sys.stdout
+    sys.stdout = open(os.path.join(gettempdir(), 'trash'), 'w')
+    yield
+    sys.stdout = save_stdout
 
 class dnf(Exception):
     '''
@@ -213,7 +232,7 @@ class ROSA(object):
         Recognition
         '''
 
-        # obtain audio from the microphone
+        # NOTE: obtain audio from the microphone
         r = sr.Recognizer()
         with sr.Microphone() as source:
             print('\n: ')
@@ -226,7 +245,10 @@ class ROSA(object):
         self.gpio_manager('processing', 1)
 
         try:
-            speech = str(r.recognize_google(audio)).lower() #converting to str for syntax highlighting
+            with no_stdout():
+                speech: str = r.recognize_google(audio, pfilter=1)
+                speech = speech.lower()
+
             print(f'> {speech}')
             for phrase in self.activations:
                 if phrase in speech:
@@ -236,16 +258,22 @@ class ROSA(object):
 
             return speech
         except sr.UnknownValueError:
-            print('\tGoogle Speech Recognition could not understand audio')
-            print('\tThis is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music in the background')
-            print('\tNot logged as an error by system')
             self.gpio_manager('processing', 0)
 
-            raise dnf #did not complete but exited fine
+            print('\tGoogle Speech Recognition could not understand audio')
+            print('\tThis is likely because you weren\'t talking to ROSA and' \
+                'she tried to listen to speaking/music in the background')
+            print('\tNot logged as an error by system')
+
+            raise dnf  # NOTE: did not complete but exited fine
         except sr.RequestError as e:
             self.gpio_manager('processing', 0)
-            print(f'\tCould not request results from Google Speech Recognition service; Error Context: \'{e}\'')
-            print('\tIf the Error Context on the above line is blank, that would be because the `speech_recognition` module\'s error handling classes just returns `pass`, ie they ignore all the errors lol')
+
+            print(f'\tCould not request results from Google Speech' \
+                'Recognition service; Error Context: \'{e}\'')
+            print('\tIf the Error Context on the above line is blank, that' \
+            'would be because the `speech_recognition` module\'s error handling' \
+            'classes just returns `pass`, ie they ignore all the errors lol')
             print('\tOh well you get what you put in I suppose')
 
             self.gpio_manager('speaking', 1)
@@ -316,15 +344,6 @@ class ROSA(object):
                 self.prev_responses['wikiq'] += 1
             else:
                 self.prev_responses['wikiq'] = 0
-
-                try: 
-                    print(f'\t{wiki.summary(query)}')
-                except wiki.DisambiguationError as e: 
-                    try: 
-                        print(f'\t{wiki.summary(wiki.suggest(query))}')
-                    except wiki.DisambiguationError as e: 
-                        ... #error logginf
-                        raise e
         elif typeq == 'homeq':
             print(self.responses['homeq'][self.prev_responses['homeq']])
             self.music_manager(f'responses/homeq/homeq_{self.prev_responses["homeq"]}.mp3')
@@ -373,8 +392,6 @@ def main() -> NoReturn:
                         obj.respond(typeq, speech)
             except dnf:
                 ...
-            except (sr.RequestError, wiki.DisambiguationError):
-                pass #has already been handled so we gonna ignore them
     except KeyboardInterrupt:
         if is_on_RPi: GPIO.cleanup()
         sys.exit(0)
