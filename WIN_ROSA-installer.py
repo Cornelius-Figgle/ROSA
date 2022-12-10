@@ -1,4 +1,4 @@
-# pyinstaller --distpath "t:\projects\rosa\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_gui --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --add-data "T:\projects\ROSA\bin\bin;." --add-data "T:\projects\ROSA\ico;ico" --hidden-import pyi_splash --splash "T:\projects\ROSA\ico\hotpot-ai.png" -i "T:\projects\ROSA\ico\hotpot-ai.ico" "T:\projects\ROSA\WIN_ROSA-installer.py"
+# pyinstaller --distpath "t:\projects\rosa\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_gui --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --add-data "T:\projects\ROSA\bin\bin;." --add-data "T:\projects\ROSA\docs\ico;ico" --hidden-import pyi_splash --splash "T:\projects\ROSA\docs\ico\hotpot-ai.png" -i "T:\projects\ROSA\docs\ico\hotpot-ai.ico" "T:\projects\ROSA\WIN_ROSA-installer.py"
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
@@ -329,7 +329,7 @@ class install_ROSA(qt.QWizardPage):
         install_layout = qt.QGridLayout()
 
         label = qt.QLabel()  # source: https://stackoverflow.com/a/40294286/19860022
-        pixmap = QPixmap(os.path.join(file_base_path, './ico/hotpot-ai.png'))
+        pixmap = QPixmap(os.path.join(file_base_path, './docs/ico/hotpot-ai.png'))
         label.setPixmap(pixmap)
 
         self.info_label = qt.QLabel(' ')

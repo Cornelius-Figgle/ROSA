@@ -1,7 +1,7 @@
 
 # ROSA
 
-[<img src="./ico/rick_meme.jpg" width="300" align="right"/>](./ico/README-2.jpg)
+[<img src="./docs/ico/rick_meme.jpg" width="300" align="right"/>](./docs/ico/README-2.jpg)
 
 ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 

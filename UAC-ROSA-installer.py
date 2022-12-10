@@ -1,4 +1,4 @@
-# pyinstaller --distpath "t:\projects\rosa\bin\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_uac --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --uac-admin --hidden-import pyi_splash --splash "T:\projects\ROSA\ico\hotpot-ai.png" -i "T:\projects\ROSA\ico\hotpot-ai.ico" "T:\projects\ROSA\UAC-ROSA-installer.py"
+# pyinstaller --distpath "t:\projects\rosa\bin\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_uac --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --uac-admin --hidden-import pyi_splash --splash "T:\projects\ROSA\docs\ico\hotpot-ai.png" -i "T:\projects\ROSA\docs\ico\hotpot-ai.ico" "T:\projects\ROSA\UAC-ROSA-installer.py"
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
