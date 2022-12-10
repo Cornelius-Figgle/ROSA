@@ -26,27 +26,17 @@ git clone https://github.com/Cornelius-Figgle/ROSA.git
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python)
 
 ```shell
-pip install pygame PyAudio SpeechRecognition 
-```
-
-I think you may have to download PyAudio externally and then pip-install the `whl` file. First, download the relevant file from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio) and copy the name of the saved file. Then run the following command, replacing the file path and name with your copy: (see [here](https://stackoverflow.com/a/61050118/19860022) for more details)
-
-```shell
-pip install "D:\full\path\to\file\PyAudio-0.2.11-cp311-cp311-win_amd64.whl"
+pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio
 ```
 
 It is recommended that these are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
 ### Linux Only
 
-On Linux, PyAudio should be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
+On Linux, PyAudio may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
 
 ```bash
-sudo apt install python-pyaudio flac 
-```
-
-```bash
-sudo apt install python3-gst-1.0
+sudo apt install python-pyaudio flac python3-gst-1.0
 ```
 
 Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)
@@ -56,10 +46,10 @@ Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, 
 ### Prerequisites
 
 - [ROSA source code](https://github.com/Cornelius-Figgle/ROSA)
-- [Python](https://www.python.org/downloads/)
+- [Python 3](https://www.python.org/downloads/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux](https://github.com/Cornelius-Figgle/ROSA#Linux))
-- [pygame](https://pypi.org/project/pygame/)
+- [pygame==2.1.3.dev8](https://pypi.org/project/pygame/)
 
 ### Setup
 
