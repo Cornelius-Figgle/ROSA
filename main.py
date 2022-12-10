@@ -34,6 +34,7 @@ import json
 import os
 import sys
 from time import sleep
+from typing import NoReturn
 
 import pygame.mixer as mixer
 import speech_recognition as sr
@@ -158,7 +159,7 @@ class ROSA(object):
                     shutdown() if not self.has_started else sleep(1)
             )
 
-            def shutdown() -> None:
+            def shutdown() -> NoReturn:
                 self.hadStarted = True
 
                 GPIO.cleanup()
@@ -354,7 +355,7 @@ class ROSA(object):
         self.gpio_manager('speaking', 0)
 
 
-def main() -> None:
+def main() -> NoReturn:
     '''
     The main function that handles passing or args and return values.
     Also handles the application loop and errors from functions
