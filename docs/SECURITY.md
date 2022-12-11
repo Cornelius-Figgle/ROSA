@@ -7,7 +7,7 @@ Use this section to tell people about which versions of your project are current
 | Version | Supported |
 | ------- | ------------------ |
 | 0.5 | :white_check_mark: |
-| 0.4 | :x: |
+| 0.4 | :heavy_check_mark: |
 | 0.3 | :x: |
 | 0.2 | :x: |
 | 0.1 | :x: |
