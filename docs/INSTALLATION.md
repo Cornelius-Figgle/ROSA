@@ -12,8 +12,7 @@ First you will want to **clone** the repo or [download the zip from GitHub](http
 
 | *nix | Windows |
 | - | - |
-|`cd ~/source/projects/`|`cd c:\\users\\Cornelius-Figgle\\source\\projects\\`|
-|`git clone https://github.com/Cornelius-Figgle/ROSA.git`|`git clone https://github.com/Cornelius-Figgle/ROSA.git`|
+|<pre>cd ~/source/projects/<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|<pre>cd c:\\users\\Cornelius-Figgle\\source\\projects\\<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|
 
 It is recommended that the dependencies are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
