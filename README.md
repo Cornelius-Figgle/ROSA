@@ -13,6 +13,8 @@ An emotional smart assistant that doesn't listen to you
 
 ## Installation
 
+*for a more detailed guide, [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/docs/INSTALLATION.md)*
+
 ### All Platforms
 
 [Python 3](https://www.python.org/downloads/) will need to be installed if it isn't already
