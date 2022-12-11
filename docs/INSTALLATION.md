@@ -4,43 +4,46 @@ ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
 
-*This guide assumes you have [Python 3](https://www.python.org/downloads/) and [Git](https://git-scm.com/downloads) installed and setup, and a [GitHub](https://github.com) account setup. <br> If you do not, please research how to install these yourself before continuing*
+*This guide assumes you have [Python 3](https://www.python.org/downloads/) and [Git](https://git-scm.com/downloads) installed and setup, and a [GitHub](https://github.com) account setup. <br> If you do not, please research how to install these yourself for your platform before continuing*
 
 ## All Platforms
 
-First you will want to **clone** the repo or [download the zip from GitHub](https://github.com/Cornelius-Figgle/ROSA/zipball/main/)
+Any shell commands in this guide are to executed using an appropriate `sh`ell. This could be `Command Prompt`, `Powershell`, `bash`, `Git CMD` or any others of your choice ¯\\( ツ )/¯
+
+First you will want to **clone** the repo (or download the [zip](https://github.com/Cornelius-Figgle/ROSA/zipball/main/) or the [tarball](https://github.com/Cornelius-Figgle/ROSA/tarball/main/) from GitHub):
 
 | *nix | Windows |
 | - | - |
-|<pre>cd ~/source/projects/<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|<pre>cd c:\\users\\Cornelius-Figgle\\source\\projects\\<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|
+|<pre>cd /path/to/some/folder/<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|<pre>cd c:\\path\\to\\some\\folder\\<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|
 
 It is recommended that the dependencies are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m venv ./rosa-env<br>bash ./rosa-env/scripts/activate</pre>|<pre>python3 -m venv ./rosa-env<br>./rosa-env/scripts/activate.bat</pre>|
+|<pre>python3 -m venv ./rosa-env<br>bash ./rosa-env/scripts/activate</pre>|<pre>python -m venv .\\rosa-env<br>.\\rosa-env\\scripts\\activate.bat</pre>|
 
 Replace the last line with the appropriate command from the table below
 
 | OS | file |
 | - | - |
-| Windows CMD | `.\rosa-env\scripts\actaivate.bat` |
+| Windows CMD | `.\rosa-env\scripts\activate.bat` |
 | Powershell | `.\rosa-env\scripts\Activate.ps1` |
-| bash/sh | `bash ./rosa-env/scripts/activate` |
+| bash | `bash ./rosa-env/scripts/activate` |
 | fish | `fish ./rosa-env/scripts/activate.fish` |
-| csh/tcsh | `csh ./rosa-env/scripts/activate.csh` |
 
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
 
-```shell
-pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio
-```
+*Side note: I could only get `pygame` to work with version `2.1.3.dev8`, however others may not have this issue*
 
-or alternatively, (when inside repository root)
+| *nix | Windows |
+| - | - |
+|<pre>python3 -m pip --version<br>python3 -m pip install --user SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>pip --version<br>pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
 
-```shell
-pip install -r ./docs/requirements.txt
-```
+Or alternatively, (when inside repository root):
+
+| *nix | Windows |
+| - | - |
+|<pre>python3 -m pip install --user -r ./docs/requirements.txt</pre>|<pre>pip install -r .\\docs\\requirements.txt</pre>|
 
 ## Linux Only
 
