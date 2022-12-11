@@ -83,7 +83,6 @@ class dnf(Exception):
     '''
     ...
 
-
 class ROSA(object):
     '''
     Main class for defining responses/keywords etc
