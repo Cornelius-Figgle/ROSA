@@ -23,23 +23,7 @@ You can then either clone the repo or download the zip from GitHub
 git clone https://github.com/Cornelius-Figgle/ROSA.git
 ```
 
-It is recommended that the dependencies are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo. For example:
-
-```shell
-cd /path/to/ROSA
-python3 -m venv ./rosa-env
-bash ./rosa-env/scripts/activate
-```
-
-Replace the last line with the appropriate command from the table below
-
-| OS | file
-|-|-
-| Windows CMD | `.\rosa-env\scripts\activate.bat`
-| Powershell | `.\rosa-env\scripts\Activate.ps1`
-| bash/sh | `bash ./rosa-env/scripts/activate`
-| fish | `fish ./rosa-env/scripts/activate.fish`
-| csh/tcsh | `csh ./rosa-env/scripts/activate.csh`
+It is recommended that the dependencies are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
 
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
 
