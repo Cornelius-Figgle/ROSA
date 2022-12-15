@@ -119,7 +119,9 @@ a {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-weight: normal;
-  color: #159957; }
+  /*color: #159957;*/
+  color: #c94b4b;
+}
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {
