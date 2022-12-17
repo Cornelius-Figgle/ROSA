@@ -1,4 +1,4 @@
-# pyinstaller --distpath "t:\projects\rosa\bin" --workpath "t:\projects\rosa\bin\build" -F -n ROSA-installer_gui --paths "T:\projects\ROSA\rosa-env\Lib\site-packages" --add-data "T:\projects\ROSA\bin\bin;." --add-data "T:\projects\ROSA\docs\ico;ico" --hidden-import pyi_splash --splash "T:\projects\ROSA\docs\ico\hotpot-ai.png" -i "T:\projects\ROSA\docs\ico\hotpot-ai.ico" "T:\projects\ROSA\WIN_ROSA-installer.py"
+# pyinstaller --noconfirm --log-level=WARN --clean --distpath ".\bin\bin" --workpath ".\bin\build" --name ROSA-installer_gui --onefile --nowindow --paths ".\rosa-env\Lib\site-packages" --add-data ".\bin\bin;." --add-data ".\docs\ico;.\ico" --hidden-import pyi_splash --splash ".\docs\ico\hotpot-ai.png" --icon ".\docs\ico\hotpot-ai.ico" .\WIN_ROSA-installer.py
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
@@ -66,7 +66,7 @@ if os.name != 'nt':
 
     So. `git clone https://GitHub.com/Cornelius-Figgle/ROSA.git` 
     works. I may also add ROSA to package managers en la futuro 
-    (especially the RPi one: (`apt` iirc)
+    (especially the RPi one: (`apt` iirc))
 
     Btw, I was previously using `requests` to download the files from 
     GitHub, then realised I can pkg them into the exe with `pyinstaller`
