@@ -1,3 +1,5 @@
+#!/bin/sh
+
 cd ..
 
 pyinstaller --noconfirm --log-level=WARN --clean \
