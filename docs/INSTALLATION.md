@@ -20,7 +20,7 @@ It is recommended that the dependencies are installed inside a [virtual environm
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m venv ./rosa-env<br>bash ./rosa-env/scripts/activate</pre>|<pre>python -m venv .\\rosa-env<br>.\\rosa-env\\scripts\\activate.bat</pre>|
+|<pre>python3 -m venv ./rosa-env<br>source ./rosa-env/scripts/activate</pre>|<pre>python -m venv .\\rosa-env<br>.\\rosa-env\\scripts\\activate.bat</pre>|
 
 Replace the last line with the appropriate command from the table below
 
@@ -28,8 +28,7 @@ Replace the last line with the appropriate command from the table below
 | - | - |
 | Windows CMD | `.\rosa-env\scripts\activate.bat` |
 | Powershell | `.\rosa-env\scripts\Activate.ps1` |
-| bash | `bash ./rosa-env/scripts/activate` |
-| fish | `fish ./rosa-env/scripts/activate.fish` |
+| sh | `source ./rosa-env/scripts/activate` |
 
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
 
@@ -37,20 +36,26 @@ And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) 
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m pip --version<br>python3 -m pip install --user SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>pip --version<br>pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
+|<pre>python3 -m pip --version<br>python3 -m pip install --user SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>python -m pip --version<br>python -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
 
 Or alternatively, (when inside repository root):
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m pip install --user -r ./docs/requirements.txt</pre>|<pre>pip install -r .\\docs\\requirements.txt</pre>|
+|<pre>python3 -m pip install --user -r ./docs/requirements.txt</pre>|<pre>python -m pip install -r .\\docs\\win_requirements.txt</pre>|
 
-## Linux Only
+## *nix Only
 
-On Linux, PyAudio may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
+On *nix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
+
+```bash
+sudo apt install python3-sdl2
+```
+
+PyAudio also may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
 
 ```bash
 sudo apt install python-pyaudio flac python3-gst-1.0
 ```
 
-Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)
+Replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)

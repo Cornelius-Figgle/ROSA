@@ -7,7 +7,9 @@ ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
 
-*If you wish to install the binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)*
+*If you wish to install the Windows binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)*
+
+*If you wish to build the Windows binaries (executables), [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/docs/BUILDING.md)*
 
 <br>
 
@@ -30,24 +32,30 @@ It is recommended that the dependencies are installed inside a [virtual environm
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
 
 ```shell
-pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio
+python -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio
 ```
 
 or alternatively, (when inside repository root)
 
 ```shell
-pip install -r ./docs/requirements.txt
+python -m pip install -r ./docs/requirements.txt
 ```
 
-### Linux Only
+### *nix Only
 
-On Linux, PyAudio may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
+On *nix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
+
+```bash
+sudo apt install python3-sdl2
+```
+
+PyAudio also may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
 
 ```bash
 sudo apt install python-pyaudio flac python3-gst-1.0
 ```
 
-Just replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)
+Replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)
 
 ## Usage
 
