@@ -1,6 +1,6 @@
 #!/bin/sh
 
-python3 -m pyinstaller --noconfirm --log-level=WARN --clean \
+pyinstaller --noconfirm --log-level=WARN --clean \
     --distpath "./bin/bin" --workpath "./bin/build" \
     --name ROSA --onefile \
     --paths "./rosa-env/Lib/site-packages" \
