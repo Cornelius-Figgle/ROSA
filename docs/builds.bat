@@ -1,6 +1,6 @@
 cd ..
 
-pyinstaller --noconfirm --log-level=WARN --clean ^
+py -m pyinstaller --noconfirm --log-level=WARN --clean ^
     --distpath ".\bin\bin" --workpath ".\bin\build" ^
     --name ROSA --onefile ^
     --paths ".\rosa-env\Lib\site-packages" ^
@@ -9,7 +9,7 @@ pyinstaller --noconfirm --log-level=WARN --clean ^
     --splash ".\docs\ico\hotpot-ai.png" --icon ".\docs\ico\hotpot-ai.ico" ^
     .\main.py
 
-pyinstaller --noconfirm --log-level=WARN --clean ^
+py -m pyinstaller --noconfirm --log-level=WARN --clean ^
     --distpath ".\bin\bin" --workpath ".\bin\build" ^
     --name  ROSA-installer_uac --onefile --nowindow --uac-admin ^
     --paths ".\rosa-env\Lib\site-packages" ^
@@ -17,7 +17,7 @@ pyinstaller --noconfirm --log-level=WARN --clean ^
     --splash ".\docs\ico\hotpot-ai.png" --icon ".\docs\ico\hotpot-ai.ico" ^
     .\UAC-ROSA-installer.py
 
-pyinstaller --noconfirm --log-level=WARN --clean ^
+py -m pyinstaller --noconfirm --log-level=WARN --clean ^
     --distpath ".\bin\bin" --workpath ".\bin\build" ^
     --name ROSA-installer_gui --onefile --nowindow ^
     --paths ".\rosa-env\Lib\site-packages" ^

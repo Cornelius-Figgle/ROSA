@@ -31,15 +31,15 @@ It is recommended that the dependencies are installed inside a [virtual environm
 
 And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
 
-```shell
-python -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio
-```
+| *nix | Windows |
+| - | - |
+|<pre>python3 -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>py -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
 
 or alternatively, (when inside repository root)
 
-```shell
-python -m pip install -r ./docs/requirements.txt
-```
+| *nix | Windows |
+| - | - |
+|<pre>python3 -m pip install -r ./docs/requirements.txt</pre>|<pre>py -m pip install -r ./docs/requirements.txt</pre>|
 
 ### *nix Only
 

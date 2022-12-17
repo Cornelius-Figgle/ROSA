@@ -20,7 +20,7 @@ It is recommended that the dependencies are installed inside a [virtual environm
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m venv ./rosa-env<br>source ./rosa-env/scripts/activate</pre>|<pre>python -m venv .\\rosa-env<br>.\\rosa-env\\scripts\\activate.bat</pre>|
+|<pre>python3 -m venv ./rosa-env<br>source ./rosa-env/scripts/activate</pre>|<pre>py -m venv .\\rosa-env<br>.\\rosa-env\\scripts\\activate.bat</pre>|
 
 Replace the last line with the appropriate command from the table below
 
@@ -36,13 +36,13 @@ And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) 
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m pip --version<br>python3 -m pip install --user SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>python -m pip --version<br>python -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
+|<pre>python3 -m pip --version<br>python3 -m pip install --user SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>py -m pip --version<br>py -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
 
 Or alternatively, (when inside repository root):
 
 | *nix | Windows |
 | - | - |
-|<pre>python3 -m pip install --user -r ./docs/requirements.txt</pre>|<pre>python -m pip install -r .\\docs\\win_requirements.txt</pre>|
+|<pre>python3 -m pip install --user -r ./docs/requirements.txt</pre>|<pre>py -m pip install -r .\\docs\\win_requirements.txt</pre>|
 
 ## *nix Only
 
