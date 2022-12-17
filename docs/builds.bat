@@ -1,5 +1,3 @@
-cd ..
-
 py -m pyinstaller --noconfirm --log-level=WARN --clean ^
     --distpath ".\bin\bin" --workpath ".\bin\build" ^
     --name ROSA --onefile ^
