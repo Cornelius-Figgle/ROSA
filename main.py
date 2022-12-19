@@ -64,7 +64,7 @@ def no_stdout() -> None:
     
     [Credit here](https://stackoverflow.com/a/2829036/19860022)
 
-    #### Example:
+    ### Example:
     
     ```python
     with no_stdout():
