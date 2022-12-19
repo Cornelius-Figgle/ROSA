@@ -64,8 +64,9 @@ def no_stdout() -> None:
     
     [Credit here](https://stackoverflow.com/a/2829036/19860022)
 
-    Example:
-    ```
+    #### Example:
+    
+    ```python
     with no_stdout():
         do_something_noisily()
     ```
@@ -115,14 +116,12 @@ class ROSA(object):
                 'What do you think I am, an encyclopedia?', 
                 'Why the hell would I know?'],
             'homeq': ['Why should I do it?', 
-                'Just walk like 10 feet to the lights, itll do you some' \
-                ' good'],
-            'confusionq': ['You expect me to do everything, but you dont' \
-                ' even English?!', 'STOP BEING FRENCH!!!'],
+                'Just walk like 10 feet to the lights, itll do you some good'],
+            'confusionq': ['You expect me to do everything, but you dont even English?!',
+                'STOP BEING FRENCH!!!'],
             'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 
                 'LEAVE MY ALLOCATED RAM ALONE!'],
-            'net_err': ['You berate me with your credulous requests, yet no' \
-                ' one offers to help me at all']
+            'net_err': ['You berate me with your credulous requests, yet no one offers to help me at all']
         }
         self.prev_responses = {
             'musicq': 0,
@@ -261,19 +260,15 @@ class ROSA(object):
             self.gpio_manager('processing', 0)
 
             print('\tGoogle Speech Recognition could not understand audio')
-            print('\tThis is likely because you weren\'t talking to ROSA and' \
-                'she tried to listen to speaking/music in the background')
+            print('\tThis is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music in the background')
             print('\tNot logged as an error by system')
 
             raise dnf  # NOTE: did not complete but exited fine
         except sr.RequestError as e:
             self.gpio_manager('processing', 0)
 
-            print(f'\tCould not request results from Google Speech' \
-                'Recognition service; Error Context: \'{e}\'')
-            print('\tIf the Error Context on the above line is blank, that' \
-            'would be because the `speech_recognition` module\'s error handling' \
-            'classes just returns `pass`, ie they ignore all the errors lol')
+            print(f'\tCould not request results from Google Speech Recognition service; Error Context: \'{e}\'')
+            print('\tIf the Error Context on the above line is blank, that would be because the `speech_recognition` module\'s error handling classes just returns `pass`, ie they ignore all the errors lol')
             print('\tOh well you get what you put in I suppose')
 
             self.gpio_manager('speaking', 1)
@@ -330,7 +325,9 @@ class ROSA(object):
 
         if typeq == 'musicq':
             print(self.responses['musicq'][self.prev_responses['musicq']])
-            self.music_manager(f'responses/musicq/musicq_{self.prev_responses["musicq"]}.mp3')
+            self.music_manager(
+                f'responses/musicq/musicq_{self.prev_responses["musicq"]}.mp3'
+            )
 
             if self.prev_responses['musicq'] < len(self.responses['musicq']):
                 self.prev_responses['musicq'] += 1
@@ -338,7 +335,9 @@ class ROSA(object):
                 self.prev_responses['musicq'] = 0
         elif typeq == 'wikiq':
             print(self.responses['wikiq'][self.prev_responses['wikiq']])
-            self.music_manager(f'responses/wikiq/wikiq_{self.prev_responses["wikiq"]}.mp3')
+            self.music_manager(
+                f'responses/wikiq/wikiq_{self.prev_responses["wikiq"]}.mp3'
+            )
 
             if self.prev_responses['wikiq'] < len(self.responses['wikiq']):
                 self.prev_responses['wikiq'] += 1
@@ -346,7 +345,9 @@ class ROSA(object):
                 self.prev_responses['wikiq'] = 0
         elif typeq == 'homeq':
             print(self.responses['homeq'][self.prev_responses['homeq']])
-            self.music_manager(f'responses/homeq/homeq_{self.prev_responses["homeq"]}.mp3')
+            self.music_manager(
+                f'responses/homeq/homeq_{self.prev_responses["homeq"]}.mp3'
+            )
             
             if self.prev_responses['homeq'] < len(self.responses['homeq']):
                 self.prev_responses['homeq'] += 1
@@ -355,7 +356,9 @@ class ROSA(object):
         elif typeq == 'deathq':
             if self.prev_responses['deathq'] < len(self.responses['deathq']):
                 print(self.responses['deathq'][self.prev_responses['deathq']])
-                self.music_manager(f'responses/deathq/deathq_{self.prev_responses["deathq"]}.mp3')
+                self.music_manager(
+                    f'responses/deathq/deathq_{self.prev_responses["deathq"]}.mp3'
+                )
 
                 self.prev_responses['deathq'] += 1
             else:
@@ -364,7 +367,9 @@ class ROSA(object):
                 else: sys.exit(0)#desktop
         else:
             print(self.responses['confusionq'][self.prev_responses['confusionq']])
-            self.music_manager(f'responses/confusionq/confusionq_{self.prev_responses["confusionq"]}.mp3')
+            self.music_manager(
+                f'responses/confusionq/confusionq_{self.prev_responses["confusionq"]}.mp3'
+            )
 
             if self.prev_responses['confusionq'] < len(self.responses['confusionq']):
                 self.prev_responses['confusionq'] += 1

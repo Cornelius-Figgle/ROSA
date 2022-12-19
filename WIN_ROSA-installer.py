@@ -121,8 +121,7 @@ class license_agree(qt.QWizardPage):
             DEALINGS IN THE SOFTWARE.
             '''
         )
-        agree_cb = qt.QLabel('By proceeding, you are agreeing to this' \
-            ' license and its terms')
+        agree_cb = qt.QLabel('By proceeding, you are agreeing to this license and its terms')
 
         license_box = qt.QScrollArea()
         license_box.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
@@ -329,7 +328,12 @@ class install_ROSA(qt.QWizardPage):
         install_layout = qt.QGridLayout()
 
         label = qt.QLabel()  # source: https://stackoverflow.com/a/40294286/19860022
-        pixmap = QPixmap(os.path.join(file_base_path, './docs/ico/hotpot-ai.png'))
+        pixmap = QPixmap(
+            os.path.join(
+                file_base_path, 
+                './docs/ico/hotpot-ai.png'
+            )
+        )
         label.setPixmap(pixmap)
 
         self.info_label = qt.QLabel(' ')
@@ -375,18 +379,39 @@ class install_ROSA(qt.QWizardPage):
         be embedded within this file
         '''
 
-        self.downloaded_files['bin'] = os.path.join(file_base_path, 'ROSA.exe')
-        self.downloaded_files['adm'] = os.path.join(file_base_path, 'ROSA-installer_uac.exe')
-        self.downloaded_files['vbs'] = os.path.join(file_base_path, 'create_shortcut.vbs')
-        self.downloaded_files['readme'] = os.path.join(file_base_path, 'README.md')
-        self.downloaded_files['ico'] = os.path.join(file_base_path, 'ico', 'hotpot-ai.ico')
+        self.downloaded_files['bin'] = os.path.join(
+            file_base_path, 
+            'ROSA.exe'
+            )
+        self.downloaded_files['adm'] = os.path.join(
+            file_base_path,
+            'ROSA-installer_uac.exe'
+        )
+        self.downloaded_files['vbs'] = os.path.join(
+            file_base_path, 
+            'create_shortcut.vbs'
+        )
+        self.downloaded_files['readme'] = os.path.join(
+            file_base_path, 
+            'README.md'
+        )
+        self.downloaded_files['ico'] = os.path.join(
+            file_base_path, 
+            'ico', 
+            'hotpot-ai.ico'
+        )
         
         self.display_msg('paths loaded')
 
-        with open(os.path.join(file_base_path, 'install_configs.pickle'), 'wb') as file:
+        with open(os.path.join(
+            file_base_path, 'install_configs.pickle'), 'wb') as file:
+
             pickle.dump(install_configs, file)
             self.display_msg('install_configs.pickle created')
-        with open(os.path.join(file_base_path, 'downloaded_files.pickle'), 'wb') as file:
+
+        with open(os.path.join(
+            file_base_path, 'downloaded_files.pickle'), 'wb') as file:
+
             pickle.dump(self.downloaded_files, file)
             self.display_msg('downloaded_files.pickle created')
 
@@ -396,7 +421,7 @@ class install_ROSA(qt.QWizardPage):
             process = subprocess.run(
                 [
                     f'{self.downloaded_files["adm"]}', 
-                    f'{os.path.join(file_base_path, "install_configs.pickle")}', 
+                    f'{os.path.join(file_base_path, "install_configs.pickle")}',
                     f'{os.path.join(file_base_path, "downloaded_files.pickle")}'
                 ], 
                 shell=True, check=True, text=True,
@@ -437,7 +462,8 @@ class install_ROSA(qt.QWizardPage):
                 'ROSA', 
                 os.path.basename(self.downloaded_files['bin'])
             ), 
-            dest_dir = install_configs['desk_path']  # note: no folder in desktop
+            dest_dir = install_configs['desk_path']
+            # note: no folder in desktop
         )
 
         self.display_msg('install complete!')
