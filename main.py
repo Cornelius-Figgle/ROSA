@@ -85,13 +85,12 @@ class dnf(Exception):
     '''
     ...
 
-class ROSA(object):
+class ROSA:
     '''
     Main class for defining responses/keywords etc
     '''
 
-    def __init__(self, *args: object) -> None:
-        super().__init__(*args)
+    def __init__(self) -> None:
         '''
         Initialises the `RPi.GPIO` class & pin setup, as well as 
         microphone instances
