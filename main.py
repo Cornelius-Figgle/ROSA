@@ -251,10 +251,11 @@ class ROSA:
             for phrase in self.activations:
                 if phrase in speech:
                     speech = speech.replace(phrase, '').strip()
+                    return speech
                 else:
                     self.gpio_manager('processing', 0)
-
-            return speech
+                    return None
+            
         except sr.UnknownValueError:
             self.gpio_manager('processing', 0)
 
