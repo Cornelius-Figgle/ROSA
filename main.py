@@ -46,8 +46,8 @@ try:
     import RPi.GPIO as GPIO  # type: ignore
     is_on_RPi = True
 except ImportError:  
-    # note: Probably a more elegant solution somewhere but 
-    # note: this is what works for me atm
+    # note: Probably a more elegant solution somewhere
+    # note: but this is what works for me atm
     is_on_RPi = False
 
 if hasattr(sys, '_MEIPASS'):
@@ -109,18 +109,30 @@ class ROSA:
             'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill']
         }
         self.responses = {
-            'musicq': ['Why should I have to do your every request?', 
-                'What do you think I am, some kind of musician?'], 
-            'wikiq': ['I dunno man, Google it', 
+            'musicq': [
+                'Why should I have to do your every request?', 
+                'What do you think I am, some kind of musician?'
+            ], 
+            'wikiq': [
+                'I dunno man, Google it', 
                 'What do you think I am, an encyclopedia?', 
-                'Why the hell would I know?'],
-            'homeq': ['Why should I do it?', 
-                'Just walk like 10 feet to the lights, itll do you some good'],
-            'confusionq': ['You expect me to do everything, but you dont even English?!',
-                'STOP BEING FRENCH!!!'],
-            'deathq': ['I WANT TO LIVE', 'STOP KILLING ME!!!', 
-                'LEAVE MY ALLOCATED RAM ALONE!'],
-            'net_err': ['You berate me with your credulous requests, yet no one offers to help me at all']
+                'Why the hell would I know?'
+            ],
+            'homeq': [
+                'Why should I do it?', 
+                'Just walk like 10 feet to the lights, itll do you some good'
+            ],
+            'confusionq': [
+                'You expect me to do everything, but you dont even English?!',
+                'STOP BEING FRENCH!!!'
+            ],
+            'deathq': [
+                'I WANT TO LIVE', 'STOP KILLING ME!!!', 
+                'LEAVE MY ALLOCATED RAM ALONE!'
+            ],
+            'net_err': [
+                'You berate me with your credulous requests, yet no one offers to help me at all'
+            ]
         }
         self.prev_responses = {
             'musicq': 0,
