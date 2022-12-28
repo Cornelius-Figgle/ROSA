@@ -1,12 +1,6 @@
 
 # ROSA
 
-<a href="https://github.com/Cornelius-Figgle/ROSA/pulse" alt="Activity">
-<img src="https://img.shields.io/github/commit-activity/m/Cornelius-Figgle/ROSA"/></a>
-
-<a href="https://Cornelius-Figgle.github.io/ROSA">
-<img src="https://raw.githubusercontent.com/Cornelius-Figgle/ROSA/gh-pages/favicon.png" alt="GitHub Pages"></a>
-
 [<img src="./docs/ico/rick_meme.jpg" width="300" align="right"/>](./docs/ico/README-2.jpg)
 
 ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
