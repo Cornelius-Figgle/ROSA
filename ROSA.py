@@ -244,9 +244,9 @@ class ROSA_:
     def background_listening(self) -> str:
         '''
         Listens in the background and determines whether an activation 
-        phrase from global `activations` is in `speech`, before returning
-        it for processing functions. Also logs errors with Speech 
-        Recognition
+        phrase from `activations` is in `speech`, before returning it
+        for processing functions. Also logs errors with 
+        `speech_recognition`
         '''
 
         # note: obtain audio from the microphone
@@ -265,7 +265,7 @@ class ROSA_:
             with no_stdout():
                 # note: req speech from google
                 speech: str = r.recognize_google(
-                    audio, language='en-GB', pfilter=1
+                    audio, language='en-GB', pfilter=0
                 )
                 speech = speech.lower()
 
@@ -273,7 +273,7 @@ class ROSA_:
             for phrase in self.activations:
                 if phrase in speech:
                     # note: if `ROSA` is said
-                    # note: ie if user is talking to us
+                    # note: ie the user is talking to us
 
                     return speech
                     # old: speech = speech.replace(phrase, '').strip()
@@ -335,6 +335,7 @@ class ROSA_:
             typeq,
             f'{typeq}_{self.prev_responses[typeq]}.mp3'
         )
+
         if self.prev_responses[typeq] < len(self.responses[typeq]):
             self.prev_responses[typeq] += 1
         else:
