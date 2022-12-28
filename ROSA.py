@@ -37,11 +37,14 @@ import os
 import sys
 from contextlib import contextmanager
 from tempfile import gettempdir
+from threading import Thread
 from time import sleep
 from typing import NoReturn
 
 import pygame.mixer as mixer
 import speech_recognition as sr
+
+from . import foreign_potato_master
 
 try: 
     import RPi.GPIO as GPIO  # type: ignore
@@ -102,60 +105,65 @@ class ROSA_:
     Main class for defining responses/keywords etc
     '''
 
-    def __init__(self, json_path: str = None) -> None:
+    def __init__(
+        self, json_path: str = None, write_file: str = sys.stdout) -> None:
+
         '''
         Initialises the `RPi.GPIO` class & pin setup, as well as 
         microphone instances
         '''
         
-        self.activations = [
-            'rosa', 'browser', 'rosanna', 'frozen', 'roserton', 'rota' 
-            # note: misheard words are included as well
-            # future: user could append their own via a command ?
-        ] 
-        self.keys = {
-            'musicq': ['play', 'music'], 
-            'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
-            'homeq': ['turn', 'on', 'off', 'light'],
-            'confusionq': ['france'],
-            'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill']
-        }
-        self.responses = {
-            'musicq': [
-                'Why should I have to do your every request?', 
-                'What do you think I am, some kind of musician?'
-            ], 
-            'wikiq': [
-                'I dunno man, Google it', 
-                'What do you think I am, an encyclopedia?', 
-                'Why the hell would I know?'
-            ],
-            'homeq': [
-                'Why should I do it?', 
-                'Just walk like 10 feet to the lights, itll do you some good'
-            ],
-            'confusionq': [
-                'You expect me to do everything, but you dont even English?!',
-                'STOP BEING FRENCH!!!'
-            ],
-            'deathq': [
-                'I WANT TO LIVE', 'STOP KILLING ME!!!', 
-                'LEAVE MY ALLOCATED RAM ALONE!'
-            ],
-            'net_err': [
-                'You berate me with your credulous requests, yet no one offers to help me at all'
-            ]
-        }
-        self.prev_responses = {
-            'musicq': 0,
-            'wikiq': 0,
-            'homeq': 0,
-            'confusionq': 0,
-            'deathq': 0,
-            'net_err': 0
+        self.write_file = write_file
+
+        self.title = foreign_potato_master.Text_Decorations.title
+        self.symbols = foreign_potato_master.Text_Decorations.symbols
+
+        def loading_screen_thread() -> None:
+            '''
+            Simple function to print out the title whilst the
+            application is setup. Uses `write_file` from the `ROSA`
+            class
+
+            ```python
+            
+            fred = Thread(
+                target=loading_screen_thread,
+                name='fred (ROSA)'
+            )
+            fred.start()
+            ```
+            '''
+
+            if self.write_file is sys.stdout:
+                if os.name in ('nt', 'dos'):
+                    os.system('cls')
+                else:
+                    os.system('clear')
+                sleep(1)
+
+            for line in self.title: 
+                print(line, file=self.write_file)
+                sleep(0.5)
+            print('\n\n', file=self.write_file)
+            sleep(2)
+
+        fred = Thread(
+            target=loading_screen_thread,
+            name='fred (ROSA)'
+        )
+        fred.start()
+
+        self.activations = foreign_potato_master.Responses.activations
+        self.keys = foreign_potato_master.Responses.keys
+        self.responses = foreign_potato_master.Responses.responses
+        self.prev_responses = foreign_potato_master.Responses.prev_responses
+
+        self.notices = {
+            'unrecognised': foreign_potato_master.Notices.unrecognised,
+           'net_err': foreign_potato_master.Notices.net_err
         }
 
-        print('ADJUSTING FOR AMBIENT')
+        print(f'{self.symbols["base"]} Adjusting To Ambient Noise', file=write_file)
         with sr.Microphone() as source: 
             sr.Recognizer().adjust_for_ambient_noise(source)
             # note: we only need to calibrate once, before we 
@@ -252,11 +260,9 @@ class ROSA_:
         # note: obtain audio from the microphone
         r = sr.Recognizer()
         with sr.Microphone() as source:
-            print('\n: ')
+            print(f'\n{self.symbols["base"]} Awaiting Speech', file=self.write_file)
             self.gpio_manager('listening', 1)
-
-            audio = r.listen(source)
-            
+            audio = r.listen(source)            
             self.gpio_manager('listening', 0)
 
         self.gpio_manager('processing', 1)
@@ -269,7 +275,7 @@ class ROSA_:
                 )
                 speech = speech.lower()
 
-            print(f'> {speech}')
+            print(f'{self.symbols["input"]} {speech}', file=self.write_file)
             for phrase in self.activations:
                 if phrase in speech:
                     # note: if `ROSA` is said
@@ -283,23 +289,13 @@ class ROSA_:
                     return None
         except sr.UnknownValueError:
             self.gpio_manager('processing', 0)
-
-            print('\tGoogle Speech Recognition could not understand audio')
-            print('\tThis is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music that is in the background')
-            print('\tNot logged as an error')
-
+            print(self.notices['unrecognised'], file=self.write_file)
             raise dnf  # note: did not complete but exited fine
         except sr.RequestError as e:
             self.gpio_manager('processing', 0)
-
-            print('\tCould not request results from Google Speech Recognition service')
-            print(f'\t\tError Context: \"{e}\"')
-            print('\tIf the Error Context on the above line is blank, that would be because the `speech_recognition` module\'s error handling classes just returns `pass`, ie they ignore all the errors lol')
-            print('\tOh well you get out what you put in I suppose')
-
+            print(print(self.notices['net_err'], file=self.write_file))
             self.respond('net_err')
-
-            raise e
+            raise dnf  # note: did not complete but exited fine
 
     def determine_response(self, query: str) -> str:
         '''
@@ -347,7 +343,7 @@ class ROSA_:
                 else: 
                     sys.exit(0)  # note: for desktop
 
-        print(res)
+        print(f'{self.symbols["output"]} {res}')
         mixer.music.load(file_to_load)
         mixer.music.play()
         while mixer.music.get_busy(): 

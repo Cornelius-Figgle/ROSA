@@ -34,10 +34,9 @@ __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 
 import os
 import sys
-from time import sleep
 from typing import NoReturn
 
-import ROSA
+from . import ROSA
 
 
 def main() -> NoReturn:
@@ -59,15 +58,9 @@ def main() -> NoReturn:
 
     obj = ROSA.ROSA_(**obj_args)
 
-    if os.name in ('nt', 'dos'):
-        os.system('cls')
-    else:
-        os.system('clear')
-    sleep(1)
-
     try:
         while True:
-            try: 
+            try:
                 speech = obj.background_listening()
                 if speech:  # note: if req asked
                     typeq = obj.determine_response(speech)
