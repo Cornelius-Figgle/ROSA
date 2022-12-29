@@ -49,7 +49,7 @@ import foreign_potato_master
 try: 
     import RPi.GPIO as GPIO  # type: ignore
     is_on_RPi = True
-except ImportError:  
+except ImportError:
     # note: Probably a more elegant solution somewhere
     # note: but this is what works for me atm
     is_on_RPi = False
@@ -112,7 +112,7 @@ class ROSA_:
         Initialises the `RPi.GPIO` class & pin setup, as well as 
         microphone instances
         '''
-        
+
         self.write_file = write_file
 
         self.title = foreign_potato_master.Text_Decorations.title
@@ -159,18 +159,12 @@ class ROSA_:
         self.prev_responses = foreign_potato_master.Responses.prev_responses
 
         self.notices = {
+            'adjusting_levels': foreign_potato_master.Notices.adjusting_levels,
+            'awaiting_speech': foreign_potato_master.Notices.awaiting_speech,
+            'processing_request': foreign_potato_master.Notices.processing_request,
             'unrecognised': foreign_potato_master.Notices.unrecognised,
-           'net_err': foreign_potato_master.Notices.net_err
+            'net_err': foreign_potato_master.Notices.net_err
         }
-
-        print(
-            f'{self.symbols["base"]} Adjusting To Ambient Noise',
-            file=write_file
-        )
-        with sr.Microphone() as source: 
-            sr.Recognizer().adjust_for_ambient_noise(source)
-            # note: we only need to calibrate once, before we 
-            # note: start listening
         
         mixer.init()
 
@@ -183,6 +177,16 @@ class ROSA_:
             close()
 
         fred.join()
+        # note: join `fred` before we print the notice about adjusting
+        # for ambient noise
+
+        print(self.notices['adjusting_levels'], file=write_file)
+        with sr.Microphone() as source: 
+            sr.Recognizer().adjust_for_ambient_noise(source)
+            # note: we only need to calibrate once, before we 
+            # start listening
+
+        self.gpio_manager('processing', 0)
 
     def __pi_init__(self, json_path: str) -> None:
         self.gpio_loc = {}
@@ -265,9 +269,9 @@ class ROSA_:
         # note: obtain audio from the microphone
         r = sr.Recognizer()
         with sr.Microphone() as source:
-            print(f'\n{self.symbols["base"]} Awaiting Speech', file=self.write_file)
+            print(self.notices['awaiting_speech'], file=self.write_file)
             self.gpio_manager('listening', 1)
-            audio = r.listen(source)            
+            audio = r.listen(source)
             self.gpio_manager('listening', 0)
 
         self.gpio_manager('processing', 1)
@@ -278,9 +282,10 @@ class ROSA_:
                 speech: str = r.recognize_google(
                     audio, language='en-GB', pfilter=0
                 )
-                speech = speech.lower()
 
             print(f'{self.symbols["input"]} {speech}', file=self.write_file)
+            speech = speech.lower()
+            
             for phrase in self.activations:
                 if phrase in speech:
                     # note: if `ROSA` is said
@@ -294,7 +299,7 @@ class ROSA_:
                     return None
         except sr.UnknownValueError:
             self.gpio_manager('processing', 0)
-            print(self.notices['unrecognised'], file=self.write_file)
+            # old: print(self.notices['unrecognised'], file=self.write_file)
             raise dnf  # note: did not complete but exited fine
         except sr.RequestError as e:
             self.gpio_manager('processing', 0)
@@ -309,6 +314,8 @@ class ROSA_:
         `self.keys[typeq]`)
         '''
 
+        print(self.notices['processing_request'], file=self.write_file)
+
         for key_set in self.keys:
             for key in self.keys[key_set]:
                 if key in query:
@@ -318,6 +325,11 @@ class ROSA_:
                 # note: if inner-loop didn't reach `break`
                 continue
             break  # note: double break
+        
+        try:
+            typeq
+        except UnboundLocalError:
+            typeq = 'confusionq'
 
         self.gpio_manager('processing', 0)
         return typeq
@@ -337,7 +349,7 @@ class ROSA_:
             f'{typeq}_{self.prev_responses[typeq]}.mp3'
         )
 
-        if self.prev_responses[typeq] < len(self.responses[typeq]):
+        if self.prev_responses[typeq] < len(self.responses[typeq]) - 1:
             self.prev_responses[typeq] += 1
         else:
             self.prev_responses[typeq] = 0
@@ -348,7 +360,8 @@ class ROSA_:
                 else: 
                     sys.exit(0)  # note: for desktop
 
-        print(f'{self.symbols["output"]} {res}')
+        print(f'{self.symbols["output"]} {res}', file=self.write_file)
+
         mixer.music.load(file_to_load)
         mixer.music.play()
         while mixer.music.get_busy(): 

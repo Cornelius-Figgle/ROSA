@@ -34,7 +34,9 @@ __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 
 class Responses:
 	activations: list[str] = [
-		'rosa', 'browser', 'rosanna', 'frozen', 'roserton', 'rota' 
+		'rosa', 'browser', 'rosanna', 'frozen', 
+		'roserton', 'rota', 'roses', 'router',
+		'closer'
 		# note: misheard words are included as well
 		# future: user could append their own via a command ?
 	] 
@@ -112,11 +114,15 @@ class Text_Decorations:
 	}
 
 class Notices:
-	unrecognised: str = (
-		f'{Text_Decorations.symbols["error"]} Google Speech Recognition could not understand audio\n'
-		f'{Text_Decorations.symbols["error"]} This is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music that is in the background\n'
-		f'{Text_Decorations.symbols["error"]} Not logged as an error',
+	adjusting_levels: str = (f'{Text_Decorations.symbols["base"]} Adjusting To Ambient Noise'
 	)
-	net_err: str = (
-		f'{Text_Decorations.symbols["error"]} Could not request results from Google Speech Recognition service'
+	awaiting_speech: str = (f'{Text_Decorations.symbols["base"]} Awaiting Speech'
+	)
+	processing_request: str = (f'{Text_Decorations.symbols["base"]} Processing Speech'
+	)
+	unrecognised: str = (f'{Text_Decorations.symbols["error"]} Google Speech Recognition could not understand audio\n'
+		f'{Text_Decorations.symbols["error"]} This is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music that is in the background\n'
+		f'{Text_Decorations.symbols["error"]} Not logged as an error'
+	)
+	net_err: str = (f'{Text_Decorations.symbols["error"]} Could not request results from Google Speech Recognition service'
 	)
