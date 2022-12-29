@@ -34,3 +34,7 @@
 ## Ask her name
 
 'Don\'t you know that already?!'
+
+## Questions The Creator
+
+'Shiva Gatuma Christ Chan is the creator of all in existence'

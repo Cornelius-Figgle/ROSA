@@ -6,6 +6,23 @@
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
+This file contains all of the text output from `ROSA`. Feel free to
+modify any of the phrases, but remember to update the audio files as
+well! :D
+
+In the `Responses` class, each category of response phrases should have
+a dictionary key in the `keys`, `responses` and `prev_responses`
+dictionaries. Keys should be a single word followed by the letter `q`,
+(although this is only by convention). They should also be listed in
+order of importance, starting with the most important. The key 
+`confusionq` HAS to be present in all three dictionaries all it is used
+as a fallback for unregistered queries
+
+The `ROSA.py` file in the module uses this file, so make sure
+both are present in your installation/download
+
+=======================================================================
+
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2022
 
@@ -46,7 +63,8 @@ class Responses:
 		'homeq': ['turn', 'on', 'off', 'light'],
 		'confusionq': ['france'],
 		'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill'],
-		'nameq': ['name', 'called']
+		'nameq': ['name', 'called'],
+		'creatorq': ['creator', 'maker', 'who is']
 	}
 	responses: dict[str, list[str]] = {
 		'musicq': [
@@ -75,6 +93,9 @@ class Responses:
 		],
 		'nameq': [
 			'Don\'t you know that already?!'
+		],
+		'creatorq': [
+			'Shiva Gatuma Christ Chan is the creator of all in existence'
 		]
 	}
 	prev_responses: dict[str, int] = {
@@ -84,7 +105,8 @@ class Responses:
 		'confusionq': 0,
 		'deathq': 0,
 		'net_err': 0,
-		'nameq': 0
+		'nameq': 0,
+		'creatorq': 0
 	}
 
 class Text_Decorations:

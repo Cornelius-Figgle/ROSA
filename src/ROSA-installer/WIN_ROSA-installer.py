@@ -6,6 +6,31 @@
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
+Ok so, originally this was intended to be cross-platform. It was 
+hard and confusing and messy. I also realised, *nix users generally 
+install stuff themselves, and my installer is probably incorrect 
+for their specific system anyways.
+
+I summed this up with:
+
+    'cod3 is way nicer to look at without 6 thousand `if` 
+    statements for cross-platform code that doesn't function properly'
+
+So. `git clone https://GitHub.com/Cornelius-Figgle/ROSA.git` 
+works. I may also add ROSA to package managers en la futuro 
+(especially the RPi one: (`apt` iirc))
+
+Btw, I was previously using `requests` to download the files from 
+GitHub, then realised I can pkg them into the exe with `pyinstaller`
+
+# source: https://python.plainenglish.io/packaging-data-files-to-pyinstaller-binaries-6ed63aa20538
+
+So anyway, have fun on Windows,
+
+    - Max, learning to be a dev
+
+=======================================================================
+
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2022
 
@@ -54,31 +79,6 @@ else:
     file_base_path = os.path.dirname(__file__)
 
 if os.name != 'nt':
-    '''
-    Ok so, originally this was intended to be cross-platform. It was 
-    hard and confusing and messy. I also realised, *nix users generally 
-    install stuff themselves, and my installer is probably incorrect 
-    for their specific system anyways.
-
-    I summed this up with:
-
-        'cod3 is way nicer to look at without 6 thousand `if` 
-        statements for cross-platform code that doesn't function properly'
-
-    So. `git clone https://GitHub.com/Cornelius-Figgle/ROSA.git` 
-    works. I may also add ROSA to package managers en la futuro 
-    (especially the RPi one: (`apt` iirc))
-
-    Btw, I was previously using `requests` to download the files from 
-    GitHub, then realised I can pkg them into the exe with `pyinstaller`
-    
-    # source: https://python.plainenglish.io/packaging-data-files-to-pyinstaller-binaries-6ed63aa20538
-
-    So anyway, have fun on Windows,
-
-        - Max, learning to be a dev
-    '''
-
     sys.exit(0)
 
 
