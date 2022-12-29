@@ -377,7 +377,6 @@ class ROSA_:
         file_to_load = os.path.join(
             file_base_path,
             'responses',
-            typeq,
             f'{typeq}_{self.prev_responses[typeq]}.mp3'
         )
 
