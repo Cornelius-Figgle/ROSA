@@ -33,19 +33,19 @@ __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 
 
 class Responses:
-	activations = [
+	activations: list[str] = [
 		'rosa', 'browser', 'rosanna', 'frozen', 'roserton', 'rota' 
 		# note: misheard words are included as well
 		# future: user could append their own via a command ?
 	] 
-	keys = {
+	keys: dict[str, list[str]] = {
 		'musicq': ['play', 'music'], 
 		'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
 		'homeq': ['turn', 'on', 'off', 'light'],
 		'confusionq': ['france'],
 		'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill']
 	}
-	responses = {
+	responses: dict[str, list[str]] = {
 		'musicq': [
 			'Why should I have to do your every request?', 
 			'What do you think I am, some kind of musician?'
@@ -71,7 +71,7 @@ class Responses:
 			'You berate me with your credulous requests, yet no one offers to help me at all'
 		]
 	}
-	prev_responses = {
+	prev_responses: dict[str, int] = {
 		'musicq': 0,
 		'wikiq': 0,
 		'homeq': 0,
@@ -81,7 +81,7 @@ class Responses:
 	}
 
 class Text_Decorations:
-	title = [
+	title: str = [
 		'          _____                   _______                   _____                    _____          ',
 		'         /\    \                 /::\    \                 /\    \                  /\    \         ',
 		'        /::\    \               /::::\    \               /::\    \                /::\    \        ',
@@ -104,7 +104,7 @@ class Text_Decorations:
 		'        \:|   |                   ¯¯                      \::/    /                \::/    /        ',
 		'         \|___|                                            \/____/                  \/____/         '
 	]
-	symbols = {
+	symbols: dict[str, str] = {
 		'base': '|',
 		'input': '| < |',
 		'output': '| > |',
@@ -112,11 +112,11 @@ class Text_Decorations:
 	}
 
 class Notices:
-	unrecognised = (
+	unrecognised: str = (
 		f'{Text_Decorations.symbols["error"]} Google Speech Recognition could not understand audio\n'
 		f'{Text_Decorations.symbols["error"]} This is likely because you weren\'t talking to ROSA and she tried to listen to speaking/music that is in the background\n'
 		f'{Text_Decorations.symbols["error"]} Not logged as an error',
 	)
-	net_err = (
+	net_err: str = (
 		f'{Text_Decorations.symbols["error"]} Could not request results from Google Speech Recognition service'
 	)

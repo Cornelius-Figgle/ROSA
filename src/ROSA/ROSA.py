@@ -41,7 +41,7 @@ from threading import Thread
 from time import sleep
 from typing import NoReturn
 
-import pygame.mixer as mixer
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'true' ; import pygame.mixer as mixer
 import speech_recognition as sr
 
 from . import foreign_potato_master
@@ -163,7 +163,10 @@ class ROSA_:
            'net_err': foreign_potato_master.Notices.net_err
         }
 
-        print(f'{self.symbols["base"]} Adjusting To Ambient Noise', file=write_file)
+        print(
+            f'{self.symbols["base"]} Adjusting To Ambient Noise',
+            file=write_file
+        )
         with sr.Microphone() as source: 
             sr.Recognizer().adjust_for_ambient_noise(source)
             # note: we only need to calibrate once, before we 
@@ -178,6 +181,8 @@ class ROSA_:
             from pyi_splash import close, update_text  # type: ignore
             update_text('UI Loaded...')
             close()
+
+        fred.join()
 
     def __pi_init__(self, json_path: str) -> None:
         self.gpio_loc = {}
