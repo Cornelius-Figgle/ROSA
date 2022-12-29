@@ -36,7 +36,7 @@ import os
 import sys
 from typing import NoReturn
 
-from . import ROSA
+import ROSA
 
 
 def main() -> NoReturn:
