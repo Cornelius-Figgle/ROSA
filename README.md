@@ -3,6 +3,7 @@
 
 [![CodeQL](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/codeql.yml/badge.svg)](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/codeql.yml)
 [![pages-build-deployment](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/pages/pages-build-deployment)
+[![Activity](https://img.shields.io/github/commit-activity/m/badges/shields)](https://github.com/badges/shields/pulse)
 
 [<img src="./docs/ico/rick_meme.jpg" width="300" align="right"/>](./docs/ico/README-2.jpg)
 
