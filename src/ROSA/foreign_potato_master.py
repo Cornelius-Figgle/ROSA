@@ -45,7 +45,8 @@ class Responses:
 		'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
 		'homeq': ['turn', 'on', 'off', 'light'],
 		'confusionq': ['france'],
-		'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill']
+		'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill'],
+		'nameq': ['name', 'called']
 	}
 	responses: dict[str, list[str]] = {
 		'musicq': [
@@ -71,6 +72,9 @@ class Responses:
 		],
 		'net_err': [
 			'You berate me with your credulous requests, yet no one offers to help me at all'
+		],
+		'nameq': [
+			'Don\'t you know that already?!'
 		]
 	}
 	prev_responses: dict[str, int] = {
@@ -79,7 +83,8 @@ class Responses:
 		'homeq': 0,
 		'confusionq': 0,
 		'deathq': 0,
-		'net_err': 0
+		'net_err': 0,
+		'nameq': 0
 	}
 
 class Text_Decorations:

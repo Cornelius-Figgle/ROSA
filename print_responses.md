@@ -30,3 +30,7 @@
 ## No internet/Google server not working
 
 'You berate me with your credulous requests, yet no one offers to help me at all'
+
+## Ask her name
+
+'Don\'t you know that already?!'
