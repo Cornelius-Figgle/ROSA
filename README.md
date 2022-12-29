@@ -1,7 +1,7 @@
 
 # ROSA
 
-[![GitHub license](https://img.shields.io/github/license/Cornelius-Figgle/ROSA)](https://github.com/Cornelius-Figgle/ROSA/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Cornelius-Figgle/ROSA)](./LICENSE)
 [![CodeQL](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/codeql.yml/badge.svg)](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/codeql.yml)
 [![pages-build-deployment](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/Cornelius-Figgle/ROSA/actions/workflows/pages/pages-build-deployment)
 
