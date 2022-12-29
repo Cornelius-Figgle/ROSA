@@ -7,7 +7,7 @@
 
 [![Activity](https://img.shields.io/github/commit-activity/m/Cornelius-Figgle/ROSA)](https://github.com/badges/shields/pulse)
 [![GitHub commits](https://badgen.net/github/commits/Cornelius-Figgle/ROSA/main)](https://GitHub.com/Cornelius-Figgle/ROSA/commit/)
-[![Latest Tag](https://badgen.net/github/tag/Cornelius-Figgle/ROSA/)](https://GitHub.com/Cornelius-Figgle/ROSA/tags)
+[![Latest Tag](https://badgen.net/github/tag/Cornelius-Figgle/ROSA)](https://GitHub.com/Cornelius-Figgle/ROSA/tags)
 
 [<img src="./docs/ico/rick_meme.jpg" width="300" align="right"/>](./docs/ico/README-2.jpg)
 
