@@ -64,7 +64,7 @@ def main() -> NoReturn:
                 speech = obj.background_listening()
                 if speech:  # note: if req asked
                     typeq = obj.determine_response(speech)
-                    obj.respond(typeq, speech)
+                    obj.respond(typeq)
             except ROSA.dnf:
                 ...
     except KeyboardInterrupt:
