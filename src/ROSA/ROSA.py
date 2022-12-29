@@ -6,6 +6,39 @@
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
+ROSA (or Robotically Obnoxious Serving Assistant), is a smart assistant
+(like the Amazon Alexa), except that it doesn't listen to you. The main
+code is written primarily for Windows 10 and RaspbianOS, however should
+function on most, if not all, operating systems and platforms
+
+ROSA has three main functions inside of the `ROSA_` class, which are
+`background_listening`, `determine_response` and `respond`. These
+should be called in that order, with the return values from each being
+passed into the next function
+
+### Example: 
+
+```python
+import ROSA
+
+obj = ROSA.ROSA_()
+
+try:
+    while True:
+        try:
+            speech = obj.background_listening()
+            if speech:  # note: if req asked
+                typeq = obj.determine_response(speech)
+                obj.respond(typeq)
+        except ROSA.dnf:
+            ...
+except KeyboardInterrupt:
+    if ROSA.is_on_RPi: 
+        ROSA.do_cleanup()
+```
+
+=======================================================================
+
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2022
 
@@ -158,13 +191,12 @@ class ROSA_:
         self.responses = foreign_potato_master.Responses.responses
         self.prev_responses = foreign_potato_master.Responses.prev_responses
 
-        self.notices = {
-            'adjusting_levels': foreign_potato_master.Notices.adjusting_levels,
-            'awaiting_speech': foreign_potato_master.Notices.awaiting_speech,
-            'processing_request': foreign_potato_master.Notices.processing_request,
-            'unrecognised': foreign_potato_master.Notices.unrecognised,
-            'net_err': foreign_potato_master.Notices.net_err
-        }
+        self.notices = {}
+        for attr in dir(foreign_potato_master.Notices):
+            if not attr.startswith('__'):
+                # note: filters out built-ins attrs
+                self.notices[attr] = getattr(foreign_potato_master.Notices, attr)
+
         
         mixer.init()
 
