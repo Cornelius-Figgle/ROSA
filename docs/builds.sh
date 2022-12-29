@@ -7,4 +7,4 @@ pyinstaller --noconfirm --log-level=WARN --clean \
     --hidden-import pyi_splash \
     --add-binary "./responses:./responses" \
     --splash "./docs/ico/hotpot-ai.png" --icon "./docs/ico/hotpot-ai.ico" \
-    ./main.py
+    ./src/ROSA/main.py
