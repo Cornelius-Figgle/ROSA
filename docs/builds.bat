@@ -16,7 +16,7 @@ pyinstaller --noconfirm --log-level=WARN --clean ^
     .\src\ROSA-installer\UAC-ROSA-installer.py
 
 pyinstaller --noconfirm --log-level=WARN --clean ^
-    --distpath ".\bin\bin" --workpath ".\bin\build" ^
+    --distpath ".\bin" --workpath ".\bin\build" ^
     --name ROSA-installer_gui --onefile --nowindow ^
     --paths ".\rosa-env\Lib\site-packages" ^
 	 --add-data ".\bin\bin;." --add-data ".\docs\ico;.\ico" ^
