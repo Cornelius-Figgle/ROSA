@@ -11,28 +11,6 @@
 
 [<img src="./docs/ico/no_idea_rosa.jpg" width="300" align="right"/>](./docs/ico/no_idea_rosa.jpg)
 
-<head>
-  <style>
-    @media screen and (orientation: landscape) {
-      #rotate-device-warning {
-        display: none;
-      }
-    }
-    @media screen and (orientation: portrait) {
-      #rotate-device-warning {
-        display: block;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div id="rotate-device-warning">
-    <img src="./docs/ico/no_idea_rosa.jpg" width="300" align="right"/>
-  </div>
-
-</body>
-
 ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
