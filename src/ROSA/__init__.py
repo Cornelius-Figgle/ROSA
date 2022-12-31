@@ -30,3 +30,7 @@ __copyright__ = 'Copyright (c) 2022 Max Harrison'
 __license__ = 'MIT'
 __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
+
+
+import ROSA.ROSA
+import ROSA.foreign_potato_master
