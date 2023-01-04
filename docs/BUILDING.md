@@ -1,5 +1,7 @@
 # How to Build ROSA
 
+[<img src="../docs/ico/rick_meme.jpg" width="300" align="right"/>](../docs/ico/rick_meme.jpg)
+
 *please read the [CONTRIBUTING guide](./CONTRIBUTING.md), as well as the [Code Of Conduct](./CODE_OF_CONDUCT.md) before proceeding*
 
 ## *nix
