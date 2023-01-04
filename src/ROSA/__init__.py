@@ -32,5 +32,5 @@ __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 
 
-import ROSA.ROSA
-import ROSA.foreign_potato_master
+from ROSA import ROSA
+from ROSA import foreign_potato_master

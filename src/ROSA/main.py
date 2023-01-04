@@ -36,7 +36,7 @@ import os
 import sys
 from typing import NoReturn
 
-import ROSA
+from ROSA import ROSA
 
 
 def main() -> NoReturn:
@@ -45,18 +45,15 @@ def main() -> NoReturn:
     Also handles the application loop and errors from functions
     '''
 
-    obj_args = {}
-
-    if not hasattr(sys, '_MEIPASS'):
-        obj_args['json_path'] = os.path.join(
-            os.path.dirname(__file__), 'gpio.json'
+    obj = ROSA.ROSA_(
+        json_path = os.path.join(
+            os.path.dirname(
+                sys.executable
+            ),
+            'gpio.json'
         )
-    else:
-        obj_args['json_path'] = os.path.join(
-            os.path.dirname(sys.executable), 'gpio.json'
-        )
-
-    obj = ROSA.ROSA_(**obj_args)
+    )
+    # note: https://stackoverflow.com/a/74975328/19860022
 
     try:
         while True:

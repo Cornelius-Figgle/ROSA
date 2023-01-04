@@ -77,9 +77,9 @@ from typing import NoReturn
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'true' ; import pygame.mixer as mixer
 import speech_recognition as sr
 
-import foreign_potato_master
+from ROSA import foreign_potato_master
 
-try: 
+try:
     import RPi.GPIO as GPIO  # type: ignore
     is_on_RPi = True
 except ImportError:
@@ -87,13 +87,8 @@ except ImportError:
     # note: but this is what works for me atm
     is_on_RPi = False
 
-
-if hasattr(sys, '_MEIPASS'):
-    # source: https://stackoverflow.com/a/66581062/19860022
-    file_base_path = sys._MEIPASS
-    # source: https://stackoverflow.com/a/36343459/19860022
-else:
-    file_base_path = os.path.dirname(__file__)
+file_base_path = os.path.dirname(__file__)
+# note: https://stackoverflow.com/a/74975328/19860022
 
 @contextmanager
 def no_stdout() -> None:
