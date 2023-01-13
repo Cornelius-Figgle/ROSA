@@ -61,10 +61,11 @@ class Responses:
 		'musicq': ['play', 'music'], 
 		'wikiq': ['wikipedia', 'wiki', 'what does', 'lookup', 'def'], 
 		'homeq': ['turn', 'on', 'off', 'light'],
-		'confusionq': ['france'],
+		'confusionq': ['help'],
 		'deathq': ['shutdown', 'reboot', 'restart', 'yourself', 'kill'],
 		'nameq': ['name', 'called'],
-		'creatorq': ['creator', 'maker', 'who is']
+		'creatorq': ['creator', 'maker', 'who is'],
+		'lizardq': ['lizarb', 'lizard', 'france', 'french']
 	}
 	responses: dict[str, list[str]] = {
 		'musicq': [
@@ -96,6 +97,9 @@ class Responses:
 		],
 		'creatorq': [
 			'Shiva Gatuma Christ Chan is the creator of all in existence'
+		],
+		'lizard': [
+			'NOOOO'
 		]
 	}
 	prev_responses: dict[str, int] = {
@@ -106,7 +110,8 @@ class Responses:
 		'deathq': 0,
 		'net_err': 0,
 		'nameq': 0,
-		'creatorq': 0
+		'creatorq': 0,
+		'lizardq': 0,
 	}
 
 class Text_Decorations:
