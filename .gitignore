@@ -1,4 +1,4 @@
-rosa-env/
+.venv/
 !.github/*
 __pycache__
 
@@ -17,3 +17,5 @@ soundcloud.tmp
 demo/
 *.ogg
 /bin/
+rosa-env/
+./docs/*requirements.txt

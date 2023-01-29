@@ -17,7 +17,7 @@ An emotional smart assistant that doesn't listen to you
 
 *If you wish to install the Windows binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)*
 
-*If you wish to build the Windows binaries (executables), [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/docs/BUILDING.md)*
+*If you wish to build the Windows binaries (executables), [see here](./docs/BUILDING.md)*
 
 <br>
 
