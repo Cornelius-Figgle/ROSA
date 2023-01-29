@@ -18,4 +18,4 @@ demo/
 *.ogg
 /bin/
 rosa-env/
-./docs/*requirements.txt
+/docs/*requirements.txt
