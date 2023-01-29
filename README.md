@@ -27,7 +27,7 @@ An emotional smart assistant that doesn't listen to you
 
 ### All Platforms
 
-[Python 3](https://www.python.org/downloads/) will need to be installed if it isn't already
+[Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
 
 You can then either clone the repo or download the zip from GitHub
 
@@ -35,19 +35,11 @@ You can then either clone the repo or download the zip from GitHub
 git clone https://github.com/Cornelius-Figgle/ROSA.git
 ```
 
-It is recommended that the dependencies are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
+The dependencies can be installed via [poetry](https://python-poetry.org/)
 
-And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
-
-| *nix | Windows |
-| - | - |
-|<pre>python3 -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>py -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
-
-or alternatively, (when inside repository root)
-
-| *nix | Windows |
-| - | - |
-|<pre>python3 -m pip install -r ./docs/requirements.txt</pre>|<pre>py -m pip install -r ./docs/requirements.txt</pre>|
+```shell
+poetry install --without dev
+```
 
 ### *nix Only
 
@@ -71,8 +63,9 @@ Replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacm
 
 - [ROSA source code](https://github.com/Cornelius-Figgle/ROSA)
 - [Python 3](https://www.python.org/downloads/)
+- [poetry](https://python-poetry.org/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
-- [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux](https://github.com/Cornelius-Figgle/ROSA#Linux))
+- [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux notes](https://github.com/Cornelius-Figgle/ROSA#Linux))
 - [pygame==2.1.3.dev8](https://pypi.org/project/pygame/)
 
 ### Setup

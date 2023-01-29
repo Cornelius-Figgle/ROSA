@@ -12,37 +12,21 @@ Any shell commands in this guide are to executed using an appropriate `sh`ell. T
 
 First you will want to **clone** the repo (or download the [zip](https://github.com/Cornelius-Figgle/ROSA/zipball/main/) or the [tarball](https://github.com/Cornelius-Figgle/ROSA/tarball/main/) from GitHub):
 
-| *nix | Windows |
-| - | - |
-|<pre>cd /path/to/some/folder/<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|<pre>cd c:\\path\\to\\some\\folder\\<br>git clone https://github.com/Cornelius-Figgle/ROSA.git</pre>|
+[Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
 
-It is recommended that the dependencies are installed inside a [virtual environment](https://docs.python.org/3/library/venv.html) in your project repo
+You can then either clone the repo or download the zip from GitHub
 
-| *nix | Windows |
-| - | - |
-|<pre>python3 -m venv ./rosa-env<br>source ./rosa-env/scripts/activate</pre>|<pre>py -m venv .\\rosa-env<br>.\\rosa-env\\scripts\\activate.bat</pre>|
+```shell
+git clone https://github.com/Cornelius-Figgle/ROSA.git
+```
 
-Replace the last line with the appropriate command from the table below
+The dependencies can be installed via [poetry](https://python-poetry.org/)
 
-| OS | file |
-| - | - |
-| Windows CMD | `.\rosa-env\scripts\activate.bat` |
-| Powershell | `.\rosa-env\scripts\Activate.ps1` |
-| sh | `source ./rosa-env/scripts/activate` |
+```shell
+poetry install --without dev
+```
 
-And the dependencies can be installed via [pip](https://pip.pypa.io/en/stable/) (which is normally installed with Python) when inside your virtual environment
-
-*Side note: I could only get `pygame` to work with version `2.1.3.dev8`, however others may not have this issue*
-
-| *nix | Windows |
-| - | - |
-|<pre>python3 -m pip --version<br>python3 -m pip install --user SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|<pre>py -m pip --version<br>py -m pip install SpeechRecognition pygame==2.1.3.dev8 PyAudio</pre>|
-
-Or alternatively, (when inside repository root):
-
-| *nix | Windows |
-| - | - |
-|<pre>python3 -m pip install --user -r ./docs/requirements.txt</pre>|<pre>py -m pip install -r .\\docs\\win_requirements.txt</pre>|
+*side note: I could only get `pygame` to work with version `2.1.3.dev8`, however others may not have this issue*
 
 ## *nix Only
 
