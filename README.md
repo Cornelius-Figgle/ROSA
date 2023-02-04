@@ -33,9 +33,10 @@ You can then either clone the repo or download the zip from GitHub
 
 ```shell
 git clone https://github.com/Cornelius-Figgle/ROSA.git
+cd ROSA
 ```
 
-The dependencies can be installed via [poetry](https://python-poetry.org/)
+The dependencies can be installed via [poetry](https://python-poetry.org/) &mdash; when inside the project root
 
 ```shell
 poetry install --without dev
@@ -55,8 +56,6 @@ PyAudio also may need to be installed via the `python-pyaudio` package (you will
 sudo apt install python-pyaudio flac python3-gst-1.0
 ```
 
-Replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacman`, etc)
-
 ## Usage
 
 ### Prerequisites
@@ -74,7 +73,7 @@ Replace `apt` with the package manager for your system (`dpkg`, `apt-get`, `pacm
 - Please make sure you have connected your mic and speakers
 - Your internet connection is stable (used to transcribe speech via Google Speech Recognition)
 
-Then you should be able to run the `main.py` file from wherever you cloned the repo/extracted the zip to
+Then you should be able to run the `./src/ROSA/main.py` file from wherever you cloned the repo/extracted the zip to
 
 ## License
 
