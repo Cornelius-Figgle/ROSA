@@ -10,7 +10,7 @@ An emotional smart assistant that doesn't listen to you
 
 Any shell commands in this guide are to executed using an appropriate `sh`ell. This could be `Command Prompt`, `Powershell`, `bash`, `Git CMD` or any others of your choice ¯\\( ツ )/¯
 
-First you will want to **clone** the repo (or download the [zip](https://github.com/Cornelius-Figgle/ROSA/zipball/main/) or the [tarball](https://github.com/Cornelius-Figgle/ROSA/tarball/main/) from GitHub):
+First you will want to **clone** the repo (or download the [zip](https://github.com/Cornelius-Figgle/ROSA/zipball/main/)/[tarball](https://github.com/Cornelius-Figgle/ROSA/tarball/main/) from GitHub):
 
 [Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
 
