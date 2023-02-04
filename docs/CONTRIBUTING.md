@@ -13,7 +13,7 @@ The [issue tracker](https://github.com/Cornelius-Figgle/ROSA/issues) is the pref
 - Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others
 - Please make sure to provide **accurate, up to date information** on your issue/topic
-  - It should include the information listed in the [issue templates](https://github.com/Cornelius-Figgle/ROSA/blob/main/.github/ISSUE_TEMPLATE)
+  - It should include the information listed in the [issue templates](../.github/ISSUE_TEMPLATE/)
 
 ## Bug reports
 
@@ -24,7 +24,7 @@ Guidelines for bug reports:
 - **Use the GitHub issue search** &mdash; check if the issue has already been reported
 - **Check if the issue has been fixed** &mdash; try to reproduce it using the latest `main` branch in the repository
 - **Isolate the problem** &mdash; ideally on a fresh install
-  - Either fully uninstall/reinstall the program, install inside a fresh VM/sandbox/machine
+  - Either fully uninstall/reinstall the program or install inside a fresh VM/sandbox/machine
 - **Give us your test environment** &mdash; Operating system name and version, program version...
 
 ## Feature requests
