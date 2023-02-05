@@ -1,5 +1,4 @@
 # 
-# 
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/

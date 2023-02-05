@@ -1,0 +1,17 @@
+fred started
+progress_thread started
+paths loaded
+install_configs.pickle created
+downloaded_files.pickle created
+started UAC script
+UAC script finished
+checking dirs at "bin -> start"
+started shortcut script for "bin -> start"
+shortcut script finished for "bin -> start"
+checking dirs at "readme -> start"
+started shortcut script for "readme -> start"
+shortcut script finished for "readme -> start"
+checking dirs at "bin -> desk"
+started shortcut script for "bin -> desk"
+shortcut script finished for "bin -> desk"
+install complete!
