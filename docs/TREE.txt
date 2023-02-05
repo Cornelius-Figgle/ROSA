@@ -1,0 +1,99 @@
+https://tree.nathanfriend.io/?s=(%27options!(%27fancy!true~fullPath!false~trailingSlash!true~rootDot!true)~source!(%27source!%27main9V2K672Khub6ISSUE_TEMPLATE3bug_report83config.yml3feature_request86workflows3codeql.yml6dependabot.yml2.venv6include376Lib376Scripts376Kgnore6pyvenv.cfg2H672bin6V.exe65_gui.exe65_uac.exe2W672demo672docs6ico3bloody_hellJcode_1Jdocs.png%23ico%23png3lordJno_idea_rosaJrick_memeJtitle.txt6BUILDING86CODE_OF_CONDUCT86CONTRIBUTING86INSTALLATION86SECURITY86TODO86TREE.txt2src6W3batch_W.bat3batch_W.sh3progress_steps.txt3X3valid_known_paths.txt6V3H3*73responses3*73*responses83__init__Z3foreign_potato_masterZ3gpio.json3mainZ3VZ6535_guiZ35_uacZ2tests672Kignore2LICENSE2poetry.lock2pyproject.toml2X%5Cngh-pages9K279.venv279H279css2cayman.css2normalize.css2Kignore2404.html2Qico2Qpng2%22LICENSE2X2template_%22wh_Qpng%27)~version!%271%27)*%20%2029*36*5V_installer62*7...8.md9%5Cn*H__pycache__J.jpg3K.gitQfavicon.VROSAWbuildXREADME8Z.py%22index.html2%233hotpot-ai.%01%23%22ZXWVQKJH9876532*
+
+.
+├── main/
+│   └── ROSA/
+│       ├── .git/
+│       │   └── ...
+│       ├── .github/
+│       │   ├── ISSUE_TEMPLATE/
+│       │   │   ├── bug_report.md
+│       │   │   ├── config.yml
+│       │   │   └── feature_request.md
+│       │   ├── workflows/
+│       │   │   └── codeql.yml
+│       │   └── dependabot.yml
+│       ├── .venv/
+│       │   ├── include/
+│       │   │   └── ...
+│       │   ├── Lib/
+│       │   │   └── ...
+│       │   ├── Scripts/
+│       │   │   └── ...
+│       │   ├── .gitgnore
+│       │   └── pyvenv.cfg
+│       ├── __pycache__/
+│       │   └── ...
+│       ├── bin/
+│       │   ├── ROSA.exe
+│       │   ├── ROSA_installer_gui.exe
+│       │   └── ROSA_installer_uac.exe
+│       ├── build/
+│       │   └── ...
+│       ├── demo/
+│       │   └── ...
+│       ├── docs/
+│       │   ├── ico/
+│       │   │   ├── bloody_hell.jpg
+│       │   │   ├── code_1.jpg
+│       │   │   ├── docs.png
+│       │   │   ├── hotpot-ai.ico
+│       │   │   ├── hotpot-ai.png
+│       │   │   ├── lord.jpg
+│       │   │   ├── no_idea_rosa.jpg
+│       │   │   ├── rick_meme.jpg
+│       │   │   └── title.txt
+│       │   ├── BUILDING.md
+│       │   ├── CODE_OF_CONDUCT.md
+│       │   ├── CONTRIBUTING.md
+│       │   ├── INSTALLATION.md
+│       │   ├── SECURITY.md
+│       │   ├── TODO.md
+│       │   └── TREE.txt
+│       ├── src/
+│       │   ├── build/
+│       │   │   ├── batch_build.bat
+│       │   │   ├── batch_build.sh
+│       │   │   ├── progress_steps.txt
+│       │   │   ├── README.md
+│       │   │   └── valid_known_paths.txt
+│       │   ├── ROSA/
+│       │   │   ├── __pycache__/
+│       │   │   │   └── ...
+│       │   │   ├── responses/
+│       │   │   │   ├── ...
+│       │   │   │   └── responses.md
+│       │   │   ├── __init__.py
+│       │   │   ├── foreign_potato_master.py
+│       │   │   ├── gpio.json
+│       │   │   ├── main.py
+│       │   │   └── ROSA.py
+│       │   └── ROSA_installer/
+│       │       ├── ROSA_installer_gui.py
+│       │       └── ROSA_installer_uac.py
+│       ├── tests/
+│       │   └── ...
+│       ├── .gitignore
+│       ├── LICENSE
+│       ├── poetry.lock
+│       ├── pyproject.toml
+│       └── README.md
+└── gh-pages/
+    ├── .git/
+    │   └── ...
+    ├── .venv/
+    │   └── ...
+    ├── __pycache__/
+    │   └── ...
+    └── css/
+        ├── cayman.css
+        ├── normalize.css
+        ├── .gitignore
+        ├── 404.html
+        ├── favicon.ico
+        ├── favicon.png
+        ├── index.html
+        ├── LICENSE
+        ├── README.md
+        ├── template_index.html
+        └── wh_favicon.png
