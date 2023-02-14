@@ -1,0 +1,30 @@
+import pygst
+pygst.require("0.10")
+import gst
+import soundcloud
+import sys
+
+query = sys.argv[1] ##TODO try catch  for no parameters
+
+
+client = soundcloud.Client(client_id='xxx')
+track = client.get('/tracks', q=query)[0]
+stream_url = client.get(track.stream_url, allow_redirects=False)
+
+
+
+#our stream to play
+music_stream_uri = stream_url.location
+
+#creates a playbin (plays media form an uri) 
+player = gst.element_factory_make("playbin", "player")
+
+#set the uri
+player.set_property('uri', music_stream_uri)
+
+#start playing
+player.set_state(gst.STATE_PLAYING)
+
+
+#wait and let the music play
+raw_input('Press enter to stop playing...')
