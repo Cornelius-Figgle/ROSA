@@ -40,6 +40,12 @@ from typing import NoReturn
 import PyInstaller.__main__ as pyinstaller_
 
 
+class TreeError(FileNotFoundError):
+    '''
+    Files missing in tree, see `check_tree()` for more info
+    '''
+
+
 def check_tree(work_dir: str, do_installer: bool) -> list:
     build_tree = {
         # note: the prefix of './' has intentionally been left off
@@ -76,7 +82,6 @@ def check_tree(work_dir: str, do_installer: bool) -> list:
                 error_list.append(ntpath.normpath(path_to_check))
 
     return error_list
-
 
 def compile_src(work_dir: str, do_installer: bool) -> None:
     windows_main_args = [
@@ -178,6 +183,8 @@ def main() -> NoReturn:
             work_dir=args.work_dir,
             do_installer=args.installer
         )
+        if tree_state:
+            raise TreeError(tree_state)
 
     compile_src(
         work_dir=args.work_dir,
