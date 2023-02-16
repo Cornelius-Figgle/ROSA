@@ -15,7 +15,7 @@ It may work separately and independently of the main repo, it may not
 - Ideas (c) Max Harrison 2023
 - Vocals (c) Evie Peacock 2023
 
-Thanks also to Alex, Ashe & Jake for support throughout (sorry for the
+Thanks also to everyone else for support throughout (sorry for the
 spam). also thanks to all the internet peoples that helped with this
 as well 
 '''
