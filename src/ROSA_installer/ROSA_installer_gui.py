@@ -1,4 +1,4 @@
-# pyinstaller --noconfirm --log-level=WARN --clean --distpath ".\bin" --workpath ".\bin\build" --name ROSA-installer_gui --onefile --nowindow --paths ".\.venv\Lib\site-packages" --add-data ".\bin\bin;." --add-data ".\docs\ico;.\ico" --hidden-import pyi_splash --splash ".\docs\ico\hotpot-ai.png" --icon ".\docs\ico\hotpot-ai.ico" .\src\ROSA-installer\WIN_ROSA-installer.py
+# 
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
@@ -331,7 +331,7 @@ class install_ROSA(qt.QWizardPage):
         pixmap = QPixmap(
             os.path.join(
                 file_base_path, 
-                './docs/ico/hotpot-ai.png'
+                './ico/hotpot-ai.png'
             )
         )
         label.setPixmap(pixmap)
@@ -385,7 +385,7 @@ class install_ROSA(qt.QWizardPage):
             )
         self.downloaded_files['adm'] = os.path.join(
             file_base_path,
-            'ROSA-installer_uac.exe'
+            'ROSA_installer_uac.exe'
         )
         self.downloaded_files['vbs'] = os.path.join(
             file_base_path, 

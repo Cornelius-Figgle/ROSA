@@ -1,5 +1,3 @@
-' "C:\Users\WDAGUtilityAccount\Downloads\create_shortcut.vbs" "C:\Program Files\ROSA\ROSA.exe" "C:\Users\WDAGUtilityAccount\Desktop\ROSA.lnk" "C:\Users\WDAGUtilityAccount\AppData\Local\Temp\_MEI50202\ico\hotpot-ai.ico" "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you"
-
 'https://github.com/Cornelius-Figgle/ROSA/
 'ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
@@ -17,6 +15,7 @@
 'the spam). Also thanks to all the internet peoples that helped with 
 'this as well 
 
+' "C:\Users\WDAGUtilityAccount\Downloads\create_shortcut.vbs" "C:\Program Files\ROSA\ROSA.exe" "C:\Users\WDAGUtilityAccount\Desktop\ROSA.lnk" "C:\Users\WDAGUtilityAccount\AppData\Local\Temp\_MEI50202\ico\hotpot-ai.ico" "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesnt listen to you"
 
 exe = WScript.Arguments.Item(0) 'exe path
 work = WScript.Arguments.Item(0) 'working dir of exe

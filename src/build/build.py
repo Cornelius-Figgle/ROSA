@@ -79,53 +79,64 @@ def check_tree(work_dir: str, do_installer: bool) -> list:
 
 
 def compile_src(work_dir: str, do_installer: bool) -> None:
+    windows_main_args = [
+        os.path.join(work_dir, 'src\\ROSA\\main.py'),
+        '--name', 'ROSA', '--onefile',
+        '--noconfirm', '--log-level=WARN', '--clean', '--console',
+        '--icon', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico'),
+        '--distpath', os.path.join(work_dir, 'bin'),
+        '--workpath', os.path.join(work_dir, 'build'),
+        '--paths', os.path.join(work_dir, '.venv\\Lib\\site-packages'),
+        '--add-binary', os.path.join(work_dir, 'src\\ROSA\\responses;.\\responses'),
+        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.\\README.md')
+    ]
+    windows_installer_uac_args = [
+        os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_uac.py'),
+        '--name', 'ROSA_installer_uac', '--onefile', '--uac-admin',
+        '--noconfirm', '--log-level=WARN', '--clean', '--windowed',
+        '--hidden-import', 'pyi_splash'
+        '--splash', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png'),
+        '--icon', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico'),
+        '--distpath', os.path.join(work_dir, 'bin'),
+        '--workpath', os.path.join(work_dir, 'build'),
+        '--paths', os.path.join(work_dir, '.venv\\Lib\\site-packages'),
+        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.\\README.md')
+    ]
+    windows_installer_main_args = [
+        os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_gui.py'),
+        '--name', 'ROSA_installer_gui', '--onefile'
+        '--noconfirm', '--log-level=WARN', '--clean', '--windowed',
+        '--hidden-import', 'pyi_splash'
+        '--splash', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png'),
+        '--icon', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico'),
+        '--distpath', os.path.join(work_dir, 'bin'),
+        '--workpath', os.path.join(work_dir, 'build'),
+        '--paths', os.path.join(work_dir, '.venv\\Lib\\site-packages'),
+        '--add-data', os.path.join(work_dir, 'docs\\ico;.\\ico'),
+        '--add-data', os.path.join(work_dir, 'src\\build\\create_shortcut.vbs;.\\create_shortcut.vbs'),
+        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.\\README.md'),
+        '--add-data', os.path.join(work_dir, 'bin\\ROSA.exe;.\\ROSA.exe'),
+        '--add-data', os.path.join(work_dir, 'bin\\ROSA_installer_uac.exe;.\\ROSA_installer_uac.exe')
+    ]
+    posix_main_args = [
+        os.path.join(work_dir, 'src/ROSA/main.py'),
+        '--name', 'ROSA', '--onefile',
+        '--noconfirm', '--log-level=WARN', '--clean', '--console',
+        '--icon', os.path.join(work_dir, 'docs/ico/hotpot-ai.ico'),
+        '--distpath', os.path.join(work_dir, 'bin'),
+        '--workpath', os.path.join(work_dir, 'build'),
+        '--paths', os.path.join(work_dir, '.venv/Lib/site-packages'),
+        '--add-binary', os.path.join(work_dir, 'src/ROSA/responses:./responses'),
+        '--add-data', os.path.join(work_dir, 'src/build/README.md:./README.md'),
+    ]
+
     if os.name in ('nt', 'dos'):
-        pyinstaller_.run([
-            os.path.join(work_dir, 'src\\ROSA\\main.py'),
-            '--name ROSA', '--onefile',
-            '--noconfirm', '--log-level=WARN', '--clean', '--nowindow',
-            '--icon {}'.format(os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico')),
-            '--distpath {}'.format(os.path.join(work_dir, 'bin')),
-            '--workpath {}'.format(os.path.join(work_dir, 'build')),
-            '--paths {}'.format(os.path.join(work_dir, '.venv\\Lib\\site-packages')),
-            '--add-binary .\\src\\ROSA\\responses;.\\responses'
-        ])
-
+        pyinstaller_.run(windows_main_args)
         if do_installer:
-            pyinstaller_.run([
-                os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_uac.py'),
-                '--name ROSA_installer_uac', '--onefile', '--uac-admin',
-                '--noconfirm', '--log-level=WARN', '--clean', '--nowindow',
-                '--hidden-import pyi_splash'
-                '--splash {}'.format(os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png')),
-                '--icon {}'.format(os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico')),
-                '--distpath {}'.format(os.path.join(work_dir, 'bin')),
-                '--workpath {}'.format(os.path.join(work_dir, 'build')),
-                '--paths {}'.format(os.path.join(work_dir, '.venv\\Lib\\site-packages'))
-            ])
-            pyinstaller_.run([
-                os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_gui.py'),
-                '--name ROSA_installer_gui', '--onefile'
-                '--noconfirm', '--log-level=WARN', '--clean', '--nowindow',
-                '--hidden-import pyi_splash'
-                '--splash {}'.format(os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png')),
-                '--icon {}'.format(os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico')),
-                '--distpath {}'.format(os.path.join(work_dir, 'bin')),
-                '--workpath {}'.format(os.path.join(work_dir, 'build')),
-                '--paths {}'.format(os.path.join(work_dir, '.venv\\Lib\\site-packages'))
-            ])
-
+            pyinstaller_.run(windows_installer_uac_args)
+            pyinstaller_.run(windows_installer_main_args)
     elif os.name in ('posix'):
-        pyinstaller_.run([
-            os.path.join(work_dir, 'src/ROSA/main.py'),
-            '--name ROSA', '--onefile',
-            '--noconfirm', '--log-level=WARN', '--clean',
-            '--icon {}'.format(os.path.join(work_dir, 'docs/ico/hotpot-ai.ico')),
-            '--distpath {}'.format(os.path.join(work_dir, 'bin')),
-            '--workpath {}'.format(os.path.join(work_dir, 'build')),
-            '--paths {}'.format(os.path.join(work_dir, '.venv/Lib/site-packages')),
-            '--add-binary ./src/ROSA/responses:./responses'
-        ])
+        pyinstaller_.run(posix_main_args)
 
 def main() -> NoReturn:
     parser = argparse.ArgumentParser(
