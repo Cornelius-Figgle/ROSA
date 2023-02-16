@@ -83,6 +83,8 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         os.path.join(work_dir, 'src\\ROSA\\main.py'),
         '--name', 'ROSA', '--onefile',
         '--noconfirm', '--log-level=WARN', '--clean', '--console',
+        #'--hidden-import', 'pyi_splash'
+        #'--splash', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png'),
         '--icon', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico'),
         '--distpath', os.path.join(work_dir, 'bin'),
         '--workpath', os.path.join(work_dir, 'build'),
@@ -94,8 +96,6 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_uac.py'),
         '--name', 'ROSA_installer_uac', '--onefile', '--uac-admin',
         '--noconfirm', '--log-level=WARN', '--clean', '--windowed',
-        '--hidden-import', 'pyi_splash'
-        '--splash', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png'),
         '--icon', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico'),
         '--distpath', os.path.join(work_dir, 'bin'),
         '--workpath', os.path.join(work_dir, 'build'),
@@ -104,10 +104,10 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
     ]
     windows_installer_main_args = [
         os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_gui.py'),
-        '--name', 'ROSA_installer_gui', '--onefile'
+        '--name', 'ROSA_installer_gui', '--onefile',
         '--noconfirm', '--log-level=WARN', '--clean', '--windowed',
-        '--hidden-import', 'pyi_splash'
-        '--splash', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png'),
+        #'--hidden-import', 'pyi_splash'
+        #'--splash', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.png'),
         '--icon', os.path.join(work_dir, 'docs\\ico\\hotpot-ai.ico'),
         '--distpath', os.path.join(work_dir, 'bin'),
         '--workpath', os.path.join(work_dir, 'build'),
@@ -122,6 +122,8 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         os.path.join(work_dir, 'src/ROSA/main.py'),
         '--name', 'ROSA', '--onefile',
         '--noconfirm', '--log-level=WARN', '--clean', '--console',
+        #'--hidden-import', 'pyi_splash'
+        #'--splash', os.path.join(work_dir, 'docs/ico/hotpot-ai.png'),
         '--icon', os.path.join(work_dir, 'docs/ico/hotpot-ai.ico'),
         '--distpath', os.path.join(work_dir, 'bin'),
         '--workpath', os.path.join(work_dir, 'build'),
