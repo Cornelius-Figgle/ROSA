@@ -151,11 +151,16 @@ def main() -> NoReturn:
         description='Compiles the ROSA application to binaries for distribution',
         epilog='''For any further assistance, please refer to the documentation:
             https://github.com/Cornelius-Figgle/ROSA/blob/main/docs/BUILDING.md
-            https://github.com/Cornelius-Figgle/ROSA/tree/main/src/build
+            https://github.com/Cornelius-Figgle/ROSA/tree/main/src/build/
         ''',
         formatter_class=argparse.RawTextHelpFormatter
     )
-    
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version='%(prog)s {version}'.format(version=__version__),
+        help='show version info and exit'
+    )
     parser.add_argument(
         '-i', '--installer',
         action='store_true', default=False,
