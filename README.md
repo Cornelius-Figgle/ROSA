@@ -42,9 +42,9 @@ The dependencies can be installed via [poetry](https://python-poetry.org/) &mdas
 poetry install --without dev
 ```
 
-### *nix Only
+### Posix Only
 
-On *nix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
+On Posix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
 
 ```bash
 sudo apt install python3-sdl2

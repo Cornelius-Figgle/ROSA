@@ -6,7 +6,7 @@
 
 '''
 Ok so, originally this was intended to be cross-platform. It was 
-hard and confusing and messy. I also realised, *nix users generally 
+hard and confusing and messy. I also realised, posix users generally 
 install stuff themselves, and my installer is probably incorrect 
 for their specific system anyways.
 

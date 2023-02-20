@@ -165,7 +165,7 @@ def main() -> NoReturn:
         '-i', '--installer',
         action='store_true', default=False,
         required=False,
-        help='whether to build to the Windows installer, defaults to `False` (does nothing on *nix )'
+        help='whether to build to the Windows installer, defaults to `False` (does nothing on posix )'
     )
     parser.add_argument(
         '-w', '--work-dir',
