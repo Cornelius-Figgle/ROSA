@@ -20,7 +20,7 @@ python3 ./src/build/build.py
 py .\src\build\build.py --installer
 ```
 
-And that should be everything! For more info see below, or run `python3 ./src/build/build.py --help`
+And that should be everything! For more info about configuration see below
 
 ```shell
 usage: ./src/build/build.py [-h] [-v] [-i] [-w PATH] [--no-check]
