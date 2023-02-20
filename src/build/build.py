@@ -21,7 +21,7 @@ as well
 '''
 
 # note: view associated GitHub info as well
-__version__ = 'Pre-release'  
+__version__ = 'v0.6.0'  
 __author__ = 'Cornelius-Figgle'
 __email__ = 'max@fullimage.net'
 __maintainer__ = 'Cornelius-Figgle'
@@ -95,7 +95,7 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         '--workpath', os.path.join(work_dir, 'build'),
         '--paths', os.path.join(work_dir, '.venv\\Lib\\site-packages'),
         '--add-binary', os.path.join(work_dir, 'src\\ROSA\\responses;.\\responses'),
-        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.\\README.md')
+        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.')
     ]
     windows_installer_uac_args = [
         os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_uac.py'),
@@ -105,7 +105,7 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         '--distpath', os.path.join(work_dir, 'bin'),
         '--workpath', os.path.join(work_dir, 'build'),
         '--paths', os.path.join(work_dir, '.venv\\Lib\\site-packages'),
-        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.\\README.md')
+        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.')
     ]
     windows_installer_main_args = [
         os.path.join(work_dir, 'src\\ROSA_installer\\ROSA_installer_gui.py'),
@@ -118,10 +118,10 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         '--workpath', os.path.join(work_dir, 'build'),
         '--paths', os.path.join(work_dir, '.venv\\Lib\\site-packages'),
         '--add-data', os.path.join(work_dir, 'docs\\ico;.\\ico'),
-        '--add-data', os.path.join(work_dir, 'src\\build\\create_shortcut.vbs;.\\create_shortcut.vbs'),
-        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.\\README.md'),
-        '--add-data', os.path.join(work_dir, 'bin\\ROSA.exe;.\\ROSA.exe'),
-        '--add-data', os.path.join(work_dir, 'bin\\ROSA_installer_uac.exe;.\\ROSA_installer_uac.exe')
+        '--add-data', os.path.join(work_dir, 'src\\build\\create_shortcut.vbs;.'),
+        '--add-data', os.path.join(work_dir, 'src\\build\\README.md;.'),
+        '--add-data', os.path.join(work_dir, 'bin\\ROSA.exe;.'),
+        '--add-data', os.path.join(work_dir, 'bin\\ROSA_installer_uac.exe;.')
     ]
     posix_main_args = [
         os.path.join(work_dir, 'src/ROSA/main.py'),
@@ -134,7 +134,7 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         '--workpath', os.path.join(work_dir, 'build'),
         '--paths', os.path.join(work_dir, '.venv/Lib/site-packages'),
         '--add-binary', os.path.join(work_dir, 'src/ROSA/responses:./responses'),
-        '--add-data', os.path.join(work_dir, 'src/build/README.md:./README.md'),
+        '--add-data', os.path.join(work_dir, 'src/build/README.md:.'),
     ]
 
     if os.name in ('nt', 'dos'):
