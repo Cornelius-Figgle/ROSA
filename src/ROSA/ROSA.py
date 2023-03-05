@@ -76,7 +76,7 @@ from typing import NoReturn
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'true' ; import pygame.mixer as mixer
 import speech_recognition as sr
 
-from ROSA import foreign_potato_master
+import foreign_potato_master
 
 try:
     import RPi.GPIO as GPIO  # type: ignore
@@ -127,6 +127,7 @@ class dnf(Exception):
     fine
     '''
     ...
+
 
 class ROSA_:
     '''

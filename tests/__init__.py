@@ -31,42 +31,5 @@ __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 
 
-import os
-import sys
-from typing import NoReturn
-
-import ROSA
-
-
-def main() -> NoReturn:
-    '''
-    The main function that handles passing or args and return values.
-    Also handles the application loop and errors from functions
-    '''
-
-    obj = ROSA.ROSA_(
-        json_path = os.path.join(
-            os.path.dirname(
-                sys.executable
-            ),
-            'gpio.json'
-        )
-    )
-    # note: https://stackoverflow.com/a/74975328/19860022
-
-    try:
-        while True:
-            try:
-                speech = obj.background_listening()
-                if speech:  # note: if req asked
-                    typeq = obj.determine_response(speech)
-                    obj.respond(typeq)
-            except ROSA.dnf:
-                ...
-    except KeyboardInterrupt:
-        if ROSA.is_on_RPi: 
-            ROSA.do_cleanup()
-
-
-if __name__ == '__main__': 
-    main()
+from ROSA import ROSA
+from ROSA import foreign_potato_master
