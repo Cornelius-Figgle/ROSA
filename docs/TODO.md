@@ -10,7 +10,7 @@
 
 - sped?
 
-- >dynamically aud resp loading/layouts 
+- &#62; dynamically aud resp loading/layouts 
 
   - error checking in loads from aud&text (filling in gaps/warnings??)
 
