@@ -131,17 +131,8 @@ class ROSA_:
         def loading_screen_thread() -> None:
             '''
             Simple function to print out the title whilst the
-            application is setup. Uses `write_file` from the `ROSA`
+            application is setup. Uses `write_file` from the `ROSA_`
             class
-
-            ```python
-            
-            fred = Thread(
-                target=loading_screen_thread,
-                name='fred (ROSA)'
-            )
-            fred.start()
-            ```
             '''
 
             if self.write_file is sys.stdout:

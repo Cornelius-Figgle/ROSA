@@ -9,13 +9,18 @@ This file contains all of the text output from `ROSA`. Feel free to
 modify any of the phrases, but remember to update the audio files as
 well! :D
 
-In the `Responses` class, each category of response phrases should have
-a dictionary key in the `keys`, `responses` and `prev_responses`
-dictionaries. Keys should be a single word followed by the letter `q`,
-(although this is only by convention). They should also be listed in
-order of importance, starting with the most important. The key 
-`confusionq` HAS to be present in all three dictionaries all it is used
-as a fallback for unregistered queries
+- In the `Responses` class, each category of response phrases should
+have a dictionary key in the `keys`, `responses` and `prev_responses`
+dictionaries
+- Keys should be a single word followed by the letter `q`, (although
+this is only by convention)
+- They should also be listed in (roughly) the order of importance, 
+starting with the most important
+- The key `confusionq` HAS to be present in all three dictionaries all
+it is used as a fallback for unregistered queries
+- I should also add that the order of the strings in the lists inside of
+`responses` refers to the index number in the names of the audio files,
+so make sure these line up
 
 This file is directly used by `main.py`
 '''
@@ -137,7 +142,7 @@ class Text_Decorations:
         '         \|___|                                            \/____/                  \/____/         '
     ]
     symbols: dict[str, str] = {
-        'base': '|',
+        'base': '| i |',
         'input': '| < |',
         'output': '| > |',
         'error': '| ! |'
