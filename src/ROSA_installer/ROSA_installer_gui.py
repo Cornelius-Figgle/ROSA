@@ -24,12 +24,10 @@ GitHub, then realised I can pkg them into the exe with `pyinstaller`
 
 # source: https://python.plainenglish.io/packaging-data-files-to-pyinstaller-binaries-6ed63aa20538
 
-So anyway, have fun on Windows,
+So anyway, have fun on Windows
+'''
 
-    - Max, learning to be a dev
-
-=======================================================================
-
+'''
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2023
 
@@ -46,7 +44,7 @@ as well
 '''
 
 # note: view associated GitHub info as well
-__version__ = 'v0.6.0'  
+__version__ = 'v0.7.0'  
 __author__ = 'Cornelius-Figgle'
 __email__ = 'max@fullimage.net'
 __maintainer__ = 'Cornelius-Figgle'

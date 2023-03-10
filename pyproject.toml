@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ROSA"
-version = "0.5.0"
+version = "0.7.0"
 description = "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - an emotional voice assistant"
 authors = ["Cornelius-Figgle <max@fullimage.net>"]
 license = "MIT"
