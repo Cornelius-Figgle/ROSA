@@ -5,6 +5,10 @@
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
+Entry point for module execution
+'''
+
+'''
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2023
 
@@ -31,5 +35,8 @@ __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
 
 
-from ROSA import ROSA
-from ROSA import foreign_potato_master
+import ROSA
+
+
+if __name__ == '__main__': 
+    ROSA.main()

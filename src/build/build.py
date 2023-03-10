@@ -5,6 +5,10 @@
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
+Compiles the ROSA application to binaries for distribution
+'''
+
+'''
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2023
 
@@ -21,7 +25,7 @@ as well
 '''
 
 # note: view associated GitHub info as well
-__version__ = 'v0.6.0'  
+__version__ = 'v0.7.0'  
 __author__ = 'Cornelius-Figgle'
 __email__ = 'max@fullimage.net'
 __maintainer__ = 'Cornelius-Figgle'
@@ -56,8 +60,8 @@ def check_tree(work_dir: str, do_installer: bool) -> list:
             'src/ROSA/responses/',
             'src/ROSA/__init__.py',
             'src/ROSA/foreign_potato_master.py',
-            'src/ROSA/main.py',
-            'src/ROSA/ROSA.py'
+            'src/ROSA/__main__.py',
+            'src/ROSA/main.py'
         ],
         'installer_extras' : [
             'src/build/create_shortcut.vbs',
@@ -85,7 +89,7 @@ def check_tree(work_dir: str, do_installer: bool) -> list:
 
 def compile_src(work_dir: str, do_installer: bool) -> None:
     windows_main_args = [
-        os.path.join(work_dir, 'src\\ROSA\\main.py'),
+        os.path.join(work_dir, 'src\\ROSA\\__main__.py'),
         '--name', 'ROSA', '--onefile',
         '--noconfirm', '--log-level=WARN', '--clean', '--console',
         #'--hidden-import', 'pyi_splash'
@@ -124,7 +128,7 @@ def compile_src(work_dir: str, do_installer: bool) -> None:
         '--add-data', os.path.join(work_dir, 'bin\\ROSA_installer_uac.exe;.')
     ]
     posix_main_args = [
-        os.path.join(work_dir, 'src/ROSA/main.py'),
+        os.path.join(work_dir, 'src/ROSA/__main__.py'),
         '--name', 'ROSA', '--onefile',
         '--noconfirm', '--log-level=WARN', '--clean', '--console',
         #'--hidden-import', 'pyi_splash'
