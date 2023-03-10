@@ -1,6 +1,6 @@
-# todos
+# TODO
 
-## problems
+## Problems
 
 - sort pkg/app struct diffs (look into other projs?)
 
@@ -10,7 +10,7 @@
 
 - sped?
 
-- &#62; dynamically aud resp loading/layouts 
+- &#62; dynamically aud resp loading/layouts
 
   - error checking in loads from aud&text (filling in gaps/warnings??)
 
@@ -18,9 +18,7 @@
 
 - fix the cancelling in loaders/etc (CTRL+C / sys stops?? (daemons...maybe.))
 
-- BETTER THREAD HANDLING/ORGANISATION
-
-## future
+## Future
 
 - flags for bits and pieces (argparse)
 
@@ -31,13 +29,3 @@
 - PyPI pkgs??? (poetry!)
 
 - prog bars etc for build src
-
-
-
-
-
-
-
-
-
-

@@ -178,6 +178,7 @@ class ROSA_:
 
         fred = Thread(
             target=loading_screen_thread,
+            daemon=True,
             name='fred (ROSA)'
         )
         fred.start()
