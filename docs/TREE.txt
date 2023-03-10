@@ -48,6 +48,7 @@ https://tree.nathanfriend.io/?s=(%27options!(%27fancy!true~fullPath!false~traili
 │       │   ├── CONTRIBUTING.md
 │       │   ├── INSTALLATION.md
 │       │   ├── SECURITY.md
+│       │   ├── STRUCTURE.md
 │       │   ├── TODO.md
 │       │   └── TREE.txt
 │       ├── src/
@@ -65,10 +66,10 @@ https://tree.nathanfriend.io/?s=(%27options!(%27fancy!true~fullPath!false~traili
 │       │   │   │   ├── ...
 │       │   │   │   └── responses.md
 │       │   │   ├── __init__.py
+│       │   │   ├── __main__.py
 │       │   │   ├── foreign_potato_master.py
 │       │   │   ├── gpio.json
-│       │   │   ├── main.py
-│       │   │   └── ROSA.py
+│       │   │   └── main.py
 │       │   └── ROSA_installer/
 │       │       ├── ROSA_installer_gui.py
 │       │       └── ROSA_installer_uac.py
