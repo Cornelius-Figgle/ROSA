@@ -17,11 +17,10 @@ order of importance, starting with the most important. The key
 `confusionq` HAS to be present in all three dictionaries all it is used
 as a fallback for unregistered queries
 
-The `ROSA.py` file in the module uses this file, so make sure
-both are present in your installation/download
+This file is directly used by `main.py`
+'''
 
-=======================================================================
-
+'''
 THIS FILE IS PART OF THE `ROSA` REPO, MAINTAINED AND PRODUCED BY MAX 
 HARRISON, AS OF 2023
 
