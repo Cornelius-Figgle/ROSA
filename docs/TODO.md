@@ -2,8 +2,6 @@
 
 ## Problems
 
-- sort pkg/app struct diffs (look into other projs?)
-
 - run on rpi???
 
 - threaded response+playback (locks or smth to cancel any currently running threads)
