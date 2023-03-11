@@ -177,9 +177,12 @@ class ROSA_:
             update_text('UI Loaded...')
             close()
 
-        fred.join()
-        # note: join `fred` before we print the notice about adjusting
-        # for ambient noise
+        while True:
+            # note: blocks main for one second
+            # note: allows the main thread to check for CTRL-C presses
+            fred.join(1)
+            if not fred.is_alive():  # note: if it has finished
+                break
 
         print(self.notices['adjusting_levels'], file=write_file)
         with sr.Microphone() as source: 
