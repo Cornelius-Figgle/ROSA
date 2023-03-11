@@ -3,11 +3,6 @@
 ## Problems
 
 - run on rpi???
-- threaded response+playback (locks or smth to cancel any currently running threads)
-- sped?
-- &#62;dynamic aud resp loading/layouts
-  - error checking in loads from aud&text (filling in gaps/warnings??)
-  - global data as fallbacks (see comment ab future cfgs/flags)
 - gh-pages title bar in mobile is wrong colours
 
 ## Future
@@ -19,6 +14,16 @@
   - silent mode?
   - mic to use
   - force `is_on_RPi` state
-- move `gpio.json` to a global cfg
+  - gpio pins
+
+  - &#62;dynamic aud resp loading/layouts
+    - error checking in loads from aud&text (filling in gaps/warnings??)
+    - global data as fallbacks (see comment ab future cfgs/flags)
+  
+  - move `gpio.json` to a global cfg
+
 - PyPI pkgs??? (poetry!)
 - prog bars etc for build src
+
+- threaded response+playback (locks or smth to cancel any currently running threads)
+  - hm maybe not for now
