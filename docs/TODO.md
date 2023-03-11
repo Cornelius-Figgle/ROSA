@@ -8,7 +8,6 @@
 - &#62;dynamic aud resp loading/layouts
   - error checking in loads from aud&text (filling in gaps/warnings??)
   - global data as fallbacks (see comment ab future cfgs/flags)
-- fix the cancelling in loaders/etc (CTRL+C / sys stops?? (daemons...maybe.))
 - gh-pages title bar in mobile is wrong colours
 
 ## Future
