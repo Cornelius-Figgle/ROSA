@@ -27,7 +27,7 @@ An emotional smart assistant that doesn't listen to you
 
 ### All Platforms
 
-[Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
+[Python 3.10](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
 
 You can then either clone the repo or download the zip from GitHub
 
@@ -61,7 +61,7 @@ sudo apt install python-pyaudio flac python3-gst-1.0
 ### Prerequisites
 
 - [ROSA source code](https://github.com/Cornelius-Figgle/ROSA)
-- [Python 3](https://www.python.org/downloads/)
+- [Python 3.10](https://www.python.org/downloads/)
 - [poetry](https://python-poetry.org/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux notes](https://github.com/Cornelius-Figgle/ROSA#Linux))
