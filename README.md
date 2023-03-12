@@ -27,7 +27,7 @@ An emotional smart assistant that doesn't listen to you
 
 ### All Platforms
 
-[Python 3.10](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
+[Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
 
 You can then either clone the repo or download the zip from GitHub
 
@@ -44,7 +44,7 @@ poetry install --without dev
 
 ### Posix Only
 
-On Posix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
+On some Posix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [built-in](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
 
 ```bash
 sudo apt install python3-sdl2
@@ -53,7 +53,7 @@ sudo apt install python3-sdl2
 PyAudio also may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
 
 ```bash
-sudo apt install python-pyaudio flac python3-gst-1.0
+sudo apt install python3-pyaudio flac python3-gst-1.0
 ```
 
 ## Usage
@@ -61,7 +61,7 @@ sudo apt install python-pyaudio flac python3-gst-1.0
 ### Prerequisites
 
 - [ROSA source code](https://github.com/Cornelius-Figgle/ROSA)
-- [Python 3.10](https://www.python.org/downloads/)
+- [Python 3](https://www.python.org/downloads/)
 - [poetry](https://python-poetry.org/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux notes](https://github.com/Cornelius-Figgle/ROSA#Linux))
@@ -73,7 +73,13 @@ sudo apt install python-pyaudio flac python3-gst-1.0
 - Please make sure you have connected your mic and speakers
 - Your internet connection is stable (used to transcribe speech via Google Speech Recognition)
 
-Then you should be able to run the `./src/ROSA/main.py` file from wherever you cloned the repo/extracted the zip to
+Then you should be able to run the following command to start ROSA (within the project root):
+
+```shell
+py -m src.ROSA
+OR
+python3 -m src.ROSA
+```
 
 ## License
 
