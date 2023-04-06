@@ -74,9 +74,9 @@ sudo apt install python3-pyaudio flac python3-gst-1.0
 Then you should be able to run the following command to start ROSA (within the project root):
 
 ```shell
-py -m src.ROSA
+poetry run python3 -m src.ROSA
 OR
-python3 -m src.ROSA
+poetry run py -m src.ROSA
 ```
 
 ## License
