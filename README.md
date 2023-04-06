@@ -23,13 +23,11 @@ An emotional smart assistant that doesn't listen to you
 
 ## Installation
 
-*for a more detailed guide, [see here](https://github.com/Cornelius-Figgle/ROSA/blob/main/docs/INSTALLATION.md)*
-
 ### All Platforms
 
-[Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if it isn't already
+[Python 3](https://www.python.org/downloads/) and [poetry](https://python-poetry.org/) will need to be installed if they aren't already
 
-You can then either clone the repo or download the zip from GitHub
+You can then either clone the repo or download the zip/tarball from GitHub
 
 ```shell
 git clone https://github.com/Cornelius-Figgle/ROSA.git
@@ -39,7 +37,7 @@ cd ROSA
 The dependencies can be installed via [poetry](https://python-poetry.org/) &mdash; when inside the project root
 
 ```shell
-poetry install --without dev
+poetry install
 ```
 
 ### Posix Only
