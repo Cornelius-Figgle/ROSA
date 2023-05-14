@@ -28,6 +28,7 @@ It may work separately and independently of the main repo, it may not
 - Ideas (c) Callum Blumfield 2023
 - Ideas (c) Max Harrison 2023
 - Vocals (c) Evie Peacock 2023
+- Art (c) Ashe Ceaton 2023
 
 Thanks also to everyone else for support throughout (sorry for the
 spam). also thanks to all the internet peoples that helped with this
@@ -35,14 +36,14 @@ as well
 '''
 
 # note: view associated GitHub info as well
-__version__ = 'v0.7.0'  
+__version__ = 'v0.8.0'  
 __author__ = 'Cornelius-Figgle'
 __email__ = 'max@fullimage.net'
 __maintainer__ = 'Cornelius-Figgle'
 __copyright__ = 'Copyright (c) 2023 Max Harrison'
 __license__ = 'MIT'
 __status__ = 'Development'
-__credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
+__credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock', 'Ashe Ceaton']
 
 
 import json
@@ -57,7 +58,7 @@ from typing import NoReturn
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'true' ; import pygame.mixer as mixer
 import speech_recognition as sr
 
-from ROSA import foreign_potato_master
+from rosa import foreign_potato_master
 
 try:
     import RPi.GPIO as GPIO  # type: ignore
@@ -110,7 +111,7 @@ class dnf(Exception):
     ...
 
 
-class ROSA_:
+class Rosa_:
     '''
     Main class for defining responses/keywords etc
     '''

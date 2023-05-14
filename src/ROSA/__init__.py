@@ -18,6 +18,7 @@ It may work separately and independently of the main repo, it may not
 - Ideas (c) Callum Blumfield 2023
 - Ideas (c) Max Harrison 2023
 - Vocals (c) Evie Peacock 2023
+- Art (c) Ashe Ceaton 2023
 
 Thanks also to everyone else for support throughout (sorry for the
 spam). also thanks to all the internet peoples that helped with this
@@ -25,21 +26,21 @@ as well
 '''
 
 # note: view associated GitHub info as well
-__version__ = 'v0.7.0'  
+__version__ = 'v0.8.0'  
 __author__ = 'Cornelius-Figgle'
 __email__ = 'max@fullimage.net'
 __maintainer__ = 'Cornelius-Figgle'
 __copyright__ = 'Copyright (c) 2023 Max Harrison'
 __license__ = 'MIT'
 __status__ = 'Development'
-__credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock']
+__credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock', 'Ashe Ceaton']
 
 
 import os
 import sys
 from typing import NoReturn
 
-import ROSA.main as ROSA
+import rosa.main as rs
 
 
 def main() -> NoReturn:
@@ -48,7 +49,7 @@ def main() -> NoReturn:
     Also handles the application loop and errors from functions
     '''
 
-    obj = ROSA.ROSA_(
+    obj = rs.Rosa_(
         json_path = os.path.join(
             os.path.dirname(
                 sys.executable
@@ -65,8 +66,8 @@ def main() -> NoReturn:
                 if speech:  # note: if req asked
                     typeq = obj.determine_response(speech)
                     obj.respond(typeq)
-            except ROSA.dnf:
+            except rs.dnf:
                 ...
     except KeyboardInterrupt:
-        if ROSA.is_on_RPi: 
-            ROSA.do_cleanup()
+        if rs.is_on_RPi: 
+            rs.do_cleanup()

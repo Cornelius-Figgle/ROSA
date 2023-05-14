@@ -21,7 +21,7 @@ as well
 '''
 
 # note: view associated GitHub info as well
-__version__ = 'v0.7.0'  
+__version__ = 'v0.8.0'  
 __author__ = 'Cornelius-Figgle'
 __email__ = 'max@fullimage.net'
 __maintainer__ = 'Cornelius-Figgle'

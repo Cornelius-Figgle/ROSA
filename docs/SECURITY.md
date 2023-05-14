@@ -6,8 +6,9 @@ Use this section to tell people about which versions of your project are current
 
 | Version | Supported |
 | - | - |
-| v0.7.0 | :heavy_check_mark: |
-| v0.6.0 | :heavy_check_mark: |
+| v0.8.0 | coming soon |
+| v0.7.0 | :x: |
+| v0.6.0 | :x: |
 | v0.5.0 | :x: |
 | v0.4.0 | :x: |
 | v0.3.0 | :x: |
