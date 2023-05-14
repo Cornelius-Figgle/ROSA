@@ -10,12 +10,12 @@ ROSA (or Robotically Obnoxious Serving Assistant), is a smart assistant
 code is written primarily for Windows 10 and RaspbianOS, however should
 function on most, if not all, operating systems and platforms
 
-ROSA has three main functions inside of the `ROSA_` class in `main`, which are
+ROSA has three main functions inside of the `Rosa_` class in `main`, which are
 `background_listening`, `determine_response` and `respond`. These
 should be called in that order, with the return values from each being
 passed into the next function
 
-For examples see https://github.com/Cornelius-Figgle/ROSA/blob/main/src/ROSA/main.py
+For examples see https://github.com/Cornelius-Figgle/ROSA/blob/main/src/ROSA/__init__.py
 '''
 
 '''
@@ -106,7 +106,7 @@ def do_cleanup() -> None:
 class dnf(Exception):
     '''
     Exception class for error handling - did not complete but exited
-    fine
+    fine. Usually for audio transcription errors 
     '''
     ...
 
