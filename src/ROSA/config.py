@@ -5,7 +5,7 @@
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
-ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - an emotional voice assistant
+Manages cli args and config files
 '''
 
 '''
@@ -36,30 +36,20 @@ __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock', 'Ashe Ceaton']
 
 
+import argparse
 import os
 import sys
-from typing import NoReturn
-
-import rosa.main as rs
 
 
-def main() -> NoReturn:
-    '''
-    The main function that handles passing or args and return values.
-    Also handles the application loop and errors from functions
-    '''
+class ConfigsFromArgs():
+    def __init__():
+        parser = argparse.ArgumentParser(
+            description='An emotional smart assistant that doesn\'t listen to you',
+            epilog='Please see https://github.com/Cornelius-Figgle/ROSA for more info',
 
-    obj = rs.Rosa_()
+            fromfile_prefix_chars='@'  # info: https://docs.python.org/3/library/argparse.html#fromfile-prefix-chars 
+        )
 
-    try:
-        while True:
-            try:
-                speech = obj.background_listening()
-                if speech:  # note: if req asked
-                    typeq = obj.determine_response(speech)
-                    obj.respond(typeq)
-            except rs.dnf:
-                ...
-    except KeyboardInterrupt:
-        if rs.is_on_RPi: 
-            rs.do_cleanup()
+        parser.add_argument('--hide-title', action='store_true')
+        
+        return parser.parse_args()

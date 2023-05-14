@@ -7,17 +7,12 @@
 
 [![Activity](https://img.shields.io/github/commit-activity/m/Cornelius-Figgle/ROSA)](https://github.com/badges/shields/pulse)
 [![GitHub commits](https://badgen.net/github/commits/Cornelius-Figgle/ROSA/main)](https://GitHub.com/Cornelius-Figgle/ROSA/commit/)
-[![Latest Tag](https://badgen.net/github/tag/Cornelius-Figgle/ROSA)](https://GitHub.com/Cornelius-Figgle/ROSA/tags)
 
 [<img src="./docs/ico/no_idea_rosa.jpg" width="300" align="right"/>](./docs/ico/no_idea_rosa.jpg)
 
 ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 An emotional smart assistant that doesn't listen to you
-
-*If you wish to install the Windows binaries (executables) instead of the source, [see here](https://github.com/cornelius-figgle/ROSA/releases)*
-
-*If you wish to build the Windows binaries (executables), [see here](./docs/BUILDING.md)*
 
 <br>
 
@@ -63,7 +58,7 @@ sudo apt install python3-pyaudio flac python3-gst-1.0
 - [poetry](https://python-poetry.org/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux notes](https://github.com/Cornelius-Figgle/ROSA#Linux))
-- [pygame==2.1.3.dev8](https://pypi.org/project/pygame/)
+- [pygame](https://pypi.org/project/pygame/)
 
 ### Setup
 

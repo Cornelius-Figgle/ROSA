@@ -3,12 +3,15 @@
 ## Problems
 
 - run on rpi???
+  - kill me
 - gh-pages title bar in mobile is wrong colours
+  - need to redo a lot of it tbh
 
 ## Future
 
 - flags for bits and pieces (argparse)
 - more lines (ev)
+
 - cfg/flags
   - diff audio files / text dbs
   - silent mode?
@@ -23,7 +26,6 @@
   - move `gpio.json` to a global cfg
 
 - PyPI pkgs??? (poetry!)
-- prog bars etc for build src
 
 - threaded response+playback (locks or smth to cancel any currently running threads)
   - hm maybe not for now
