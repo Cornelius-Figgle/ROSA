@@ -7,13 +7,9 @@ description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "certifi-2023.5.7-py3-none-any.whl", hash = "sha256:a05b7f098e2e533c193db8b624afaec36d486c7fdbf350a9936eb9a00d44d2b7"},
+    {file = "certifi-2023.5.7-py3-none-any.whl", hash = "sha256:c6c2e98f5c7869efca1f8916fed228dd91539f9f1b444c314c06eef02980c716"},
+    {file = "certifi-2023.5.7.tar.gz", hash = "sha256:0f0d56dc5a6ad56fd4ba36484d6cc34451e1c6548c61daad8c320169f91eddc7"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
 
 [[package]]
 name = "charset-normalizer"
@@ -106,13 +102,9 @@ description = "Internationalized Domain Names in Applications (IDNA)"
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "idna-3.4-py3-none-any.whl", hash = "sha256:bcac1132a4eadea8321490704e2349b752e29c6ec2f1c27d372010e76ebd3fa1"},
+    {file = "idna-3.4-py3-none-any.whl", hash = "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"},
+    {file = "idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
 
 [[package]]
 name = "pyaudio"
@@ -121,19 +113,21 @@ description = "Cross-platform audio I/O with PortAudio"
 optional = false
 python-versions = "*"
 files = [
-    {file = "PyAudio-0.2.13-cp37-cp37m-linux_armv6l.whl", hash = "sha256:e6f39ac2a52c9cdbf210b305f7927c63ff25845e7bd962d1c81ecd97e2cbdeb8"},
-    {file = "PyAudio-0.2.13-cp37-cp37m-linux_armv7l.whl", hash = "sha256:e6f39ac2a52c9cdbf210b305f7927c63ff25845e7bd962d1c81ecd97e2cbdeb8"},
-    {file = "PyAudio-0.2.13-cp39-cp39-linux_armv6l.whl", hash = "sha256:add4d0896ec93be9b006ec0966e427f42f3dbfde8748b38d02bf57f5d92d2d5e"},
-    {file = "PyAudio-0.2.13-cp39-cp39-linux_armv7l.whl", hash = "sha256:add4d0896ec93be9b006ec0966e427f42f3dbfde8748b38d02bf57f5d92d2d5e"},
+    {file = "PyAudio-0.2.13-cp310-cp310-win32.whl", hash = "sha256:48e29537ea22ae2ae323eebe297bfb2683831cee4f20d96964e131f65ab2161d"},
+    {file = "PyAudio-0.2.13-cp310-cp310-win_amd64.whl", hash = "sha256:87137cfd0ef8608a2a383be3f6996f59505e322dab9d16531f14cf542fa294f1"},
+    {file = "PyAudio-0.2.13-cp311-cp311-win32.whl", hash = "sha256:13915faaa780e6bbbb6d745ef0e761674fd461b1b1b3f9c1f57042a534bfc0c3"},
+    {file = "PyAudio-0.2.13-cp311-cp311-win_amd64.whl", hash = "sha256:59cc3cc5211b729c7854e3989058a145872cc58b1a7b46c6d4d88448a343d890"},
+    {file = "PyAudio-0.2.13-cp37-cp37m-win32.whl", hash = "sha256:d294e3f85b2238649b1ff49ce3412459a8a312569975a89d14646536362d7576"},
+    {file = "PyAudio-0.2.13-cp37-cp37m-win_amd64.whl", hash = "sha256:ff7f5e44ef51fe61da1e09c6f632f0b5808198edd61b363855cc7dd03bf4a8ac"},
+    {file = "PyAudio-0.2.13-cp38-cp38-win32.whl", hash = "sha256:c6b302b048c054b7463936d8ba884b73877dc47012f3c94665dba92dd658ae04"},
+    {file = "PyAudio-0.2.13-cp38-cp38-win_amd64.whl", hash = "sha256:1505d766ee718df6f5a18b73ac42307ba1cb4d2c0397873159254a34f67515d6"},
+    {file = "PyAudio-0.2.13-cp39-cp39-win32.whl", hash = "sha256:eb128e4a6ea9b98d9a31f33c44978885af27dbe8ae53d665f8790cbfe045517e"},
+    {file = "PyAudio-0.2.13-cp39-cp39-win_amd64.whl", hash = "sha256:910ef09225cce227adbba92622d4a3e3c8375117f7dd64039f287d9ffc0e02a1"},
+    {file = "PyAudio-0.2.13.tar.gz", hash = "sha256:26bccc81e4243d1c0ff5487e6b481de6329fcd65c79365c267cef38f363a2b56"},
 ]
 
 [package.extras]
 test = ["numpy"]
-
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
 
 [[package]]
 name = "pygame"
@@ -142,16 +136,62 @@ description = "Python Game Development"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "pygame-2.5.0-cp37-cp37m-linux_armv6l.whl", hash = "sha256:33553eb66a14d090edf496e29e3f4298dedd20186069fb8b07572addbb8fc5d2"},
-    {file = "pygame-2.5.0-cp37-cp37m-linux_armv7l.whl", hash = "sha256:33553eb66a14d090edf496e29e3f4298dedd20186069fb8b07572addbb8fc5d2"},
-    {file = "pygame-2.5.0-cp39-cp39-linux_armv6l.whl", hash = "sha256:88df9bdd2737ac8ce470353a8d16184486fcb4dcf7540a94e44cce3ad22f53d5"},
-    {file = "pygame-2.5.0-cp39-cp39-linux_armv7l.whl", hash = "sha256:88df9bdd2737ac8ce470353a8d16184486fcb4dcf7540a94e44cce3ad22f53d5"},
+    {file = "pygame-2.5.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:e34a2b5660acc298d0a66ce16f13a7ca1c56c2a685e40afef3a0cf6eaf3f44b3"},
+    {file = "pygame-2.5.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:875dbde88b899fb7f48d6f0e87f70c3dcc8ee87a947c3df817d949a9741dbcf5"},
+    {file = "pygame-2.5.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:854dc9106210d1a3a83914af53fc234c0bed65a39f5e6098a8eb489da354ad0c"},
+    {file = "pygame-2.5.0-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7e1898db0fd7b868a31c29204813f447c59390350fd806904d80bebde094f3f8"},
+    {file = "pygame-2.5.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:22d5eac9b9936c7dc2813a750bc8efd53234ad1afc32eb99d6f64bb403c2b9aa"},
+    {file = "pygame-2.5.0-cp310-cp310-win32.whl", hash = "sha256:e9eed550b8921080a3c7524202822fc2cf7226e0ffd3c4e4d16510ba44b24e6f"},
+    {file = "pygame-2.5.0-cp310-cp310-win_amd64.whl", hash = "sha256:93128beb1154c443f05a66bfbf3f1d4eb8659157ab3b45e4a0454e5905440431"},
+    {file = "pygame-2.5.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c71d5b3ec232113cbd2e23a19eb01eef1818db41892d0d5efbac3901f940da66"},
+    {file = "pygame-2.5.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b763062b1996de26a28600e7a8f138d5b36ba0ddd63c65ccbd06124cd95bab70"},
+    {file = "pygame-2.5.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e5b6a42109f922352c524565fceb22bf8f8b6e4b00d38306e6f5b4c673048f4a"},
+    {file = "pygame-2.5.0-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3bcb19c8ee3fc794ab3a7cb5b5fb1ad38da6866dfbba4af3699a84a828c8a4b9"},
+    {file = "pygame-2.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c66b7abc38511c7ca08c5bb58a3bfc14fa51b4e5f85a1786777afc9e584a14dd"},
+    {file = "pygame-2.5.0-cp311-cp311-win32.whl", hash = "sha256:46cf1c9b20fb11c7d836c02dd5fc2ca843b699c0e2bc4130cf4ad2f855db5f7f"},
+    {file = "pygame-2.5.0-cp311-cp311-win_amd64.whl", hash = "sha256:f7b77b5019a9a6342535f53c75cef912b218cd24e98505828418f135aacc0a1b"},
+    {file = "pygame-2.5.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7ddec0c823fd0869fe4a75ba906dcb7889db0e0c289ce8c03d4ce0a67351ab66"},
+    {file = "pygame-2.5.0-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:bae93ce29b8337a5e02507603094c51740c9f496272ef070e2624e9647776568"},
+    {file = "pygame-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c80a1ad38d11102b4dfa0519aa2a26fea534503b259872609acc9adb1860884e"},
+    {file = "pygame-2.5.0-cp312-cp312-win32.whl", hash = "sha256:8ffebcafda0add8072f82999498113be37494694fa36e02155cfaf1a0ba56fe2"},
+    {file = "pygame-2.5.0-cp312-cp312-win_amd64.whl", hash = "sha256:574e310ba708da0c34b71c4158aa7cdca3cf3e16c4100dcd1d3c931a9c6705b4"},
+    {file = "pygame-2.5.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:275e4fab379620c3b262cd58c457eea80001e91bc2e04d306ddb0ba548c969bf"},
+    {file = "pygame-2.5.0-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c116a96a2784bd1724476dbf9c48bfea466ee493a736bdfa04ecbc3f193de0bc"},
+    {file = "pygame-2.5.0-cp36-cp36m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:d4a0787ade8723323a3ba874bb725010bb08990a77327fc85f42474f3a840447"},
+    {file = "pygame-2.5.0-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c1cb39b660da1b56a1704ec4aa72bac538030786e23607fb25b8a66f357ffe3a"},
+    {file = "pygame-2.5.0-cp36-cp36m-win32.whl", hash = "sha256:d051420667dd9fc8103b3cf994c03e46ee90b1c4a72c174737b8c14729ddf68e"},
+    {file = "pygame-2.5.0-cp36-cp36m-win_amd64.whl", hash = "sha256:6b58356510b7c38836eb81cf08983b58f280da99580d4f17e89ed0ddb707c29c"},
+    {file = "pygame-2.5.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:80f167d8fcec7cd3107f829784ad721b1b7532c19fdf42b3aabbb51f7347850f"},
+    {file = "pygame-2.5.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ef96e9a2d8fd9526b89657d192c42dd7c551bfa381fa98ec52d45443e9713818"},
+    {file = "pygame-2.5.0-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e21d53279fb504b267ae06b565b72d9f95ecbf1f2dd8c705329b287f38295d98"},
+    {file = "pygame-2.5.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:147cc0256a5df1316590f351febf6205ef2907564fb0d902935834b91e183486"},
+    {file = "pygame-2.5.0-cp37-cp37m-win32.whl", hash = "sha256:e47696154d689180e4eea8c1d6f2bac923986119219db6ad0d2e60ab1f525e8c"},
+    {file = "pygame-2.5.0-cp37-cp37m-win_amd64.whl", hash = "sha256:4c87fa8fa1f3ea94069119accd6d4b5fbf869c2b2954a19b45162dfb3b7c885e"},
+    {file = "pygame-2.5.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:143550078ab10f290cd7c8715a46853e0dc598fd6cdd1561ecb4d6e3116a6b26"},
+    {file = "pygame-2.5.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:969de806bed49b28972862acba652f05ece9420bbdf5f925c970c6a18a9fd1f9"},
+    {file = "pygame-2.5.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c5d3b0da31ea341b86ef96d6b13c0ddcb25f5320186b7215bc870f08119d2f80"},
+    {file = "pygame-2.5.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b23effd50121468f1dc41022230485bff515154191a9d343224850aa3ed3b7f0"},
+    {file = "pygame-2.5.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bce4116db6924b544ff8ff03f7ef681c8baf9c6e039a1ec21e26b4ebdaa0e994"},
+    {file = "pygame-2.5.0-cp38-cp38-win32.whl", hash = "sha256:50a89c15412506d95e98792435f49a73101788db30ad9c562f611c7aa7b437fa"},
+    {file = "pygame-2.5.0-cp38-cp38-win_amd64.whl", hash = "sha256:df1d8affdbe9f417cc7141581e3d08e4b09f708060d3127d2016fd591b2e4f68"},
+    {file = "pygame-2.5.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:99965da24d0bf138d9ac6b7494b9a12781c1510cf936616d1d0c46a736777f6a"},
+    {file = "pygame-2.5.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:daa81057c1beb71a9fb96253457197ad03ee988ba546a166f253bd92a98a9a11"},
+    {file = "pygame-2.5.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3ca85da605f6621c99c05f272a5dcf85bf0badcdca45f16ff2bee9a9d41ae042"},
+    {file = "pygame-2.5.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:603d403997d46b07022097861c8b0ff76c6192f8a2f5f89f1a6a978d4411b715"},
+    {file = "pygame-2.5.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7babaeac11544f3e4d7a15756a27f943dc5fff276481fdc9d90415a903ad31a9"},
+    {file = "pygame-2.5.0-cp39-cp39-win32.whl", hash = "sha256:9d2126f91699223f0c36845d1c7b2cdfe2f1753ef85b8410ea613e8bd212ca33"},
+    {file = "pygame-2.5.0-cp39-cp39-win_amd64.whl", hash = "sha256:8062adc409f0b2742d7996b9b470494025c5e3b73d0d03e3798708dcf5d195cd"},
+    {file = "pygame-2.5.0-pp36-pypy36_pp73-win32.whl", hash = "sha256:1bd14adf6151b6ac2f617a8fd71621f1c125209c41a359d3c1cf4bf3904dba5f"},
+    {file = "pygame-2.5.0-pp37-pypy37_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:2b11708f1c7b1671db15246275adcb18cf384f5f7e73532e26999968876c5099"},
+    {file = "pygame-2.5.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6830e431575697f7a11f7731798445242e37eb07ae9007f7be33083f700e9b1e"},
+    {file = "pygame-2.5.0-pp38-pypy38_pp73-macosx_10_9_x86_64.whl", hash = "sha256:7dd80addfdf7dc1f0e04f81c98acb96580726783172256f2ebc955a967e84124"},
+    {file = "pygame-2.5.0-pp38-pypy38_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1c2cbd9d1a0a3969d6e1c6b0741279c843b4a36ef3804d324874d0a2f0e49816"},
+    {file = "pygame-2.5.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ef373b9865c740f18236f2324e17e7f2111e27c6a4a5b67c490c72a8a8b8de77"},
+    {file = "pygame-2.5.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:3959038a3e2034cee3f15471786a3bac35baeaa1f7503dc7402bb49d25b5ddbc"},
+    {file = "pygame-2.5.0-pp39-pypy39_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:583d9c8ad033ad51da8485427139d047afb649f49e42d4fa88477f73734ad4b0"},
+    {file = "pygame-2.5.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:13b650e925d2e8c82c16bdeae6e7fc5d6ca4ac659a1412da4ecd923ef9d688cb"},
+    {file = "pygame-2.5.0.tar.gz", hash = "sha256:edd5745b79435976d92c0a7318aedcafcb7ac4567125ac6ba88aa473559ef9ab"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
 
 [[package]]
 name = "requests"
@@ -160,7 +200,8 @@ description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:471e7795897eff62a8e31f26f241e3e67ee80d1bd0f64236538a3dda8d3f1acc"},
+    {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"},
+    {file = "requests-2.31.0.tar.gz", hash = "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"},
 ]
 
 [package.dependencies]
@@ -173,11 +214,6 @@ urllib3 = ">=1.21.1,<3"
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
-
 [[package]]
 name = "speechrecognition"
 version = "3.10.0"
@@ -185,7 +221,8 @@ description = "Library for performing speech recognition, with support for sever
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "SpeechRecognition-3.10.0-py2.py3-none-any.whl", hash = "sha256:a034fab01a2233d54335e8fef8c7fd4606285291ecfc5d0e6b52ad285c26580f"},
+    {file = "SpeechRecognition-3.10.0-py2.py3-none-any.whl", hash = "sha256:7ae9966887d9909ce3e5a0c27ecc3eacfca16fd0c0829f77f552919418e86306"},
+    {file = "SpeechRecognition-3.10.0.tar.gz", hash = "sha256:14131155e8a8ba00ead1b7b9b1a2fa71c845e4db5f9a5f66a33a1bd6c55c6c35"},
 ]
 
 [package.dependencies]
@@ -194,11 +231,6 @@ requests = ">=2.26.0"
 [package.extras]
 whisper-api = ["openai"]
 
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
-
 [[package]]
 name = "urllib3"
 version = "2.0.3"
@@ -206,7 +238,8 @@ description = "HTTP library with thread-safe connection pooling, file post, and 
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "urllib3-2.0.3-py3-none-any.whl", hash = "sha256:50bcd1e8ea5fc90ce4aae96e845c2f17dfa6f6c18aafd0be35ef704b939024a5"},
+    {file = "urllib3-2.0.3-py3-none-any.whl", hash = "sha256:48e7fafa40319d358848e1bc6809b208340fafe2096f1725d05d67443d0483d1"},
+    {file = "urllib3-2.0.3.tar.gz", hash = "sha256:bee28b5e56addb8226c96f7f13ac28cb4c301dd5ea8a6ca179c0b9835e032825"},
 ]
 
 [package.extras]
@@ -215,12 +248,7 @@ secure = ["certifi", "cryptography (>=1.9)", "idna (>=2.0.0)", "pyopenssl (>=17.
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://www.piwheels.org/simple"
-reference = "piwheels"
-
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "6b8ba0e9fca38273bfc2ebee153b7b285b86757b98e8d931e774947fcefc7e40"
+content-hash = "0ed6ecbdca2c701ef392b8bbc1a7470ad5b82a996ad6356eb5a409c172e0950e"
