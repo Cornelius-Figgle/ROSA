@@ -1,27 +1,25 @@
 [tool.poetry]
 name = "rosa"
-version = "0.7.0"
-description = "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesn't listen to you"
+version = "0.7.1"
+description = "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - an emotional voice assistant that doesn't listen to you"
 authors = ["Cornelius-Figgle <max@fullimage.net>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = "^3.9"
 SpeechRecognition = "^3.10.0"
-pygame = "^2.3.0"
 PyAudio = "^0.2.13"
+pygame = "^2.5.0"
 
-[tool.poetry.group.dev.dependencies]
-pyinstaller = "^5.9.0"
+[[tool.poetry.source]]
+name = "piwheels"
+url = "https://www.piwheels.org/simple/"
+priority = "default"
 
-[tool.poetry.group.win]
-optional = true
-
-[tool.poetry.group.win.dependencies]
-pywin32 = "^306"
-pywin32-ctypes = "^0.2.0"
-pyqt5 = "^5.15.9"
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
 
 [build-system]
 requires = ["poetry-core"]
