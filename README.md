@@ -35,18 +35,18 @@ The dependencies can be installed via [poetry](https://python-poetry.org/) &mdas
 poetry install
 ```
 
-### Posix Only
-
-On some Posix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [built-in](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
-
-```bash
-sudo apt install python3-sdl2
-```
+### *nix Only
 
 PyAudio also may need to be installed via the `python-pyaudio` package (you will also need to install the `flac` library afterwards) using the system's package manager as the [pip](https://pip.pypa.io/en/stable/) version doesn't include the necessary libraries (see [here](https://stackoverflow.com/questions/36681836/pyaudio-could-not-import-portaudio) for more details)
 
 ```bash
 sudo apt install python3-pyaudio flac python3-gst-1.0
+```
+
+On some *nix systems, the package `python3-sdl2` may need to be installed using the system's package manager as the [built-in](https://pip.pypa.io/en/stable/) version seems to have errors importing the shared objects (see [here](https://stackoverflow.com/a/37749807/19860022) for more details)
+
+```bash
+sudo apt install python3-sdl2
 ```
 
 ## Usage
@@ -57,7 +57,7 @@ sudo apt install python3-pyaudio flac python3-gst-1.0
 - [Python 3](https://www.python.org/downloads/)
 - [poetry](https://python-poetry.org/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
-- [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux notes](https://github.com/Cornelius-Figgle/ROSA#Linux))
+- [PyAudio](https://pypi.org/project/PyAudio/) ([See above for Linux notes](#nix-only))
 - [pygame](https://pypi.org/project/pygame/)
 
 ### Setup

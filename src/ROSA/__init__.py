@@ -40,7 +40,7 @@ import os
 import sys
 from typing import NoReturn
 
-import rosa.main as rs
+from rosa import main as rs
 
 
 def main() -> NoReturn:

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rosa"
 version = "0.8.0"
-description = "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional smart assistant that doesn't listen to you"
+description = "ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - An emotional voice assistant that doesn't listen to you"
 authors = ["Cornelius-Figgle <max@fullimage.net>"]
 license = "MIT"
 readme = "README.md"
