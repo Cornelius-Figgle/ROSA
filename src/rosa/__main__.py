@@ -1,11 +1,11 @@
-# 
+#!/usr/bin/env python3 
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
-Manages cli args and config files
+Entry point for module execution
 '''
 
 '''
@@ -36,20 +36,8 @@ __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock', 'Ashe Ceaton']
 
 
-import argparse
-import os
-import sys
+import rosa
 
 
-class ConfigsFromArgs():
-    def __init__():
-        parser = argparse.ArgumentParser(
-            description='An emotional smart assistant that doesn\'t listen to you',
-            epilog='Please see https://github.com/Cornelius-Figgle/ROSA for more info',
-
-            fromfile_prefix_chars='@'  # info: https://docs.python.org/3/library/argparse.html#fromfile-prefix-chars 
-        )
-
-        parser.add_argument('--hide-title', action='store_true')
-        
-        return parser.parse_args()
+if __name__ == '__main__': 
+    rosa.main()

@@ -1,11 +1,11 @@
-# 
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
 # ROBOTICALLY OBNOXIOUS SERVING ASSISTANT
 
 '''
-Entry point for module execution
+ROBOTICALLY OBNOXIOUS SERVING ASSISTANT - an emotional voice assistant
 '''
 
 '''
@@ -36,8 +36,30 @@ __status__ = 'Development'
 __credits__ = ['Max Harrison', 'Callum Blumfield', 'Evie Peacock', 'Ashe Ceaton']
 
 
-import rosa
+import os
+import sys
+from typing import NoReturn
+
+from rosa import main as rs
 
 
-if __name__ == '__main__': 
-    rosa.main()
+def main() -> NoReturn:
+    '''
+    The main function that handles passing or args and return values.
+    Also handles the application loop and errors from functions
+    '''
+
+    obj = rs.Rosa_()
+
+    try:
+        while True:
+            try:
+                speech = obj.background_listening()
+                if speech:  # note: if req asked
+                    typeq = obj.determine_response(speech)
+                    obj.respond(typeq)
+            except rs.dnf:
+                ...
+    except KeyboardInterrupt:
+        if rs.is_on_RPi: 
+            rs.do_cleanup()

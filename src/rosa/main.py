@@ -1,4 +1,4 @@
-# 
+#!/usr/bin/env python3 
 # -*- coding: UTF-8 -*-
 
 # https://github.com/Cornelius-Figgle/ROSA/
@@ -59,6 +59,7 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'true' ; import pygame.mixer as mixer
 import speech_recognition as sr
 
 from rosa import foreign_potato_master
+from rosa.duck_typed_microphone import DuckTypedMicrophone
 
 try:
     import RPi.GPIO as GPIO  # type: ignore
@@ -186,7 +187,7 @@ class Rosa_:
                 break
 
         print(self.notices['adjusting_levels'], file=write_file)
-        with sr.Microphone() as source: 
+        with DuckTypedMicrophone() as source: 
             sr.Recognizer().adjust_for_ambient_noise(source)
             # note: we only need to calibrate once, before we 
             # start listening
@@ -273,7 +274,7 @@ class Rosa_:
 
         # note: obtain audio from the microphone
         r = sr.Recognizer()
-        with sr.Microphone() as source:
+        with DuckTypedMicrophone() as source:
             print(self.notices['awaiting_speech'], file=self.write_file)
             self.gpio_manager('listening', 1)
             audio = r.listen(source)
